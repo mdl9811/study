@@ -1,7 +1,6 @@
 #include "src/encoder/aac_encoder.h"
 #include <functional>
 #include "src/base/log.h"
-#include "third_party/aac/libAACenc/include/aacenc_lib.h"
 
 extern "C" {
 #include "third_party/aac/libAACenc/include/aacenc_lib.h"

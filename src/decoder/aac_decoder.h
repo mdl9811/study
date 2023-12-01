@@ -4,6 +4,7 @@
 
 #ifndef SRC_DECODER_AAC_DECODER_H_
 #define SRC_DECODER_AAC_DECODER_H_
+#include "src/api/audio/audio_format.h"
 #include "src/api/audio/decode_sink.h"
 #include "src/config/config_site.h"
 
