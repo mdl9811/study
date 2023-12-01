@@ -11,12 +11,16 @@
 #include "src/config/config_list.h"
 #include "src/decoder/aac_decoder.h"
 #include "src/encoder/aac_encoder.h"
-class AACTest : public study::api::EncodeAudioSink, public base::Thread {
+
+#include "base/at_exit.h"
+#include "base/task/single_thread_task_executor.h"
+
+class AACTest : public study::api::EncodeAudioSink, protected base::Thread {
  public:
   explicit AACTest() : aac_encoder_(this, 0), base::Thread("AAC_THREAD") {
     StartWithOptions(base::Thread::Options(base::MessagePumpType::DEFAULT, 0));
   }
-  ~AACTest() override = default;
+  ~AACTest() override { Stop(); }
 
   void EncodeAudio(const char* data, size_t size) {
     auto buffer = study::base::Buffer::New(data, size,
@@ -35,6 +39,7 @@ class AACTest : public study::api::EncodeAudioSink, public base::Thread {
     format.sample_rate = 48000;  // 采样率
     aac_encoder_.Initialize(&format, 64000, 23, 512);
   }
+
   void CleanUp() override { aac_encoder_.Release(); }
   void DispatchAACEncode(std::unique_ptr<study::base::Buffer> buffer) {
     aac_encoder_.EncodeAudio(std::move(buffer));
@@ -49,11 +54,16 @@ class AACTest : public study::api::EncodeAudioSink, public base::Thread {
 };
 
 int main(int argc, char* argv[]) {
+  logging::LoggingSettings settings;
+  base::AtExitManager at_exit_manager;
+  base::SingleThreadTaskExecutor io_task_executor(base::MessagePumpType::IO);
+  settings.logging_dest = logging::LOG_TO_FILE | logging::LOG_TO_STDERR;
+  settings.log_file_path = L".";
+  logging::InitLogging(settings);
+
   AACTest aac_test;
 
   std::ifstream in(study::kAudioWriteFilePath, std::ios::in | std::ios::binary);
-
-  aac_test.Start();
 
   if (!in)
     return 0;
@@ -64,10 +74,6 @@ int main(int argc, char* argv[]) {
     aac_test.EncodeAudio(data, 512 * 4);
     delete[] data;
   }
-
-  aac_test.Stop();
-
-  base::RunLoop().Run();
 
   in.close();
   return 0;

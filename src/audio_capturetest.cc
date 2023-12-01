@@ -18,15 +18,14 @@
 namespace {
 
 // 单位ms
-const uint32_t kAudioCollectionTime = 1'000 * 10;
+const uint32_t kAudioCollectionTime = 1'000 * 5;
 }  // namespace
 
 class AudioRecordTest : public study::api::CaptureAudioSink,
                         public base::Thread {
  public:
-  AudioRecordTest() : audio_record_(this), base::Thread("AUDIO_RECORD_THREAD") {
-    StartWithOptions(base::Thread::Options(base::MessagePumpType::DEFAULT, 0));
-  }
+  AudioRecordTest()
+      : audio_record_(this), base::Thread("AUDIO_RECORD_THREAD") {}
   ~AudioRecordTest() override = default;
 
   void GetAudioFormat(study::api::AudioFormat* format) {
@@ -34,14 +33,21 @@ class AudioRecordTest : public study::api::CaptureAudioSink,
   }
 
   void Start() {
-    base::Thread::Start();
+    StartWithOptions(base::Thread::Options(base::MessagePumpType::DEFAULT, 0));
+
+    out.open(study::kAudioWriteFilePath,
+             std::ios::out | std::ios::binary | std::ios::app);
+    study::api::AudioFormat format;
+    format.channels = 2;         // 声道数
+    format.bit_depth = 16;       // 位深
+    format.sample_rate = 48000;  // 采样率
+    audio_record_.Initialize(&format);
+
     audio_record_.Start();
 
-    task_runner()->PostDelayedTask(
-        FROM_HERE,
-        base::BindOnce(&AudioRecordTest::DispatchAudioRecord,
-                       base::Unretained(this)),
-        base::Milliseconds(2));
+    task_runner()->PostTask(
+        FROM_HERE, base::BindOnce(&AudioRecordTest::DispatchAudioRecord,
+                                  base::Unretained(this)));
   }
 
   void Stop() {
@@ -52,16 +58,7 @@ class AudioRecordTest : public study::api::CaptureAudioSink,
  private:
   // 最好拷贝一份出去
 
-  void Init() override {
-    out.open(study::kAudioWriteFilePath,
-             std::ios::out | std::ios::binary | std::ios::app);
-    study::api::AudioFormat format;
-    format.channels = 2;         // 声道数
-    format.bit_depth = 16;       // 位深
-    format.sample_rate = 48000;  // 采样率
-    audio_record_.Initialize(&format);
-    return;
-  }
+  void Init() override {}
 
   void CleanUp() override {
     audio_record_.Release();
@@ -69,16 +66,17 @@ class AudioRecordTest : public study::api::CaptureAudioSink,
   }
 
   void DispatchAudioRecord() {
-    audio_record_.HandleReader();
-    task_runner()->PostDelayedTask(
-        FROM_HERE,
-        base::BindOnce(&AudioRecordTest::DispatchAudioRecord,
-                       base::Unretained(this)),
-        base::Milliseconds(2));
+    bool done = false;
+    audio_record_.HandleReader(INFINITE, &done);
+    if (done)
+      return;  //
+    task_runner()->PostTask(
+        FROM_HERE, base::BindOnce(&AudioRecordTest::DispatchAudioRecord,
+                                  base::Unretained(this)));
   }
 
   void OnCaptureAudio(std::unique_ptr<study::base::Buffer> buffer) override {
-    LOG(INFO) << "OnAudioData:" << buffer->size() << std::endl;
+    LOG(INFO) << "OnAudioData:" << buffer->size();
     out.write(buffer->data(), buffer->size());
   }
 
@@ -109,11 +107,7 @@ int main(int argc, char* argv[]) {
   settings.logging_dest = logging::LOG_TO_FILE | logging::LOG_TO_STDERR;
   settings.log_file_path = L".";
   logging::InitLogging(settings);
-
-  // base::RunLoop().Run();
-
   base::RunLoop run_loop;
-  run_loop.Run();
 
   AudioRecordTest audio_record_test;
   audio_record_test.Start();
@@ -122,14 +116,15 @@ int main(int argc, char* argv[]) {
 
   auto task_runner = base::SequencedTaskRunner::GetCurrentDefault();
 
-  // task_runner->PostDelayedTask(
-  //     FROM_HERE,
-  //     base::BindOnce([](base::RunLoop* run_loop) { run_loop->Quit(); },
-  //                    base::Unretained(&run_loop)),
-  //     base::Milliseconds(kAudioCollectionTime));
+  task_runner->PostDelayedTask(
+      FROM_HERE,
+      base::BindOnce([](base::RunLoop* run_loop) { run_loop->Quit(); },
+                     base::Unretained(&run_loop)),
+      base::Milliseconds(kAudioCollectionTime));
+
+  run_loop.Run();
 
   audio_record_test.Stop();
-  run_loop.Run();
 
   return 0;
 }

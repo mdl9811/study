@@ -5,6 +5,7 @@
 #ifndef SRC_CAPTURE_AUDIO_RECORD_H_
 #define SRC_CAPTURE_AUDIO_RECORD_H_
 
+#include <atomic>
 #include <memory>
 #include "src/api/audio/audio_format.h"
 #include "src/api/audio/capture_sink.h"
@@ -39,7 +40,7 @@ class AudioRecord {
 
   void GetAudioFormat(api::AudioFormat* format);
 
-  void HandleReader();
+  void HandleReader(uint64_t block, bool* done);
 
  private:
   void HandleAudioBuffer();
@@ -60,7 +61,7 @@ class AudioRecord {
 
   void* event_handle_ = nullptr;
   bool init_done_ = false;
-  bool start_capture_ = false;
+  std::atomic_bool start_capture_ = false;
 
   api::AudioFormat audio_format_;
 };

@@ -71,7 +71,7 @@ bool AudioRecord::Initialize(const api::AudioFormat* format) {
       REFTIMES_PER_SEC, 0, &format_, NULL);
   TEST_OUT_LOG(FAILED(hr), "AudioClient Initialize Faild result:", hr);
 
-  auto handle = CreateEventA(NULL, FALSE, FALSE, NULL);
+  auto handle = CreateEventA(NULL, TRUE, FALSE, NULL);
   TEST_OUT_LOG(!handle, "CreateEventA Faild result:", GetLastError());
 
   event_handle_ = handle;
@@ -97,7 +97,7 @@ bool AudioRecord::Start() {
   auto hr = audio_client_->Start();
   TEST_OUT_LOG(FAILED(hr), "AudioClient Start Faild result:", hr);
 
-  start_capture_ = true;
+  start_capture_.store(true);
   return true;
 }
 
@@ -105,7 +105,8 @@ void AudioRecord::Stop() {
   if (!init_done_ || !start_capture_)
     return;
   audio_client_->Stop();
-  start_capture_ = false;
+  start_capture_.store(false);
+  SetEvent(event_handle_);
 }
 
 void AudioRecord::GetAudioFormat(api::AudioFormat* format) {
@@ -114,11 +115,14 @@ void AudioRecord::GetAudioFormat(api::AudioFormat* format) {
   *format = audio_format_;
 }
 
-void AudioRecord::HandleReader() {
-  if (WaitForSingleObject(event_handle_, 0) != WAIT_OBJECT_0) {
+void AudioRecord::HandleReader(uint64_t block, bool* done) {
+  if (!start_capture_.load()) {
+    *done = true;
     return;
   }
-  HandleAudioBuffer();
+  WaitForSingleObject(event_handle_, block) == WAIT_OBJECT_0
+      ? HandleAudioBuffer()
+      : void();
 }
 
 void AudioRecord::HandleAudioBuffer() {

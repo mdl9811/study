@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
   settings.logging_dest = logging::LOG_TO_FILE | logging::LOG_TO_STDERR;
   settings.log_file_path = L".";
   logging::InitLogging(settings);
-  LOG(ERROR) << "ss" << base::Time::Now().ToJavaTime() << std::endl;
+  LOG(ERROR) << "ss" << base::Time::Now().ToJavaTime();
 
   auto task_runner = base::SequencedTaskRunner::GetCurrentDefault();
 
