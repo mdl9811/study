@@ -1,0 +1,8 @@
+#
+# Copyright (c) 2023 mdl. All rights reserved.
+#
+
+OPT_CFLAGS = -MT -DNDEBUG -O1 /GR- 
+
+OPT_LDFLAGS = kernel32.lib user32.lib advapi32.lib ole32.lib $
+  /GUARD:NO /OPT:REF /NXCOMPAT /DYNAMICBASE libcpmt.lib

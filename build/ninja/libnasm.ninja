@@ -1,0 +1,179 @@
+
+#
+# Copyright (c) 2023 mdl. All rights reserved.
+#
+
+s=third_party/nasm
+o=$obj/nasm
+
+CFLAGS = -I$s. -I$s/asm -I$s/disasm -I$s/include -I$s/output -I$s/x86 $CR_FLAGS
+
+build $o/asm/assemble.o : cc $s/asm/assemble.c
+build $o/asm/directbl.o : cc $s/asm/directbl.c
+build $o/asm/directiv.o : cc $s/asm/directiv.c
+build $o/asm/error.o : cc $s/asm/error.c
+build $o/asm/eval.o : cc $s/asm/eval.c
+build $o/asm/exprdump.o : cc $s/asm/exprdump.c
+build $o/asm/exprlib.o : cc $s/asm/exprlib.c
+build $o/asm/floats.o : cc $s/asm/floats.c
+build $o/asm/labels.o : cc $s/asm/labels.c
+build $o/asm/listing.o : cc $s/asm/listing.c
+build $o/asm/parser.o : cc $s/asm/parser.c
+build $o/asm/pptok.o : cc $s/asm/pptok.c
+build $o/asm/pragma.o : cc $s/asm/pragma.c
+build $o/asm/preproc-nop.o : cc $s/asm/preproc-nop.c
+build $o/asm/preproc.o : cc $s/asm/preproc.c
+build $o/asm/quote.o : cc $s/asm/quote.c
+build $o/asm/rdstrnum.o : cc $s/asm/rdstrnum.c
+build $o/asm/segalloc.o : cc $s/asm/segalloc.c
+build $o/asm/srcfile.o : cc $s/asm/srcfile.c
+build $o/asm/stdscan.o : cc $s/asm/stdscan.c
+build $o/asm/strfunc.o : cc $s/asm/strfunc.c
+build $o/asm/tokhash.o : cc $s/asm/tokhash.c
+build $o/asm/warnings.o : cc $s/asm/warnings.c
+build $o/common/common.o : cc $s/common/common.c
+build $o/disasm/disasm.o : cc $s/disasm/disasm.c
+build $o/disasm/sync.o : cc $s/disasm/sync.c
+build $o/macros/macros.o : cc $s/macros/macros.c
+build $o/nasmlib/alloc.o : cc $s/nasmlib/alloc.c
+build $o/nasmlib/asprintf.o : cc $s/nasmlib/asprintf.c
+build $o/nasmlib/badenum.o : cc $s/nasmlib/badenum.c
+build $o/nasmlib/bsi.o : cc $s/nasmlib/bsi.c
+build $o/nasmlib/crc64.o : cc $s/nasmlib/crc64.c
+build $o/nasmlib/file.o : cc $s/nasmlib/file.c
+build $o/nasmlib/filename.o : cc $s/nasmlib/filename.c
+build $o/nasmlib/hashtbl.o : cc $s/nasmlib/hashtbl.c
+build $o/nasmlib/ilog2.o : cc $s/nasmlib/ilog2.c
+build $o/nasmlib/md5c.o : cc $s/nasmlib/md5c.c
+build $o/nasmlib/mmap.o : cc $s/nasmlib/mmap.c
+build $o/nasmlib/nctype.o : cc $s/nasmlib/nctype.c
+build $o/nasmlib/path.o : cc $s/nasmlib/path.c
+build $o/nasmlib/perfhash.o : cc $s/nasmlib/perfhash.c
+build $o/nasmlib/raa.o : cc $s/nasmlib/raa.c
+build $o/nasmlib/rbtree.o : cc $s/nasmlib/rbtree.c
+build $o/nasmlib/readnum.o : cc $s/nasmlib/readnum.c
+build $o/nasmlib/realpath.o : cc $s/nasmlib/realpath.c
+build $o/nasmlib/rlimit.o : cc $s/nasmlib/rlimit.c
+build $o/nasmlib/saa.o : cc $s/nasmlib/saa.c
+build $o/nasmlib/string.o : cc $s/nasmlib/string.c
+build $o/nasmlib/strlist.o : cc $s/nasmlib/strlist.c
+build $o/nasmlib/ver.o : cc $s/nasmlib/ver.c
+build $o/nasmlib/zerobuf.o : cc $s/nasmlib/zerobuf.c
+build $o/output/codeview.o : cc $s/output/codeview.c
+build $o/output/legacy.o : cc $s/output/legacy.c
+build $o/output/nulldbg.o : cc $s/output/nulldbg.c
+build $o/output/nullout.o : cc $s/output/nullout.c
+build $o/output/outaout.o : cc $s/output/outaout.c
+build $o/output/outas86.o : cc $s/output/outas86.c
+build $o/output/outbin.o : cc $s/output/outbin.c
+build $o/output/outcoff.o : cc $s/output/outcoff.c
+build $o/output/outdbg.o : cc $s/output/outdbg.c
+build $o/output/outelf.o : cc $s/output/outelf.c
+build $o/output/outform.o : cc $s/output/outform.c
+build $o/output/outieee.o : cc $s/output/outieee.c
+build $o/output/outlib.o : cc $s/output/outlib.c
+build $o/output/outmacho.o : cc $s/output/outmacho.c
+build $o/output/outobj.o : cc $s/output/outobj.c
+build $o/output/outrdf2.o : cc $s/output/outrdf2.c
+build $o/stdlib/snprintf.o : cc $s/stdlib/snprintf.c
+build $o/stdlib/strlcpy.o : cc $s/stdlib/strlcpy.c
+build $o/stdlib/strnlen.o : cc $s/stdlib/strnlen.c
+build $o/stdlib/strrchrnul.o : cc $s/stdlib/strrchrnul.c
+build $o/stdlib/vsnprintf.o : cc $s/stdlib/vsnprintf.c
+build $o/x86/disp8.o : cc $s/x86/disp8.c
+build $o/x86/iflag.o : cc $s/x86/iflag.c
+build $o/x86/insnsa.o : cc $s/x86/insnsa.c
+build $o/x86/insnsb.o : cc $s/x86/insnsb.c
+build $o/x86/insnsd.o : cc $s/x86/insnsd.c
+build $o/x86/insnsn.o : cc $s/x86/insnsn.c
+build $o/x86/regdis.o : cc $s/x86/regdis.c
+build $o/x86/regflags.o : cc $s/x86/regflags.c
+build $o/x86/regs.o : cc $s/x86/regs.c
+build $o/x86/regvals.o : cc $s/x86/regvals.c
+build $o/asm/nasm.o : cc $s/asm/nasm.c
+
+
+build $bin/nasm$EXE : link $
+  $o/asm/assemble.o $
+  $o/asm/directbl.o $
+  $o/asm/directiv.o $
+  $o/asm/error.o $
+  $o/asm/eval.o $
+  $o/asm/exprdump.o $
+  $o/asm/exprlib.o $
+  $o/asm/floats.o $
+  $o/asm/labels.o $
+  $o/asm/listing.o $
+  $o/asm/parser.o $
+  $o/asm/pptok.o $
+  $o/asm/pragma.o $
+  $o/asm/preproc-nop.o $
+  $o/asm/preproc.o $
+  $o/asm/quote.o $
+  $o/asm/rdstrnum.o $
+  $o/asm/segalloc.o $
+  $o/asm/srcfile.o $
+  $o/asm/stdscan.o $
+  $o/asm/strfunc.o $
+  $o/asm/tokhash.o $
+  $o/asm/warnings.o $
+  $o/common/common.o $
+  $o/disasm/disasm.o $
+  $o/disasm/sync.o $
+  $o/macros/macros.o $
+  $o/nasmlib/alloc.o $
+  $o/nasmlib/asprintf.o $
+  $o/nasmlib/badenum.o $
+  $o/nasmlib/bsi.o $
+  $o/nasmlib/crc64.o $
+  $o/nasmlib/file.o $
+  $o/nasmlib/filename.o $
+  $o/nasmlib/hashtbl.o $
+  $o/nasmlib/ilog2.o $
+  $o/nasmlib/md5c.o $
+  $o/nasmlib/mmap.o $
+  $o/nasmlib/nctype.o $
+  $o/nasmlib/path.o $
+  $o/nasmlib/perfhash.o $
+  $o/nasmlib/raa.o $
+  $o/nasmlib/rbtree.o $
+  $o/nasmlib/readnum.o $
+  $o/nasmlib/realpath.o $
+  $o/nasmlib/rlimit.o $
+  $o/nasmlib/saa.o $
+  $o/nasmlib/string.o $
+  $o/nasmlib/strlist.o $
+  $o/nasmlib/ver.o $
+  $o/nasmlib/zerobuf.o $
+  $o/output/codeview.o $
+  $o/output/legacy.o $
+  $o/output/nulldbg.o $
+  $o/output/nullout.o $
+  $o/output/outaout.o $
+  $o/output/outas86.o $
+  $o/output/outbin.o $
+  $o/output/outcoff.o $
+  $o/output/outdbg.o $
+  $o/output/outelf.o $
+  $o/output/outform.o $
+  $o/output/outieee.o $
+  $o/output/outlib.o $
+  $o/output/outmacho.o $
+  $o/output/outobj.o $
+  $o/output/outrdf2.o $
+  $o/stdlib/snprintf.o $
+  $o/stdlib/strlcpy.o $
+  $o/stdlib/strnlen.o $
+  $o/stdlib/strrchrnul.o $
+  $o/stdlib/vsnprintf.o $
+  $o/asm/nasm.o $
+  $o/x86/disp8.o $
+  $o/x86/iflag.o $
+  $o/x86/insnsa.o $
+  $o/x86/insnsb.o $
+  $o/x86/insnsd.o $
+  $o/x86/insnsn.o $
+  $o/x86/regdis.o $
+  $o/x86/regflags.o $
+  $o/x86/regs.o $
+  $o/x86/regvals.o

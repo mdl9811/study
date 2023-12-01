@@ -1,0 +1,2 @@
+download url=https://github.com/mstorsjo/fdk-aac/releases/tag/v2.0.2
+2.0.2

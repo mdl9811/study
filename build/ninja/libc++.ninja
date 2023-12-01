@@ -1,0 +1,134 @@
+#
+# Copyright (c) 2023 mdl. All rights reserved.
+#
+
+s=third_party/libc++/src/src
+o=$obj/libc++
+
+CFLAGS = -I$s. $CR_FLAGS $
+  -Wno-missing-field-initializers -Wno-unused-parameter -Wno-psabi $
+  -Wloop-analysis -Wno-unneeded-internal-declaration -Wno-nonportable-include-path $
+  -Wenum-compare-conditional -Wno-ignored-pragma-optimize -Wno-deprecated-builtins $
+  -Wno-bitfield-constant-conversion -Wno-deprecated-this-capture -Wno-unused-variable $
+  -Wno-c++11-narrowing -Wno-unused-but-set-variable -Wno-misleading-indentation $
+  -Wno-macro-redefined /EHsc
+
+
+CFLAGS_EX = -MT -DNDEBUG -O1 -fmsc-version=1916
+
+EXCPTPTR = -I. $CFLAGS_EX
+
+rule except_cc
+  deps = msvc
+  command = $CLANG --driver-mode=cl /nologo /showIncludes:user /std:c++20 /TP $
+    -c $in -o $out $EXCPTPTR $cflags
+  description = CXX $out
+
+build $o/excptptr.o : except_cc build/amalgamation/excptptr.cc
+   cflags = -Wno-multichar -Wno-void-ptr-dereference -Wno-unused-value $
+  -Wno-invalid-noreturn /EHsc -Wno-ignored-attributes -Wno-microsoft-cast $
+  -Ithird_party/microsoft/msvc/crt/stl
+
+
+build $o/algorithm.o : cxx $s/algorithm.cpp
+build $o/any.o : cxx $s/any.cpp
+build $o/atomic.o : cxx $s/atomic.cpp
+build $o/barrier.o : cxx $s/barrier.cpp
+build $o/bind.o : cxx $s/bind.cpp
+build $o/charconv.o : cxx $s/charconv.cpp
+build $o/chrono.o : cxx $s/chrono.cpp
+build $o/condition_variable.o : cxx $s/condition_variable.cpp
+build $o/condition_variable_destructor.o : cxx $s/condition_variable_destructor.cpp
+build $o/exception.o : cxx $s/exception.cpp
+build $o/filesystem/directory_iterator.o : cxx $s/filesystem/directory_iterator.cpp
+build $o/filesystem/filesystem_error.o : cxx $s/filesystem/filesystem_error.cpp
+build $o/filesystem/operations.o : cxx $s/filesystem/operations.cpp
+build $o/filesystem/path.o : cxx $s/filesystem/path.cpp
+build $o/functional.o : cxx $s/functional.cpp
+build $o/future.o : cxx $s/future.cpp
+build $o/hash.o : cxx $s/hash.cpp
+build $o/ios.o : cxx $s/ios.cpp
+build $o/ios.instantiations.o : cxx $s/ios.instantiations.cpp
+build $o/iostream.o : cxx $s/iostream.cpp
+build $o/legacy_pointer_safety.o : cxx $s/legacy_pointer_safety.cpp
+build $o/locale.o : cxx $s/locale.cpp
+build $o/memory.o : cxx $s/memory.cpp
+build $o/mutex.o : cxx $s/mutex.cpp
+build $o/mutex_destructor.o : cxx $s/mutex_destructor.cpp
+build $o/new_handler.o : cxx $s/new_handler.cpp
+build $o/new_helpers.o : cxx $s/new_helpers.cpp
+build $o/optional.o : cxx $s/optional.cpp
+build $o/random.o : cxx $s/random.cpp
+build $o/random_shuffle.o : cxx $s/random_shuffle.cpp
+build $o/regex.o : cxx $s/regex.cpp
+build $o/ryu/d2fixed.o : cxx $s/ryu/d2fixed.cpp
+build $o/ryu/d2s.o : cxx $s/ryu/d2s.cpp
+build $o/ryu/f2s.o : cxx $s/ryu/f2s.cpp
+build $o/shared_mutex.o : cxx $s/shared_mutex.cpp
+build $o/stdexcept.o : cxx $s/stdexcept.cpp
+build $o/string.o : cxx $s/string.cpp
+build $o/strstream.o : cxx $s/strstream.cpp
+build $o/system_error.o : cxx $s/system_error.cpp
+build $o/thread.o : cxx $s/thread.cpp
+build $o/typeinfo.o : cxx $s/typeinfo.cpp
+build $o/valarray.o : cxx $s/valarray.cpp
+build $o/variant.o : cxx $s/variant.cpp
+build $o/vector.o : cxx $s/vector.cpp
+build $o/verbose_abort.o : cxx $s/verbose_abort.cpp
+build $o/new.o : cxx $s/new.cpp
+build $o/support/win32/locale_win32.o : cxx $s/support/win32/locale_win32.cpp
+build $o/support/win32/support.o : cxx $s/support/win32/support.cpp
+build $o/support/win32/thread_win32.o : cxx $s/support/win32/thread_win32.cpp
+
+build $lib/c++$LIB : ar $
+  $o/excptptr.o $
+  $o/algorithm.o $
+  $o/any.o $
+  $o/atomic.o $
+  $o/barrier.o $
+  $o/bind.o $
+  $o/charconv.o $
+  $o/chrono.o $
+  $o/condition_variable.o $
+  $o/condition_variable_destructor.o $
+  $o/exception.o $
+  $o/filesystem/directory_iterator.o $
+  $o/filesystem/filesystem_error.o $
+  $o/filesystem/operations.o $
+  $o/filesystem/path.o $
+  $o/functional.o $
+  $o/future.o $
+  $o/hash.o $
+  $o/ios.o $
+  $o/ios.instantiations.o $
+  $o/iostream.o $
+  $o/legacy_pointer_safety.o $
+  $o/locale.o $
+  $o/memory.o $
+  $o/mutex.o $
+  $o/mutex_destructor.o $
+  $o/new_handler.o $
+  $o/new_helpers.o $
+  $o/optional.o $
+  $o/random.o $
+  $o/random_shuffle.o $
+  $o/regex.o $
+  $o/ryu/d2fixed.o $
+  $o/ryu/d2s.o $
+  $o/ryu/f2s.o $
+  $o/shared_mutex.o $
+  $o/stdexcept.o $
+  $o/string.o $
+  $o/strstream.o $
+  $o/system_error.o $
+  $o/thread.o $
+  $o/typeinfo.o $
+  $o/valarray.o $
+  $o/variant.o $
+  $o/vector.o $
+  $o/verbose_abort.o $
+  $o/new.o $
+  $o/support/win32/locale_win32.o $
+  $o/support/win32/support.o $
+  $o/support/win32/thread_win32.o
+

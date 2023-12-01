@@ -1,0 +1,19 @@
+
+#
+# Copyright (c) 2023 mdl. All rights reserved.
+#
+
+#tools
+build cp : phony out/$TARGET/host/obj/tools/cp$EXE
+
+#lib
+build aac : phony $lib/aac$LIB
+build opus : phony $lib/opus$LIB
+
+#-------------------------------------------------------------------------------
+
+#exe
+build test : phony $bin/test$EXE
+build aactest : phony $bin/aactest$EXE
+build audio_capturetest : phony $bin/audio_capturetest$EXE
+

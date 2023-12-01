@@ -1,0 +1,7 @@
+#
+# Copyright (c) 2023 mdl. All rights reserved.
+#
+
+include out/args.ninja
+builddir = out/$BUILD
+include build/$TARGET/build.ninja

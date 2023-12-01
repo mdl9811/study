@@ -1,0 +1,640 @@
+#
+# Copyright (c) 2023 mdl. All rights reserved.
+#
+
+s=third_party/boringssl
+o=$obj/boringssl
+
+
+CFLAGS = -I$s. -I$s/include $CR_FLAGS -D_BORINGSSL_LIBPKI_ $
+  -DBORINGSSL_IMPLEMENTATION -DBORINGSSL_ALLOW_CXX_RUNTIME $
+  -DBORINGSSL_NO_STATIC_INITIALIZER -DOPENSSL_SMALL
+
+
+include build/ninja/boringssl/$ARCH_FILE.ninja
+
+build $o/err_data.o : cc $s/err_data.c
+build $o/src/crypto/asn1/a_bitstr.o : cc $s/src/crypto/asn1/a_bitstr.c
+build $o/src/crypto/asn1/a_bool.o : cc $s/src/crypto/asn1/a_bool.c
+build $o/src/crypto/asn1/a_d2i_fp.o : cc $s/src/crypto/asn1/a_d2i_fp.c
+build $o/src/crypto/asn1/a_dup.o : cc $s/src/crypto/asn1/a_dup.c
+build $o/src/crypto/asn1/a_gentm.o : cc $s/src/crypto/asn1/a_gentm.c
+build $o/src/crypto/asn1/a_i2d_fp.o : cc $s/src/crypto/asn1/a_i2d_fp.c
+build $o/src/crypto/asn1/a_int.o : cc $s/src/crypto/asn1/a_int.c
+build $o/src/crypto/asn1/a_mbstr.o : cc $s/src/crypto/asn1/a_mbstr.c
+build $o/src/crypto/asn1/a_object.o : cc $s/src/crypto/asn1/a_object.c
+build $o/src/crypto/asn1/a_octet.o : cc $s/src/crypto/asn1/a_octet.c
+build $o/src/crypto/asn1/a_strex.o : cc $s/src/crypto/asn1/a_strex.c
+build $o/src/crypto/asn1/a_strnid.o : cc $s/src/crypto/asn1/a_strnid.c
+build $o/src/crypto/asn1/a_time.o : cc $s/src/crypto/asn1/a_time.c
+build $o/src/crypto/asn1/a_type.o : cc $s/src/crypto/asn1/a_type.c
+build $o/src/crypto/asn1/a_utctm.o : cc $s/src/crypto/asn1/a_utctm.c
+build $o/src/crypto/asn1/asn1_lib.o : cc $s/src/crypto/asn1/asn1_lib.c
+build $o/src/crypto/asn1/asn1_par.o : cc $s/src/crypto/asn1/asn1_par.c
+build $o/src/crypto/asn1/asn_pack.o : cc $s/src/crypto/asn1/asn_pack.c
+build $o/src/crypto/asn1/f_int.o : cc $s/src/crypto/asn1/f_int.c
+build $o/src/crypto/asn1/f_string.o : cc $s/src/crypto/asn1/f_string.c
+build $o/src/crypto/asn1/posix_time.o : cc $s/src/crypto/asn1/posix_time.c
+build $o/src/crypto/asn1/tasn_dec.o : cc $s/src/crypto/asn1/tasn_dec.c
+build $o/src/crypto/asn1/tasn_enc.o : cc $s/src/crypto/asn1/tasn_enc.c
+build $o/src/crypto/asn1/tasn_fre.o : cc $s/src/crypto/asn1/tasn_fre.c
+build $o/src/crypto/asn1/tasn_new.o : cc $s/src/crypto/asn1/tasn_new.c
+build $o/src/crypto/asn1/tasn_typ.o : cc $s/src/crypto/asn1/tasn_typ.c
+build $o/src/crypto/asn1/tasn_utl.o : cc $s/src/crypto/asn1/tasn_utl.c
+build $o/src/crypto/base64/base64.o : cc $s/src/crypto/base64/base64.c
+build $o/src/crypto/bio/bio.o : cc $s/src/crypto/bio/bio.c
+build $o/src/crypto/bio/bio_mem.o : cc $s/src/crypto/bio/bio_mem.c
+build $o/src/crypto/bio/connect.o : cc $s/src/crypto/bio/connect.c
+build $o/src/crypto/bio/errno.o : cc $s/src/crypto/bio/errno.c
+build $o/src/crypto/bio/fd.o : cc $s/src/crypto/bio/fd.c
+build $o/src/crypto/bio/file.o : cc $s/src/crypto/bio/file.c
+build $o/src/crypto/bio/hexdump.o : cc $s/src/crypto/bio/hexdump.c
+build $o/src/crypto/bio/pair.o : cc $s/src/crypto/bio/pair.c
+build $o/src/crypto/bio/printf.o : cc $s/src/crypto/bio/printf.c
+build $o/src/crypto/bio/socket.o : cc $s/src/crypto/bio/socket.c
+build $o/src/crypto/bio/socket_helper.o : cc $s/src/crypto/bio/socket_helper.c
+build $o/src/crypto/blake2/blake2.o : cc $s/src/crypto/blake2/blake2.c
+build $o/src/crypto/bn_extra/bn_asn1.o : cc $s/src/crypto/bn_extra/bn_asn1.c
+build $o/src/crypto/bn_extra/convert.o : cc $s/src/crypto/bn_extra/convert.c
+build $o/src/crypto/buf/buf.o : cc $s/src/crypto/buf/buf.c
+build $o/src/crypto/bytestring/asn1_compat.o : cc $s/src/crypto/bytestring/asn1_compat.c
+build $o/src/crypto/bytestring/ber.o : cc $s/src/crypto/bytestring/ber.c
+build $o/src/crypto/bytestring/cbb.o : cc $s/src/crypto/bytestring/cbb.c
+build $o/src/crypto/bytestring/cbs.o : cc $s/src/crypto/bytestring/cbs.c
+build $o/src/crypto/bytestring/unicode.o : cc $s/src/crypto/bytestring/unicode.c
+build $o/src/crypto/chacha/chacha.o : cc $s/src/crypto/chacha/chacha.c
+build $o/src/crypto/cipher_extra/cipher_extra.o : cc $s/src/crypto/cipher_extra/cipher_extra.c
+build $o/src/crypto/cipher_extra/derive_key.o : cc $s/src/crypto/cipher_extra/derive_key.c
+build $o/src/crypto/cipher_extra/e_aesctrhmac.o : cc $s/src/crypto/cipher_extra/e_aesctrhmac.c
+build $o/src/crypto/cipher_extra/e_aesgcmsiv.o : cc $s/src/crypto/cipher_extra/e_aesgcmsiv.c
+build $o/src/crypto/cipher_extra/e_chacha20poly1305.o : cc $s/src/crypto/cipher_extra/e_chacha20poly1305.c
+build $o/src/crypto/cipher_extra/e_des.o : cc $s/src/crypto/cipher_extra/e_des.c
+build $o/src/crypto/cipher_extra/e_null.o : cc $s/src/crypto/cipher_extra/e_null.c
+build $o/src/crypto/cipher_extra/e_rc2.o : cc $s/src/crypto/cipher_extra/e_rc2.c
+build $o/src/crypto/cipher_extra/e_rc4.o : cc $s/src/crypto/cipher_extra/e_rc4.c
+build $o/src/crypto/cipher_extra/e_tls.o : cc $s/src/crypto/cipher_extra/e_tls.c
+build $o/src/crypto/cipher_extra/tls_cbc.o : cc $s/src/crypto/cipher_extra/tls_cbc.c
+build $o/src/crypto/conf/conf.o : cc $s/src/crypto/conf/conf.c
+build $o/src/crypto/cpu_aarch64_apple.o : cc $s/src/crypto/cpu_aarch64_apple.c
+build $o/src/crypto/cpu_aarch64_fuchsia.o : cc $s/src/crypto/cpu_aarch64_fuchsia.c
+build $o/src/crypto/cpu_aarch64_linux.o : cc $s/src/crypto/cpu_aarch64_linux.c
+build $o/src/crypto/cpu_aarch64_openbsd.o : cc $s/src/crypto/cpu_aarch64_openbsd.c
+build $o/src/crypto/cpu_aarch64_sysreg.o : cc $s/src/crypto/cpu_aarch64_sysreg.c
+build $o/src/crypto/cpu_aarch64_win.o : cc $s/src/crypto/cpu_aarch64_win.c
+build $o/src/crypto/cpu_arm_freebsd.o : cc $s/src/crypto/cpu_arm_freebsd.c
+build $o/src/crypto/cpu_arm_linux.o : cc $s/src/crypto/cpu_arm_linux.c
+build $o/src/crypto/cpu_intel.o : cc $s/src/crypto/cpu_intel.c
+build $o/src/crypto/crypto.o : cc $s/src/crypto/crypto.c
+build $o/src/crypto/curve25519/curve25519.o : cc $s/src/crypto/curve25519/curve25519.c
+build $o/src/crypto/curve25519/curve25519_64_adx.o : cc $s/src/crypto/curve25519/curve25519_64_adx.c
+build $o/src/crypto/curve25519/spake25519.o : cc $s/src/crypto/curve25519/spake25519.c
+build $o/src/crypto/des/des.o : cc $s/src/crypto/des/des.c
+build $o/src/crypto/dh_extra/dh_asn1.o : cc $s/src/crypto/dh_extra/dh_asn1.c
+build $o/src/crypto/dh_extra/params.o : cc $s/src/crypto/dh_extra/params.c
+build $o/src/crypto/digest_extra/digest_extra.o : cc $s/src/crypto/digest_extra/digest_extra.c
+build $o/src/crypto/dsa/dsa.o : cc $s/src/crypto/dsa/dsa.c
+build $o/src/crypto/dsa/dsa_asn1.o : cc $s/src/crypto/dsa/dsa_asn1.c
+build $o/src/crypto/ec_extra/ec_asn1.o : cc $s/src/crypto/ec_extra/ec_asn1.c
+build $o/src/crypto/ec_extra/ec_derive.o : cc $s/src/crypto/ec_extra/ec_derive.c
+build $o/src/crypto/ec_extra/hash_to_curve.o : cc $s/src/crypto/ec_extra/hash_to_curve.c
+build $o/src/crypto/ecdh_extra/ecdh_extra.o : cc $s/src/crypto/ecdh_extra/ecdh_extra.c
+build $o/src/crypto/ecdsa_extra/ecdsa_asn1.o : cc $s/src/crypto/ecdsa_extra/ecdsa_asn1.c
+build $o/src/crypto/engine/engine.o : cc $s/src/crypto/engine/engine.c
+build $o/src/crypto/err/err.o : cc $s/src/crypto/err/err.c
+build $o/src/crypto/evp/evp.o : cc $s/src/crypto/evp/evp.c
+build $o/src/crypto/evp/evp_asn1.o : cc $s/src/crypto/evp/evp_asn1.c
+build $o/src/crypto/evp/evp_ctx.o : cc $s/src/crypto/evp/evp_ctx.c
+build $o/src/crypto/evp/p_dsa_asn1.o : cc $s/src/crypto/evp/p_dsa_asn1.c
+build $o/src/crypto/evp/p_ec.o : cc $s/src/crypto/evp/p_ec.c
+build $o/src/crypto/evp/p_ec_asn1.o : cc $s/src/crypto/evp/p_ec_asn1.c
+build $o/src/crypto/evp/p_ed25519.o : cc $s/src/crypto/evp/p_ed25519.c
+build $o/src/crypto/evp/p_ed25519_asn1.o : cc $s/src/crypto/evp/p_ed25519_asn1.c
+build $o/src/crypto/evp/p_hkdf.o : cc $s/src/crypto/evp/p_hkdf.c
+build $o/src/crypto/evp/p_rsa.o : cc $s/src/crypto/evp/p_rsa.c
+build $o/src/crypto/evp/p_rsa_asn1.o : cc $s/src/crypto/evp/p_rsa_asn1.c
+build $o/src/crypto/evp/p_x25519.o : cc $s/src/crypto/evp/p_x25519.c
+build $o/src/crypto/evp/p_x25519_asn1.o : cc $s/src/crypto/evp/p_x25519_asn1.c
+build $o/src/crypto/evp/pbkdf.o : cc $s/src/crypto/evp/pbkdf.c
+build $o/src/crypto/evp/print.o : cc $s/src/crypto/evp/print.c
+build $o/src/crypto/evp/scrypt.o : cc $s/src/crypto/evp/scrypt.c
+build $o/src/crypto/evp/sign.o : cc $s/src/crypto/evp/sign.c
+build $o/src/crypto/ex_data.o : cc $s/src/crypto/ex_data.c
+build $o/src/crypto/fipsmodule/bcm.o : cc $s/src/crypto/fipsmodule/bcm.c
+build $o/src/crypto/fipsmodule/fips_shared_support.o : cc $s/src/crypto/fipsmodule/fips_shared_support.c
+build $o/src/crypto/hpke/hpke.o : cc $s/src/crypto/hpke/hpke.c
+build $o/src/crypto/hrss/hrss.o : cc $s/src/crypto/hrss/hrss.c
+build $o/src/crypto/kyber/keccak.o : cc $s/src/crypto/kyber/keccak.c
+build $o/src/crypto/kyber/kyber.o : cc $s/src/crypto/kyber/kyber.c
+build $o/src/crypto/lhash/lhash.o : cc $s/src/crypto/lhash/lhash.c
+build $o/src/crypto/mem.o : cc $s/src/crypto/mem.c
+build $o/src/crypto/obj/obj.o : cc $s/src/crypto/obj/obj.c
+build $o/src/crypto/obj/obj_xref.o : cc $s/src/crypto/obj/obj_xref.c
+build $o/src/crypto/pem/pem_all.o : cc $s/src/crypto/pem/pem_all.c
+build $o/src/crypto/pem/pem_info.o : cc $s/src/crypto/pem/pem_info.c
+build $o/src/crypto/pem/pem_lib.o : cc $s/src/crypto/pem/pem_lib.c
+build $o/src/crypto/pem/pem_oth.o : cc $s/src/crypto/pem/pem_oth.c
+build $o/src/crypto/pem/pem_pk8.o : cc $s/src/crypto/pem/pem_pk8.c
+build $o/src/crypto/pem/pem_pkey.o : cc $s/src/crypto/pem/pem_pkey.c
+build $o/src/crypto/pem/pem_x509.o : cc $s/src/crypto/pem/pem_x509.c
+build $o/src/crypto/pem/pem_xaux.o : cc $s/src/crypto/pem/pem_xaux.c
+build $o/src/crypto/pkcs7/pkcs7.o : cc $s/src/crypto/pkcs7/pkcs7.c
+build $o/src/crypto/pkcs7/pkcs7_x509.o : cc $s/src/crypto/pkcs7/pkcs7_x509.c
+build $o/src/crypto/pkcs8/p5_pbev2.o : cc $s/src/crypto/pkcs8/p5_pbev2.c
+build $o/src/crypto/pkcs8/pkcs8.o : cc $s/src/crypto/pkcs8/pkcs8.c
+build $o/src/crypto/pkcs8/pkcs8_x509.o : cc $s/src/crypto/pkcs8/pkcs8_x509.c
+build $o/src/crypto/poly1305/poly1305.o : cc $s/src/crypto/poly1305/poly1305.c
+build $o/src/crypto/poly1305/poly1305_arm.o : cc $s/src/crypto/poly1305/poly1305_arm.c
+build $o/src/crypto/poly1305/poly1305_vec.o : cc $s/src/crypto/poly1305/poly1305_vec.c
+build $o/src/crypto/pool/pool.o : cc $s/src/crypto/pool/pool.c
+build $o/src/crypto/rand_extra/deterministic.o : cc $s/src/crypto/rand_extra/deterministic.c
+build $o/src/crypto/rand_extra/forkunsafe.o : cc $s/src/crypto/rand_extra/forkunsafe.c
+build $o/src/crypto/rand_extra/getentropy.o : cc $s/src/crypto/rand_extra/getentropy.c
+build $o/src/crypto/rand_extra/ios.o : cc $s/src/crypto/rand_extra/ios.c
+build $o/src/crypto/rand_extra/passive.o : cc $s/src/crypto/rand_extra/passive.c
+build $o/src/crypto/rand_extra/rand_extra.o : cc $s/src/crypto/rand_extra/rand_extra.c
+build $o/src/crypto/rand_extra/trusty.o : cc $s/src/crypto/rand_extra/trusty.c
+build $o/src/crypto/rand_extra/windows.o : cc $s/src/crypto/rand_extra/windows.c
+build $o/src/crypto/rc4/rc4.o : cc $s/src/crypto/rc4/rc4.c
+build $o/src/crypto/refcount.o : cc $s/src/crypto/refcount.c
+build $o/src/crypto/rsa_extra/rsa_asn1.o : cc $s/src/crypto/rsa_extra/rsa_asn1.c
+build $o/src/crypto/rsa_extra/rsa_crypt.o : cc $s/src/crypto/rsa_extra/rsa_crypt.c
+build $o/src/crypto/rsa_extra/rsa_print.o : cc $s/src/crypto/rsa_extra/rsa_print.c
+build $o/src/crypto/siphash/siphash.o : cc $s/src/crypto/siphash/siphash.c
+build $o/src/crypto/stack/stack.o : cc $s/src/crypto/stack/stack.c
+build $o/src/crypto/thread.o : cc $s/src/crypto/thread.c
+build $o/src/crypto/thread_none.o : cc $s/src/crypto/thread_none.c
+build $o/src/crypto/thread_pthread.o : cc $s/src/crypto/thread_pthread.c
+build $o/src/crypto/thread_win.o : cc $s/src/crypto/thread_win.c
+build $o/src/crypto/trust_token/pmbtoken.o : cc $s/src/crypto/trust_token/pmbtoken.c
+build $o/src/crypto/trust_token/trust_token.o : cc $s/src/crypto/trust_token/trust_token.c
+build $o/src/crypto/trust_token/voprf.o : cc $s/src/crypto/trust_token/voprf.c
+build $o/src/crypto/x509/a_digest.o : cc $s/src/crypto/x509/a_digest.c
+build $o/src/crypto/x509/a_sign.o : cc $s/src/crypto/x509/a_sign.c
+build $o/src/crypto/x509/a_verify.o : cc $s/src/crypto/x509/a_verify.c
+build $o/src/crypto/x509/algorithm.o : cc $s/src/crypto/x509/algorithm.c
+build $o/src/crypto/x509/asn1_gen.o : cc $s/src/crypto/x509/asn1_gen.c
+build $o/src/crypto/x509/by_dir.o : cc $s/src/crypto/x509/by_dir.c
+build $o/src/crypto/x509/by_file.o : cc $s/src/crypto/x509/by_file.c
+build $o/src/crypto/x509/i2d_pr.o : cc $s/src/crypto/x509/i2d_pr.c
+build $o/src/crypto/x509/name_print.o : cc $s/src/crypto/x509/name_print.c
+build $o/src/crypto/x509/policy.o : cc $s/src/crypto/x509/policy.c
+build $o/src/crypto/x509/rsa_pss.o : cc $s/src/crypto/x509/rsa_pss.c
+build $o/src/crypto/x509/t_crl.o : cc $s/src/crypto/x509/t_crl.c
+build $o/src/crypto/x509/t_req.o : cc $s/src/crypto/x509/t_req.c
+build $o/src/crypto/x509/t_x509.o : cc $s/src/crypto/x509/t_x509.c
+build $o/src/crypto/x509/t_x509a.o : cc $s/src/crypto/x509/t_x509a.c
+build $o/src/crypto/x509/x509.o : cc $s/src/crypto/x509/x509.c
+build $o/src/crypto/x509/x509_att.o : cc $s/src/crypto/x509/x509_att.c
+build $o/src/crypto/x509/x509_cmp.o : cc $s/src/crypto/x509/x509_cmp.c
+build $o/src/crypto/x509/x509_d2.o : cc $s/src/crypto/x509/x509_d2.c
+build $o/src/crypto/x509/x509_def.o : cc $s/src/crypto/x509/x509_def.c
+build $o/src/crypto/x509/x509_ext.o : cc $s/src/crypto/x509/x509_ext.c
+build $o/src/crypto/x509/x509_lu.o : cc $s/src/crypto/x509/x509_lu.c
+build $o/src/crypto/x509/x509_obj.o : cc $s/src/crypto/x509/x509_obj.c
+build $o/src/crypto/x509/x509_req.o : cc $s/src/crypto/x509/x509_req.c
+build $o/src/crypto/x509/x509_set.o : cc $s/src/crypto/x509/x509_set.c
+build $o/src/crypto/x509/x509_trs.o : cc $s/src/crypto/x509/x509_trs.c
+build $o/src/crypto/x509/x509_txt.o : cc $s/src/crypto/x509/x509_txt.c
+build $o/src/crypto/x509/x509_v3.o : cc $s/src/crypto/x509/x509_v3.c
+build $o/src/crypto/x509/x509_vfy.o : cc $s/src/crypto/x509/x509_vfy.c
+build $o/src/crypto/x509/x509_vpm.o : cc $s/src/crypto/x509/x509_vpm.c
+build $o/src/crypto/x509/x509cset.o : cc $s/src/crypto/x509/x509cset.c
+build $o/src/crypto/x509/x509name.o : cc $s/src/crypto/x509/x509name.c
+build $o/src/crypto/x509/x509rset.o : cc $s/src/crypto/x509/x509rset.c
+build $o/src/crypto/x509/x509spki.o : cc $s/src/crypto/x509/x509spki.c
+build $o/src/crypto/x509/x_algor.o : cc $s/src/crypto/x509/x_algor.c
+build $o/src/crypto/x509/x_all.o : cc $s/src/crypto/x509/x_all.c
+build $o/src/crypto/x509/x_attrib.o : cc $s/src/crypto/x509/x_attrib.c
+build $o/src/crypto/x509/x_crl.o : cc $s/src/crypto/x509/x_crl.c
+build $o/src/crypto/x509/x_exten.o : cc $s/src/crypto/x509/x_exten.c
+build $o/src/crypto/x509/x_info.o : cc $s/src/crypto/x509/x_info.c
+build $o/src/crypto/x509/x_name.o : cc $s/src/crypto/x509/x_name.c
+build $o/src/crypto/x509/x_pkey.o : cc $s/src/crypto/x509/x_pkey.c
+build $o/src/crypto/x509/x_pubkey.o : cc $s/src/crypto/x509/x_pubkey.c
+build $o/src/crypto/x509/x_req.o : cc $s/src/crypto/x509/x_req.c
+build $o/src/crypto/x509/x_sig.o : cc $s/src/crypto/x509/x_sig.c
+build $o/src/crypto/x509/x_spki.o : cc $s/src/crypto/x509/x_spki.c
+build $o/src/crypto/x509/x_val.o : cc $s/src/crypto/x509/x_val.c
+build $o/src/crypto/x509/x_x509.o : cc $s/src/crypto/x509/x_x509.c
+build $o/src/crypto/x509/x_x509a.o : cc $s/src/crypto/x509/x_x509a.c
+build $o/src/crypto/x509v3/v3_akey.o : cc $s/src/crypto/x509v3/v3_akey.c
+build $o/src/crypto/x509v3/v3_akeya.o : cc $s/src/crypto/x509v3/v3_akeya.c
+build $o/src/crypto/x509v3/v3_alt.o : cc $s/src/crypto/x509v3/v3_alt.c
+build $o/src/crypto/x509v3/v3_bcons.o : cc $s/src/crypto/x509v3/v3_bcons.c
+build $o/src/crypto/x509v3/v3_bitst.o : cc $s/src/crypto/x509v3/v3_bitst.c
+build $o/src/crypto/x509v3/v3_conf.o : cc $s/src/crypto/x509v3/v3_conf.c
+build $o/src/crypto/x509v3/v3_cpols.o : cc $s/src/crypto/x509v3/v3_cpols.c
+build $o/src/crypto/x509v3/v3_crld.o : cc $s/src/crypto/x509v3/v3_crld.c
+build $o/src/crypto/x509v3/v3_enum.o : cc $s/src/crypto/x509v3/v3_enum.c
+build $o/src/crypto/x509v3/v3_extku.o : cc $s/src/crypto/x509v3/v3_extku.c
+build $o/src/crypto/x509v3/v3_genn.o : cc $s/src/crypto/x509v3/v3_genn.c
+build $o/src/crypto/x509v3/v3_ia5.o : cc $s/src/crypto/x509v3/v3_ia5.c
+build $o/src/crypto/x509v3/v3_info.o : cc $s/src/crypto/x509v3/v3_info.c
+build $o/src/crypto/x509v3/v3_int.o : cc $s/src/crypto/x509v3/v3_int.c
+build $o/src/crypto/x509v3/v3_lib.o : cc $s/src/crypto/x509v3/v3_lib.c
+build $o/src/crypto/x509v3/v3_ncons.o : cc $s/src/crypto/x509v3/v3_ncons.c
+build $o/src/crypto/x509v3/v3_ocsp.o : cc $s/src/crypto/x509v3/v3_ocsp.c
+build $o/src/crypto/x509v3/v3_pcons.o : cc $s/src/crypto/x509v3/v3_pcons.c
+build $o/src/crypto/x509v3/v3_pmaps.o : cc $s/src/crypto/x509v3/v3_pmaps.c
+build $o/src/crypto/x509v3/v3_prn.o : cc $s/src/crypto/x509v3/v3_prn.c
+build $o/src/crypto/x509v3/v3_purp.o : cc $s/src/crypto/x509v3/v3_purp.c
+build $o/src/crypto/x509v3/v3_skey.o : cc $s/src/crypto/x509v3/v3_skey.c
+build $o/src/crypto/x509v3/v3_utl.o : cc $s/src/crypto/x509v3/v3_utl.c
+
+build $o/src/ssl/bio_ssl.o : cxx $s/src/ssl/bio_ssl.cc
+build $o/src/ssl/d1_both.o : cxx $s/src/ssl/d1_both.cc
+build $o/src/ssl/d1_lib.o : cxx $s/src/ssl/d1_lib.cc
+build $o/src/ssl/d1_pkt.o : cxx $s/src/ssl/d1_pkt.cc
+build $o/src/ssl/d1_srtp.o : cxx $s/src/ssl/d1_srtp.cc
+build $o/src/ssl/dtls_method.o : cxx $s/src/ssl/dtls_method.cc
+build $o/src/ssl/dtls_record.o : cxx $s/src/ssl/dtls_record.cc
+build $o/src/ssl/encrypted_client_hello.o : cxx $s/src/ssl/encrypted_client_hello.cc
+build $o/src/ssl/extensions.o : cxx $s/src/ssl/extensions.cc
+build $o/src/ssl/handoff.o : cxx $s/src/ssl/handoff.cc
+build $o/src/ssl/handshake.o : cxx $s/src/ssl/handshake.cc
+build $o/src/ssl/handshake_client.o : cxx $s/src/ssl/handshake_client.cc
+build $o/src/ssl/handshake_server.o : cxx $s/src/ssl/handshake_server.cc
+build $o/src/ssl/s3_both.o : cxx $s/src/ssl/s3_both.cc
+build $o/src/ssl/s3_lib.o : cxx $s/src/ssl/s3_lib.cc
+build $o/src/ssl/s3_pkt.o : cxx $s/src/ssl/s3_pkt.cc
+build $o/src/ssl/ssl_aead_ctx.o : cxx $s/src/ssl/ssl_aead_ctx.cc
+build $o/src/ssl/ssl_asn1.o : cxx $s/src/ssl/ssl_asn1.cc
+build $o/src/ssl/ssl_buffer.o : cxx $s/src/ssl/ssl_buffer.cc
+build $o/src/ssl/ssl_cert.o : cxx $s/src/ssl/ssl_cert.cc
+build $o/src/ssl/ssl_cipher.o : cxx $s/src/ssl/ssl_cipher.cc
+build $o/src/ssl/ssl_file.o : cxx $s/src/ssl/ssl_file.cc
+build $o/src/ssl/ssl_key_share.o : cxx $s/src/ssl/ssl_key_share.cc
+build $o/src/ssl/ssl_lib.o : cxx $s/src/ssl/ssl_lib.cc
+build $o/src/ssl/ssl_privkey.o : cxx $s/src/ssl/ssl_privkey.cc
+build $o/src/ssl/ssl_session.o : cxx $s/src/ssl/ssl_session.cc
+build $o/src/ssl/ssl_stat.o : cxx $s/src/ssl/ssl_stat.cc
+build $o/src/ssl/ssl_transcript.o : cxx $s/src/ssl/ssl_transcript.cc
+build $o/src/ssl/ssl_versions.o : cxx $s/src/ssl/ssl_versions.cc
+build $o/src/ssl/ssl_x509.o : cxx $s/src/ssl/ssl_x509.cc
+build $o/src/ssl/t1_enc.o : cxx $s/src/ssl/t1_enc.cc
+build $o/src/ssl/tls13_both.o : cxx $s/src/ssl/tls13_both.cc
+build $o/src/ssl/tls13_client.o : cxx $s/src/ssl/tls13_client.cc
+build $o/src/ssl/tls13_enc.o : cxx $s/src/ssl/tls13_enc.cc
+build $o/src/ssl/tls13_server.o : cxx $s/src/ssl/tls13_server.cc
+build $o/src/ssl/tls_method.o : cxx $s/src/ssl/tls_method.cc
+build $o/src/ssl/tls_record.o : cxx $s/src/ssl/tls_record.cc
+build $o/src/pki/cert_error_id.o : cxx $s/src/pki/cert_error_id.cc
+build $o/src/pki/cert_error_params.o : cxx $s/src/pki/cert_error_params.cc
+build $o/src/pki/cert_errors.o : cxx $s/src/pki/cert_errors.cc
+build $o/src/pki/cert_issuer_source_static.o : cxx $s/src/pki/cert_issuer_source_static.cc
+build $o/src/pki/certificate_policies.o : cxx $s/src/pki/certificate_policies.cc
+build $o/src/pki/common_cert_errors.o : cxx $s/src/pki/common_cert_errors.cc
+build $o/src/pki/crl.o : cxx $s/src/pki/crl.cc
+build $o/src/pki/encode_values.o : cxx $s/src/pki/encode_values.cc
+build $o/src/pki/extended_key_usage.o : cxx $s/src/pki/extended_key_usage.cc
+build $o/src/pki/fillins/fillins_base64.o : cxx $s/src/pki/fillins/fillins_base64.cc
+build $o/src/pki/fillins/fillins_string_util.o : cxx $s/src/pki/fillins/fillins_string_util.cc
+build $o/src/pki/fillins/ip_address.o : cxx $s/src/pki/fillins/ip_address.cc
+build $o/src/pki/fillins/openssl_util.o : cxx $s/src/pki/fillins/openssl_util.cc
+build $o/src/pki/fillins/utf_string_conversions.o : cxx $s/src/pki/fillins/utf_string_conversions.cc
+build $o/src/pki/general_names.o : cxx $s/src/pki/general_names.cc
+build $o/src/pki/input.o : cxx $s/src/pki/input.cc
+build $o/src/pki/name_constraints.o : cxx $s/src/pki/name_constraints.cc
+build $o/src/pki/ocsp.o : cxx $s/src/pki/ocsp.cc
+build $o/src/pki/ocsp_verify_result.o : cxx $s/src/pki/ocsp_verify_result.cc
+build $o/src/pki/parse_certificate.o : cxx $s/src/pki/parse_certificate.cc
+build $o/src/pki/parse_name.o : cxx $s/src/pki/parse_name.cc
+build $o/src/pki/parse_values.o : cxx $s/src/pki/parse_values.cc
+build $o/src/pki/parsed_certificate.o : cxx $s/src/pki/parsed_certificate.cc
+build $o/src/pki/parser.o : cxx $s/src/pki/parser.cc
+build $o/src/pki/path_builder.o : cxx $s/src/pki/path_builder.cc
+build $o/src/pki/pem.o : cxx $s/src/pki/pem.cc
+build $o/src/pki/revocation_util.o : cxx $s/src/pki/revocation_util.cc
+build $o/src/pki/signature_algorithm.o : cxx $s/src/pki/signature_algorithm.cc
+build $o/src/pki/simple_path_builder_delegate.o : cxx $s/src/pki/simple_path_builder_delegate.cc
+build $o/src/pki/string_util.o : cxx $s/src/pki/string_util.cc
+build $o/src/pki/tag.o : cxx $s/src/pki/tag.cc
+build $o/src/pki/trust_store.o : cxx $s/src/pki/trust_store.cc
+build $o/src/pki/trust_store_collection.o : cxx $s/src/pki/trust_store_collection.cc
+build $o/src/pki/trust_store_in_memory.o : cxx $s/src/pki/trust_store_in_memory.cc
+build $o/src/pki/verify_certificate_chain.o : cxx $s/src/pki/verify_certificate_chain.cc
+build $o/src/pki/verify_name_match.o : cxx $s/src/pki/verify_name_match.cc
+build $o/src/pki/verify_signed_data.o : cxx $s/src/pki/verify_signed_data.cc
+
+
+build $lib/ssl$LIB : ar $
+  $o/err_data.o $
+  $o/src/crypto/asn1/a_bitstr.o $
+  $o/src/crypto/asn1/a_bool.o $
+  $o/src/crypto/asn1/a_d2i_fp.o $
+  $o/src/crypto/asn1/a_dup.o $
+  $o/src/crypto/asn1/a_gentm.o $
+  $o/src/crypto/asn1/a_i2d_fp.o $
+  $o/src/crypto/asn1/a_int.o $
+  $o/src/crypto/asn1/a_mbstr.o $
+  $o/src/crypto/asn1/a_object.o $
+  $o/src/crypto/asn1/a_octet.o $
+  $o/src/crypto/asn1/a_strex.o $
+  $o/src/crypto/asn1/a_strnid.o $
+  $o/src/crypto/asn1/a_time.o $
+  $o/src/crypto/asn1/a_type.o $
+  $o/src/crypto/asn1/a_utctm.o $
+  $o/src/crypto/asn1/asn1_lib.o $
+  $o/src/crypto/asn1/asn1_par.o $
+  $o/src/crypto/asn1/asn_pack.o $
+  $o/src/crypto/asn1/f_int.o $
+  $o/src/crypto/asn1/f_string.o $
+  $o/src/crypto/asn1/posix_time.o $
+  $o/src/crypto/asn1/tasn_dec.o $
+  $o/src/crypto/asn1/tasn_enc.o $
+  $o/src/crypto/asn1/tasn_fre.o $
+  $o/src/crypto/asn1/tasn_new.o $
+  $o/src/crypto/asn1/tasn_typ.o $
+  $o/src/crypto/asn1/tasn_utl.o $
+  $o/src/crypto/base64/base64.o $
+  $o/src/crypto/bio/bio.o $
+  $o/src/crypto/bio/bio_mem.o $
+  $o/src/crypto/bio/connect.o $
+  $o/src/crypto/bio/errno.o $
+  $o/src/crypto/bio/fd.o $
+  $o/src/crypto/bio/file.o $
+  $o/src/crypto/bio/hexdump.o $
+  $o/src/crypto/bio/pair.o $
+  $o/src/crypto/bio/printf.o $
+  $o/src/crypto/bio/socket.o $
+  $o/src/crypto/bio/socket_helper.o $
+  $o/src/crypto/blake2/blake2.o $
+  $o/src/crypto/bn_extra/bn_asn1.o $
+  $o/src/crypto/bn_extra/convert.o $
+  $o/src/crypto/buf/buf.o $
+  $o/src/crypto/bytestring/asn1_compat.o $
+  $o/src/crypto/bytestring/ber.o $
+  $o/src/crypto/bytestring/cbb.o $
+  $o/src/crypto/bytestring/cbs.o $
+  $o/src/crypto/bytestring/unicode.o $
+  $o/src/crypto/chacha/chacha.o $
+  $o/src/crypto/cipher_extra/cipher_extra.o $
+  $o/src/crypto/cipher_extra/derive_key.o $
+  $o/src/crypto/cipher_extra/e_aesctrhmac.o $
+  $o/src/crypto/cipher_extra/e_aesgcmsiv.o $
+  $o/src/crypto/cipher_extra/e_chacha20poly1305.o $
+  $o/src/crypto/cipher_extra/e_des.o $
+  $o/src/crypto/cipher_extra/e_null.o $
+  $o/src/crypto/cipher_extra/e_rc2.o $
+  $o/src/crypto/cipher_extra/e_rc4.o $
+  $o/src/crypto/cipher_extra/e_tls.o $
+  $o/src/crypto/cipher_extra/tls_cbc.o $
+  $o/src/crypto/conf/conf.o $
+  $o/src/crypto/cpu_aarch64_apple.o $
+  $o/src/crypto/cpu_aarch64_fuchsia.o $
+  $o/src/crypto/cpu_aarch64_linux.o $
+  $o/src/crypto/cpu_aarch64_openbsd.o $
+  $o/src/crypto/cpu_aarch64_sysreg.o $
+  $o/src/crypto/cpu_aarch64_win.o $
+  $o/src/crypto/cpu_arm_freebsd.o $
+  $o/src/crypto/cpu_arm_linux.o $
+  $o/src/crypto/cpu_intel.o $
+  $o/src/crypto/crypto.o $
+  $o/src/crypto/curve25519/curve25519.o $
+  $o/src/crypto/curve25519/curve25519_64_adx.o $
+  $o/src/crypto/curve25519/spake25519.o $
+  $o/src/crypto/des/des.o $
+  $o/src/crypto/dh_extra/dh_asn1.o $
+  $o/src/crypto/dh_extra/params.o $
+  $o/src/crypto/digest_extra/digest_extra.o $
+  $o/src/crypto/dsa/dsa.o $
+  $o/src/crypto/dsa/dsa_asn1.o $
+  $o/src/crypto/ec_extra/ec_asn1.o $
+  $o/src/crypto/ec_extra/ec_derive.o $
+  $o/src/crypto/ec_extra/hash_to_curve.o $
+  $o/src/crypto/ecdh_extra/ecdh_extra.o $
+  $o/src/crypto/ecdsa_extra/ecdsa_asn1.o $
+  $o/src/crypto/engine/engine.o $
+  $o/src/crypto/err/err.o $
+  $o/src/crypto/evp/evp.o $
+  $o/src/crypto/evp/evp_asn1.o $
+  $o/src/crypto/evp/evp_ctx.o $
+  $o/src/crypto/evp/p_dsa_asn1.o $
+  $o/src/crypto/evp/p_ec.o $
+  $o/src/crypto/evp/p_ec_asn1.o $
+  $o/src/crypto/evp/p_ed25519.o $
+  $o/src/crypto/evp/p_ed25519_asn1.o $
+  $o/src/crypto/evp/p_hkdf.o $
+  $o/src/crypto/evp/p_rsa.o $
+  $o/src/crypto/evp/p_rsa_asn1.o $
+  $o/src/crypto/evp/p_x25519.o $
+  $o/src/crypto/evp/p_x25519_asn1.o $
+  $o/src/crypto/evp/pbkdf.o $
+  $o/src/crypto/evp/print.o $
+  $o/src/crypto/evp/scrypt.o $
+  $o/src/crypto/evp/sign.o $
+  $o/src/crypto/ex_data.o $
+  $o/src/crypto/fipsmodule/bcm.o $
+  $o/src/crypto/fipsmodule/fips_shared_support.o $
+  $o/src/crypto/hpke/hpke.o $
+  $o/src/crypto/hrss/hrss.o $
+  $o/src/crypto/kyber/keccak.o $
+  $o/src/crypto/kyber/kyber.o $
+  $o/src/crypto/lhash/lhash.o $
+  $o/src/crypto/mem.o $
+  $o/src/crypto/obj/obj.o $
+  $o/src/crypto/obj/obj_xref.o $
+  $o/src/crypto/pem/pem_all.o $
+  $o/src/crypto/pem/pem_info.o $
+  $o/src/crypto/pem/pem_lib.o $
+  $o/src/crypto/pem/pem_oth.o $
+  $o/src/crypto/pem/pem_pk8.o $
+  $o/src/crypto/pem/pem_pkey.o $
+  $o/src/crypto/pem/pem_x509.o $
+  $o/src/crypto/pem/pem_xaux.o $
+  $o/src/crypto/pkcs7/pkcs7.o $
+  $o/src/crypto/pkcs7/pkcs7_x509.o $
+  $o/src/crypto/pkcs8/p5_pbev2.o $
+  $o/src/crypto/pkcs8/pkcs8.o $
+  $o/src/crypto/pkcs8/pkcs8_x509.o $
+  $o/src/crypto/poly1305/poly1305.o $
+  $o/src/crypto/poly1305/poly1305_arm.o $
+  $o/src/crypto/poly1305/poly1305_vec.o $
+  $o/src/crypto/pool/pool.o $
+  $o/src/crypto/rand_extra/deterministic.o $
+  $o/src/crypto/rand_extra/forkunsafe.o $
+  $o/src/crypto/rand_extra/getentropy.o $
+  $o/src/crypto/rand_extra/ios.o $
+  $o/src/crypto/rand_extra/passive.o $
+  $o/src/crypto/rand_extra/rand_extra.o $
+  $o/src/crypto/rand_extra/trusty.o $
+  $o/src/crypto/rand_extra/windows.o $
+  $o/src/crypto/rc4/rc4.o $
+  $o/src/crypto/refcount.o $
+  $o/src/crypto/rsa_extra/rsa_asn1.o $
+  $o/src/crypto/rsa_extra/rsa_crypt.o $
+  $o/src/crypto/rsa_extra/rsa_print.o $
+  $o/src/crypto/siphash/siphash.o $
+  $o/src/crypto/stack/stack.o $
+  $o/src/crypto/thread.o $
+  $o/src/crypto/thread_none.o $
+  $o/src/crypto/thread_pthread.o $
+  $o/src/crypto/thread_win.o $
+  $o/src/crypto/trust_token/pmbtoken.o $
+  $o/src/crypto/trust_token/trust_token.o $
+  $o/src/crypto/trust_token/voprf.o $
+  $o/src/crypto/x509/a_digest.o $
+  $o/src/crypto/x509/a_sign.o $
+  $o/src/crypto/x509/a_verify.o $
+  $o/src/crypto/x509/algorithm.o $
+  $o/src/crypto/x509/asn1_gen.o $
+  $o/src/crypto/x509/by_dir.o $
+  $o/src/crypto/x509/by_file.o $
+  $o/src/crypto/x509/i2d_pr.o $
+  $o/src/crypto/x509/name_print.o $
+  $o/src/crypto/x509/policy.o $
+  $o/src/crypto/x509/rsa_pss.o $
+  $o/src/crypto/x509/t_crl.o $
+  $o/src/crypto/x509/t_req.o $
+  $o/src/crypto/x509/t_x509.o $
+  $o/src/crypto/x509/t_x509a.o $
+  $o/src/crypto/x509/x509.o $
+  $o/src/crypto/x509/x509_att.o $
+  $o/src/crypto/x509/x509_cmp.o $
+  $o/src/crypto/x509/x509_d2.o $
+  $o/src/crypto/x509/x509_def.o $
+  $o/src/crypto/x509/x509_ext.o $
+  $o/src/crypto/x509/x509_lu.o $
+  $o/src/crypto/x509/x509_obj.o $
+  $o/src/crypto/x509/x509_req.o $
+  $o/src/crypto/x509/x509_set.o $
+  $o/src/crypto/x509/x509_trs.o $
+  $o/src/crypto/x509/x509_txt.o $
+  $o/src/crypto/x509/x509_v3.o $
+  $o/src/crypto/x509/x509_vfy.o $
+  $o/src/crypto/x509/x509_vpm.o $
+  $o/src/crypto/x509/x509cset.o $
+  $o/src/crypto/x509/x509name.o $
+  $o/src/crypto/x509/x509rset.o $
+  $o/src/crypto/x509/x509spki.o $
+  $o/src/crypto/x509/x_algor.o $
+  $o/src/crypto/x509/x_all.o $
+  $o/src/crypto/x509/x_attrib.o $
+  $o/src/crypto/x509/x_crl.o $
+  $o/src/crypto/x509/x_exten.o $
+  $o/src/crypto/x509/x_info.o $
+  $o/src/crypto/x509/x_name.o $
+  $o/src/crypto/x509/x_pkey.o $
+  $o/src/crypto/x509/x_pubkey.o $
+  $o/src/crypto/x509/x_req.o $
+  $o/src/crypto/x509/x_sig.o $
+  $o/src/crypto/x509/x_spki.o $
+  $o/src/crypto/x509/x_val.o $
+  $o/src/crypto/x509/x_x509.o $
+  $o/src/crypto/x509/x_x509a.o $
+  $o/src/crypto/x509v3/v3_akey.o $
+  $o/src/crypto/x509v3/v3_akeya.o $
+  $o/src/crypto/x509v3/v3_alt.o $
+  $o/src/crypto/x509v3/v3_bcons.o $
+  $o/src/crypto/x509v3/v3_bitst.o $
+  $o/src/crypto/x509v3/v3_conf.o $
+  $o/src/crypto/x509v3/v3_cpols.o $
+  $o/src/crypto/x509v3/v3_crld.o $
+  $o/src/crypto/x509v3/v3_enum.o $
+  $o/src/crypto/x509v3/v3_extku.o $
+  $o/src/crypto/x509v3/v3_genn.o $
+  $o/src/crypto/x509v3/v3_ia5.o $
+  $o/src/crypto/x509v3/v3_info.o $
+  $o/src/crypto/x509v3/v3_int.o $
+  $o/src/crypto/x509v3/v3_lib.o $
+  $o/src/crypto/x509v3/v3_ncons.o $
+  $o/src/crypto/x509v3/v3_ocsp.o $
+  $o/src/crypto/x509v3/v3_pcons.o $
+  $o/src/crypto/x509v3/v3_pmaps.o $
+  $o/src/crypto/x509v3/v3_prn.o $
+  $o/src/crypto/x509v3/v3_purp.o $
+  $o/src/crypto/x509v3/v3_skey.o $
+  $o/src/crypto/x509v3/v3_utl.o $
+  $o/src/ssl/bio_ssl.o $
+  $o/src/ssl/d1_both.o $
+  $o/src/ssl/d1_lib.o $
+  $o/src/ssl/d1_pkt.o $
+  $o/src/ssl/d1_srtp.o $
+  $o/src/ssl/dtls_method.o $
+  $o/src/ssl/dtls_record.o $
+  $o/src/ssl/encrypted_client_hello.o $
+  $o/src/ssl/extensions.o $
+  $o/src/ssl/handoff.o $
+  $o/src/ssl/handshake.o $
+  $o/src/ssl/handshake_client.o $
+  $o/src/ssl/handshake_server.o $
+  $o/src/ssl/s3_both.o $
+  $o/src/ssl/s3_lib.o $
+  $o/src/ssl/s3_pkt.o $
+  $o/src/ssl/ssl_aead_ctx.o $
+  $o/src/ssl/ssl_asn1.o $
+  $o/src/ssl/ssl_buffer.o $
+  $o/src/ssl/ssl_cert.o $
+  $o/src/ssl/ssl_cipher.o $
+  $o/src/ssl/ssl_file.o $
+  $o/src/ssl/ssl_key_share.o $
+  $o/src/ssl/ssl_lib.o $
+  $o/src/ssl/ssl_privkey.o $
+  $o/src/ssl/ssl_session.o $
+  $o/src/ssl/ssl_stat.o $
+  $o/src/ssl/ssl_transcript.o $
+  $o/src/ssl/ssl_versions.o $
+  $o/src/ssl/ssl_x509.o $
+  $o/src/ssl/t1_enc.o $
+  $o/src/ssl/tls13_both.o $
+  $o/src/ssl/tls13_client.o $
+  $o/src/ssl/tls13_enc.o $
+  $o/src/ssl/tls13_server.o $
+  $o/src/ssl/tls_method.o $
+  $o/src/ssl/tls_record.o $
+  $o/src/pki/cert_error_id.o $
+  $o/src/pki/cert_error_params.o $
+  $o/src/pki/cert_errors.o $
+  $o/src/pki/cert_issuer_source_static.o $
+  $o/src/pki/certificate_policies.o $
+  $o/src/pki/common_cert_errors.o $
+  $o/src/pki/crl.o $
+  $o/src/pki/encode_values.o $
+  $o/src/pki/extended_key_usage.o $
+  $o/src/pki/fillins/fillins_base64.o $
+  $o/src/pki/fillins/fillins_string_util.o $
+  $o/src/pki/fillins/ip_address.o $
+  $o/src/pki/fillins/openssl_util.o $
+  $o/src/pki/fillins/utf_string_conversions.o $
+  $o/src/pki/general_names.o $
+  $o/src/pki/input.o $
+  $o/src/pki/name_constraints.o $
+  $o/src/pki/ocsp.o $
+  $o/src/pki/ocsp_verify_result.o $
+  $o/src/pki/parse_certificate.o $
+  $o/src/pki/parse_name.o $
+  $o/src/pki/parse_values.o $
+  $o/src/pki/parsed_certificate.o $
+  $o/src/pki/parser.o $
+  $o/src/pki/path_builder.o $
+  $o/src/pki/pem.o $
+  $o/src/pki/revocation_util.o $
+  $o/src/pki/signature_algorithm.o $
+  $o/src/pki/simple_path_builder_delegate.o $
+  $o/src/pki/string_util.o $
+  $o/src/pki/tag.o $
+  $o/src/pki/trust_store.o $
+  $o/src/pki/trust_store_collection.o $
+  $o/src/pki/trust_store_in_memory.o $
+  $o/src/pki/verify_certificate_chain.o $
+  $o/src/pki/verify_name_match.o $
+  $o/src/pki/verify_signed_data.o $
+  $o/chacha/chacha-x86_64-win.o $
+  $o/cipher_extra/aes128gcmsiv-x86_64-win.o $
+  $o/cipher_extra/chacha20_poly1305_x86_64-win.o $
+  $o/fipsmodule/aesni-gcm-x86_64-win.o $
+  $o/fipsmodule/aesni-x86_64-win.o $
+  $o/fipsmodule/ghash-ssse3-x86_64-win.o $
+  $o/fipsmodule/ghash-x86_64-win.o $
+  $o/fipsmodule/md5-x86_64-win.o $
+  $o/fipsmodule/p256-x86_64-asm-win.o $
+  $o/fipsmodule/p256_beeu-x86_64-asm-win.o $
+  $o/fipsmodule/rdrand-x86_64-win.o $
+  $o/fipsmodule/rsaz-avx2-win.o $
+  $o/fipsmodule/sha1-x86_64-win.o $
+  $o/fipsmodule/sha256-x86_64-win.o $
+  $o/fipsmodule/sha512-x86_64-win.o $
+  $o/fipsmodule/vpaes-x86_64-win.o $
+  $o/fipsmodule/x86_64-mont-win.o $
+  $o/fipsmodule/x86_64-mont5-win.o
+  

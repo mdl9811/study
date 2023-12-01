@@ -1,0 +1,54 @@
+#
+# Copyright (c) 2023 mdl. All rights reserved.
+#
+
+ARCH_CFLAGS = -target x86_64-pc-windows-msvc -m64 -msse3 -D_WIN64
+
+EXE=.exe
+LIB=.lib
+DLL=.dll
+
+lib=$out/lib
+bin=$out/bin
+obj=$out/obj
+gen=$out/gen
+
+LIBPFX=$out/lib/
+
+ARCH_FILE = win-x64
+
+include build/windows/$BUILD.ninja
+
+OPT_LDFLAGS = /machine:x64 $OPT_LDFLAGS
+
+OPT_CFLAGS = $ARCH_CFLAGS $OPT_CFLAGS
+
+CR_FLAGS = -I. -Ithird_party/libc++ -Ithird_party/libc++/src/include $
+  -Ithird_party/abseil-cpp $
+  -Ithird_party/libcr $
+  -Ithird_party/boringssl/src/include $
+  -Ithird_party/abseil-cpp
+
+CR_LDFLAGS = kernel32.lib setupapi.lib user32.lib shell32.lib userenv.lib $
+  gdi32.lib powrprof.lib oleaut32.lib winmm.lib ncrypt.lib shlwapi.lib $
+  version.lib propsys.lib ws2_32.lib wbemuuid.lib delayimp.lib winhttp.lib $
+  iphlpapi.lib crypt32.lib secur32.lib urlmon.lib dhcpcsvc.lib advapi32.lib
+
+
+OPT_LDFLAGS = $OPT_LDFLAGS $CR_LDFLAGS
+# 
+subninja build/host/build.ninja
+
+#
+subninja build/ninja/libnasm.ninja
+subninja build/ninja/libc++.ninja
+subninja build/ninja/libcr.ninja
+subninja build/ninja/libabsl.ninja
+subninja build/ninja/libboringssl.ninja
+
+#
+subninja build/ninja/libaac.ninja
+subninja build/ninja/libopus.ninja
+
+#
+subninja build/windows/src.ninja

@@ -1,0 +1,9 @@
+#
+# Copyright (c) 2023 mdl. All rights reserved.
+#
+
+obj = out/$TARGET/host/obj
+
+build $obj/tools/cp.o : cxx src/tools/cp.cc
+
+build $obj/tools/cp.exe : link $obj/tools/cp.o

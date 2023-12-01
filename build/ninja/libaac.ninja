@@ -1,0 +1,357 @@
+#
+# Copyright (c) 2023 mdl. All rights reserved.
+#
+
+s=third_party/aac
+o=$obj/aac
+
+CFLAGS = -I$s. -I$s/libAACdec/include -I$s/libAACenc/include $
+ -I$s/libArithCoding/include -I$s/libSACdec/include -I$s/libSACenc/include  $
+ -I$s/libDRCdec/include -I$s/libSBRenc/include -I$s/libSBRdec/include $
+ -I$s/libMpegTPDec/include -I$s/libMpegTPEnc/include -I$s/libSYS/include $
+ -I$s/libFDK/include -I$s/libPCMutils/include -DPIC /EHsc $
+ -Wno-deprecated-enum-enum-conversion 
+
+
+build $o/libAACdec/src/FDK_delay.o : cxx $s/libAACdec/src/FDK_delay.cpp 
+build $o/libAACdec/src/aac_ram.o : cxx $s/libAACdec/src/aac_ram.cpp 
+build $o/libAACdec/src/aac_rom.o : cxx $s/libAACdec/src/aac_rom.cpp 
+build $o/libAACdec/src/aacdec_drc.o : cxx $s/libAACdec/src/aacdec_drc.cpp 
+build $o/libAACdec/src/aacdec_hcr.o : cxx $s/libAACdec/src/aacdec_hcr.cpp 
+build $o/libAACdec/src/aacdec_hcr_bit.o : cxx $s/libAACdec/src/aacdec_hcr_bit.cpp 
+build $o/libAACdec/src/aacdec_hcrs.o : cxx $s/libAACdec/src/aacdec_hcrs.cpp 
+build $o/libAACdec/src/aacdec_pns.o : cxx $s/libAACdec/src/aacdec_pns.cpp 
+build $o/libAACdec/src/aacdec_tns.o : cxx $s/libAACdec/src/aacdec_tns.cpp 
+build $o/libAACdec/src/aacdecoder.o : cxx $s/libAACdec/src/aacdecoder.cpp 
+build $o/libAACdec/src/aacdecoder_lib.o : cxx $s/libAACdec/src/aacdecoder_lib.cpp 
+build $o/libAACdec/src/block.o : cxx $s/libAACdec/src/block.cpp 
+build $o/libAACdec/src/channel.o : cxx $s/libAACdec/src/channel.cpp 
+build $o/libAACdec/src/channelinfo.o : cxx $s/libAACdec/src/channelinfo.cpp 
+build $o/libAACdec/src/conceal.o : cxx $s/libAACdec/src/conceal.cpp 
+build $o/libAACdec/src/ldfiltbank.o : cxx $s/libAACdec/src/ldfiltbank.cpp 
+build $o/libAACdec/src/pulsedata.o : cxx $s/libAACdec/src/pulsedata.cpp 
+build $o/libAACdec/src/rvlc.o : cxx $s/libAACdec/src/rvlc.cpp 
+build $o/libAACdec/src/rvlcbit.o : cxx $s/libAACdec/src/rvlcbit.cpp 
+build $o/libAACdec/src/rvlcconceal.o : cxx $s/libAACdec/src/rvlcconceal.cpp 
+build $o/libAACdec/src/stereo.o : cxx $s/libAACdec/src/stereo.cpp 
+build $o/libAACdec/src/usacdec_ace_d4t64.o : cxx $s/libAACdec/src/usacdec_ace_d4t64.cpp 
+build $o/libAACdec/src/usacdec_ace_ltp.o : cxx $s/libAACdec/src/usacdec_ace_ltp.cpp 
+build $o/libAACdec/src/usacdec_acelp.o : cxx $s/libAACdec/src/usacdec_acelp.cpp 
+build $o/libAACdec/src/usacdec_fac.o : cxx $s/libAACdec/src/usacdec_fac.cpp 
+build $o/libAACdec/src/usacdec_lpc.o : cxx $s/libAACdec/src/usacdec_lpc.cpp 
+build $o/libAACdec/src/usacdec_lpd.o : cxx $s/libAACdec/src/usacdec_lpd.cpp 
+build $o/libAACdec/src/usacdec_rom.o : cxx $s/libAACdec/src/usacdec_rom.cpp 
+build $o/libAACenc/src/aacEnc_ram.o : cxx $s/libAACenc/src/aacEnc_ram.cpp 
+build $o/libAACenc/src/aacEnc_rom.o : cxx $s/libAACenc/src/aacEnc_rom.cpp 
+build $o/libAACenc/src/aacenc.o : cxx $s/libAACenc/src/aacenc.cpp 
+build $o/libAACenc/src/aacenc_lib.o : cxx $s/libAACenc/src/aacenc_lib.cpp 
+build $o/libAACenc/src/aacenc_pns.o : cxx $s/libAACenc/src/aacenc_pns.cpp 
+build $o/libAACenc/src/aacenc_tns.o : cxx $s/libAACenc/src/aacenc_tns.cpp 
+build $o/libAACenc/src/adj_thr.o : cxx $s/libAACenc/src/adj_thr.cpp 
+build $o/libAACenc/src/band_nrg.o : cxx $s/libAACenc/src/band_nrg.cpp 
+build $o/libAACenc/src/bandwidth.o : cxx $s/libAACenc/src/bandwidth.cpp 
+build $o/libAACenc/src/bit_cnt.o : cxx $s/libAACenc/src/bit_cnt.cpp 
+build $o/libAACenc/src/bitenc.o : cxx $s/libAACenc/src/bitenc.cpp 
+build $o/libAACenc/src/block_switch.o : cxx $s/libAACenc/src/block_switch.cpp 
+build $o/libAACenc/src/channel_map.o : cxx $s/libAACenc/src/channel_map.cpp 
+build $o/libAACenc/src/chaosmeasure.o : cxx $s/libAACenc/src/chaosmeasure.cpp 
+build $o/libAACenc/src/dyn_bits.o : cxx $s/libAACenc/src/dyn_bits.cpp 
+build $o/libAACenc/src/grp_data.o : cxx $s/libAACenc/src/grp_data.cpp 
+build $o/libAACenc/src/intensity.o : cxx $s/libAACenc/src/intensity.cpp 
+build $o/libAACenc/src/line_pe.o : cxx $s/libAACenc/src/line_pe.cpp 
+build $o/libAACenc/src/metadata_compressor.o : cxx $s/libAACenc/src/metadata_compressor.cpp 
+build $o/libAACenc/src/metadata_main.o : cxx $s/libAACenc/src/metadata_main.cpp 
+build $o/libAACenc/src/mps_main.o : cxx $s/libAACenc/src/mps_main.cpp 
+build $o/libAACenc/src/ms_stereo.o : cxx $s/libAACenc/src/ms_stereo.cpp 
+build $o/libAACenc/src/noisedet.o : cxx $s/libAACenc/src/noisedet.cpp 
+build $o/libAACenc/src/pnsparam.o : cxx $s/libAACenc/src/pnsparam.cpp 
+build $o/libAACenc/src/pre_echo_control.o : cxx $s/libAACenc/src/pre_echo_control.cpp 
+build $o/libAACenc/src/psy_configuration.o : cxx $s/libAACenc/src/psy_configuration.cpp 
+build $o/libAACenc/src/psy_main.o : cxx $s/libAACenc/src/psy_main.cpp 
+build $o/libAACenc/src/qc_main.o : cxx $s/libAACenc/src/qc_main.cpp 
+build $o/libAACenc/src/quantize.o : cxx $s/libAACenc/src/quantize.cpp 
+build $o/libAACenc/src/sf_estim.o : cxx $s/libAACenc/src/sf_estim.cpp 
+build $o/libAACenc/src/spreading.o : cxx $s/libAACenc/src/spreading.cpp 
+build $o/libAACenc/src/tonality.o : cxx $s/libAACenc/src/tonality.cpp 
+build $o/libAACenc/src/transform.o : cxx $s/libAACenc/src/transform.cpp 
+build $o/libArithCoding/src/ac_arith_coder.o : cxx $s/libArithCoding/src/ac_arith_coder.cpp 
+build $o/libDRCdec/src/FDK_drcDecLib.o : cxx $s/libDRCdec/src/FDK_drcDecLib.cpp 
+build $o/libDRCdec/src/drcDec_gainDecoder.o : cxx $s/libDRCdec/src/drcDec_gainDecoder.cpp 
+build $o/libDRCdec/src/drcDec_reader.o : cxx $s/libDRCdec/src/drcDec_reader.cpp 
+build $o/libDRCdec/src/drcDec_rom.o : cxx $s/libDRCdec/src/drcDec_rom.cpp 
+build $o/libDRCdec/src/drcDec_selectionProcess.o : cxx $s/libDRCdec/src/drcDec_selectionProcess.cpp 
+build $o/libDRCdec/src/drcDec_tools.o : cxx $s/libDRCdec/src/drcDec_tools.cpp 
+build $o/libDRCdec/src/drcGainDec_init.o : cxx $s/libDRCdec/src/drcGainDec_init.cpp 
+build $o/libDRCdec/src/drcGainDec_preprocess.o : cxx $s/libDRCdec/src/drcGainDec_preprocess.cpp 
+build $o/libDRCdec/src/drcGainDec_process.o : cxx $s/libDRCdec/src/drcGainDec_process.cpp 
+build $o/libMpegTPDec/src/tpdec_adif.o : cxx $s/libMpegTPDec/src/tpdec_adif.cpp 
+build $o/libMpegTPDec/src/tpdec_adts.o : cxx $s/libMpegTPDec/src/tpdec_adts.cpp 
+build $o/libMpegTPDec/src/tpdec_asc.o : cxx $s/libMpegTPDec/src/tpdec_asc.cpp 
+build $o/libMpegTPDec/src/tpdec_drm.o : cxx $s/libMpegTPDec/src/tpdec_drm.cpp 
+build $o/libMpegTPDec/src/tpdec_latm.o : cxx $s/libMpegTPDec/src/tpdec_latm.cpp 
+build $o/libMpegTPDec/src/tpdec_lib.o : cxx $s/libMpegTPDec/src/tpdec_lib.cpp 
+build $o/libMpegTPEnc/src/tpenc_adif.o : cxx $s/libMpegTPEnc/src/tpenc_adif.cpp 
+build $o/libMpegTPEnc/src/tpenc_adts.o : cxx $s/libMpegTPEnc/src/tpenc_adts.cpp 
+build $o/libMpegTPEnc/src/tpenc_asc.o : cxx $s/libMpegTPEnc/src/tpenc_asc.cpp 
+build $o/libMpegTPEnc/src/tpenc_latm.o : cxx $s/libMpegTPEnc/src/tpenc_latm.cpp 
+build $o/libMpegTPEnc/src/tpenc_lib.o : cxx $s/libMpegTPEnc/src/tpenc_lib.cpp 
+build $o/libSACdec/src/sac_bitdec.o : cxx $s/libSACdec/src/sac_bitdec.cpp 
+build $o/libSACdec/src/sac_calcM1andM2.o : cxx $s/libSACdec/src/sac_calcM1andM2.cpp 
+build $o/libSACdec/src/sac_dec.o : cxx $s/libSACdec/src/sac_dec.cpp 
+build $o/libSACdec/src/sac_dec_conceal.o : cxx $s/libSACdec/src/sac_dec_conceal.cpp 
+build $o/libSACdec/src/sac_dec_lib.o : cxx $s/libSACdec/src/sac_dec_lib.cpp 
+build $o/libSACdec/src/sac_process.o : cxx $s/libSACdec/src/sac_process.cpp 
+build $o/libSACdec/src/sac_qmf.o : cxx $s/libSACdec/src/sac_qmf.cpp 
+build $o/libSACdec/src/sac_reshapeBBEnv.o : cxx $s/libSACdec/src/sac_reshapeBBEnv.cpp 
+build $o/libSACdec/src/sac_rom.o : cxx $s/libSACdec/src/sac_rom.cpp 
+build $o/libSACdec/src/sac_smoothing.o : cxx $s/libSACdec/src/sac_smoothing.cpp 
+build $o/libSACdec/src/sac_stp.o : cxx $s/libSACdec/src/sac_stp.cpp 
+build $o/libSACdec/src/sac_tsd.o : cxx $s/libSACdec/src/sac_tsd.cpp 
+build $o/libSACenc/src/sacenc_bitstream.o : cxx $s/libSACenc/src/sacenc_bitstream.cpp 
+build $o/libSACenc/src/sacenc_delay.o : cxx $s/libSACenc/src/sacenc_delay.cpp 
+build $o/libSACenc/src/sacenc_dmx_tdom_enh.o : cxx $s/libSACenc/src/sacenc_dmx_tdom_enh.cpp 
+build $o/libSACenc/src/sacenc_filter.o : cxx $s/libSACenc/src/sacenc_filter.cpp 
+build $o/libSACenc/src/sacenc_framewindowing.o : cxx $s/libSACenc/src/sacenc_framewindowing.cpp 
+build $o/libSACenc/src/sacenc_huff_tab.o : cxx $s/libSACenc/src/sacenc_huff_tab.cpp 
+build $o/libSACenc/src/sacenc_lib.o : cxx $s/libSACenc/src/sacenc_lib.cpp 
+build $o/libSACenc/src/sacenc_nlc_enc.o : cxx $s/libSACenc/src/sacenc_nlc_enc.cpp 
+build $o/libSACenc/src/sacenc_onsetdetect.o : cxx $s/libSACenc/src/sacenc_onsetdetect.cpp 
+build $o/libSACenc/src/sacenc_paramextract.o : cxx $s/libSACenc/src/sacenc_paramextract.cpp 
+build $o/libSACenc/src/sacenc_staticgain.o : cxx $s/libSACenc/src/sacenc_staticgain.cpp 
+build $o/libSACenc/src/sacenc_tree.o : cxx $s/libSACenc/src/sacenc_tree.cpp 
+build $o/libSACenc/src/sacenc_vectorfunctions.o : cxx $s/libSACenc/src/sacenc_vectorfunctions.cpp 
+build $o/libSBRdec/src/HFgen_preFlat.o : cxx $s/libSBRdec/src/HFgen_preFlat.cpp 
+build $o/libSBRdec/src/env_calc.o : cxx $s/libSBRdec/src/env_calc.cpp 
+build $o/libSBRdec/src/env_dec.o : cxx $s/libSBRdec/src/env_dec.cpp 
+build $o/libSBRdec/src/env_extr.o : cxx $s/libSBRdec/src/env_extr.cpp 
+build $o/libSBRdec/src/hbe.o : cxx $s/libSBRdec/src/hbe.cpp 
+build $o/libSBRdec/src/huff_dec.o : cxx $s/libSBRdec/src/huff_dec.cpp 
+build $o/libSBRdec/src/lpp_tran.o : cxx $s/libSBRdec/src/lpp_tran.cpp 
+build $o/libSBRdec/src/psbitdec.o : cxx $s/libSBRdec/src/psbitdec.cpp 
+build $o/libSBRdec/src/psdec.o : cxx $s/libSBRdec/src/psdec.cpp 
+build $o/libSBRdec/src/psdec_drm.o : cxx $s/libSBRdec/src/psdec_drm.cpp 
+build $o/libSBRdec/src/psdecrom_drm.o : cxx $s/libSBRdec/src/psdecrom_drm.cpp 
+build $o/libSBRdec/src/pvc_dec.o : cxx $s/libSBRdec/src/pvc_dec.cpp 
+build $o/libSBRdec/src/sbr_deb.o : cxx $s/libSBRdec/src/sbr_deb.cpp 
+build $o/libSBRdec/src/sbr_dec.o : cxx $s/libSBRdec/src/sbr_dec.cpp 
+build $o/libSBRdec/src/sbr_ram.o : cxx $s/libSBRdec/src/sbr_ram.cpp 
+build $o/libSBRdec/src/sbr_rom.o : cxx $s/libSBRdec/src/sbr_rom.cpp 
+build $o/libSBRdec/src/sbrdec_drc.o : cxx $s/libSBRdec/src/sbrdec_drc.cpp 
+build $o/libSBRdec/src/sbrdec_freq_sca.o : cxx $s/libSBRdec/src/sbrdec_freq_sca.cpp 
+build $o/libSBRdec/src/sbrdecoder.o : cxx $s/libSBRdec/src/sbrdecoder.cpp 
+build $o/libSBRenc/src/bit_sbr.o : cxx $s/libSBRenc/src/bit_sbr.cpp 
+build $o/libSBRenc/src/code_env.o : cxx $s/libSBRenc/src/code_env.cpp 
+build $o/libSBRenc/src/env_bit.o : cxx $s/libSBRenc/src/env_bit.cpp 
+build $o/libSBRenc/src/env_est.o : cxx $s/libSBRenc/src/env_est.cpp 
+build $o/libSBRenc/src/fram_gen.o : cxx $s/libSBRenc/src/fram_gen.cpp 
+build $o/libSBRenc/src/invf_est.o : cxx $s/libSBRenc/src/invf_est.cpp 
+build $o/libSBRenc/src/mh_det.o : cxx $s/libSBRenc/src/mh_det.cpp 
+build $o/libSBRenc/src/nf_est.o : cxx $s/libSBRenc/src/nf_est.cpp 
+build $o/libSBRenc/src/ps_bitenc.o : cxx $s/libSBRenc/src/ps_bitenc.cpp 
+build $o/libSBRenc/src/ps_encode.o : cxx $s/libSBRenc/src/ps_encode.cpp 
+build $o/libSBRenc/src/ps_main.o : cxx $s/libSBRenc/src/ps_main.cpp 
+build $o/libSBRenc/src/resampler.o : cxx $s/libSBRenc/src/resampler.cpp 
+build $o/libSBRenc/src/sbr_encoder.o : cxx $s/libSBRenc/src/sbr_encoder.cpp 
+build $o/libSBRenc/src/sbr_misc.o : cxx $s/libSBRenc/src/sbr_misc.cpp 
+build $o/libSBRenc/src/sbrenc_freq_sca.o : cxx $s/libSBRenc/src/sbrenc_freq_sca.cpp 
+build $o/libSBRenc/src/sbrenc_ram.o : cxx $s/libSBRenc/src/sbrenc_ram.cpp 
+build $o/libSBRenc/src/sbrenc_rom.o : cxx $s/libSBRenc/src/sbrenc_rom.cpp 
+build $o/libSBRenc/src/ton_corr.o : cxx $s/libSBRenc/src/ton_corr.cpp 
+build $o/libSBRenc/src/tran_det.o : cxx $s/libSBRenc/src/tran_det.cpp 
+build $o/libPCMutils/src/limiter.o : cxx $s/libPCMutils/src/limiter.cpp 
+build $o/libPCMutils/src/pcm_utils.o : cxx $s/libPCMutils/src/pcm_utils.cpp 
+build $o/libPCMutils/src/pcmdmx_lib.o : cxx $s/libPCMutils/src/pcmdmx_lib.cpp 
+build $o/libFDK/src/FDK_bitbuffer.o : cxx $s/libFDK/src/FDK_bitbuffer.cpp 
+build $o/libFDK/src/FDK_core.o : cxx $s/libFDK/src/FDK_core.cpp 
+build $o/libFDK/src/FDK_crc.o : cxx $s/libFDK/src/FDK_crc.cpp 
+build $o/libFDK/src/FDK_decorrelate.o : cxx $s/libFDK/src/FDK_decorrelate.cpp 
+build $o/libFDK/src/FDK_hybrid.o : cxx $s/libFDK/src/FDK_hybrid.cpp 
+build $o/libFDK/src/FDK_lpc.o : cxx $s/libFDK/src/FDK_lpc.cpp 
+build $o/libFDK/src/FDK_matrixCalloc.o : cxx $s/libFDK/src/FDK_matrixCalloc.cpp 
+build $o/libFDK/src/FDK_qmf_domain.o : cxx $s/libFDK/src/FDK_qmf_domain.cpp 
+build $o/libFDK/src/FDK_tools_rom.o : cxx $s/libFDK/src/FDK_tools_rom.cpp 
+build $o/libFDK/src/FDK_trigFcts.o : cxx $s/libFDK/src/FDK_trigFcts.cpp 
+build $o/libFDK/src/autocorr2nd.o : cxx $s/libFDK/src/autocorr2nd.cpp 
+build $o/libFDK/src/dct.o : cxx $s/libFDK/src/dct.cpp 
+build $o/libFDK/src/fft.o : cxx $s/libFDK/src/fft.cpp 
+build $o/libFDK/src/fft_rad2.o : cxx $s/libFDK/src/fft_rad2.cpp 
+build $o/libFDK/src/fixpoint_math.o : cxx $s/libFDK/src/fixpoint_math.cpp 
+build $o/libFDK/src/huff_nodes.o : cxx $s/libFDK/src/huff_nodes.cpp 
+build $o/libFDK/src/mdct.o : cxx $s/libFDK/src/mdct.cpp 
+build $o/libFDK/src/nlc_dec.o : cxx $s/libFDK/src/nlc_dec.cpp 
+build $o/libFDK/src/qmf.o : cxx $s/libFDK/src/qmf.cpp 
+build $o/libFDK/src/scale.o : cxx $s/libFDK/src/scale.cpp 
+build $o/libSYS/src/genericStds.o : cxx $s/libSYS/src/genericStds.cpp 
+build $o/libSYS/src/syslib_channelMapDescr.o : cxx $s/libSYS/src/syslib_channelMapDescr.cpp 
+
+build $lib/aac$LIB: ar $
+  $o/libAACdec/src/FDK_delay.o $
+  $o/libAACdec/src/aac_ram.o $
+  $o/libAACdec/src/aac_rom.o $
+  $o/libAACdec/src/aacdec_drc.o $
+  $o/libAACdec/src/aacdec_hcr.o $
+  $o/libAACdec/src/aacdec_hcr_bit.o $
+  $o/libAACdec/src/aacdec_hcrs.o $
+  $o/libAACdec/src/aacdec_pns.o $
+  $o/libAACdec/src/aacdec_tns.o $
+  $o/libAACdec/src/aacdecoder.o $
+  $o/libAACdec/src/aacdecoder_lib.o $
+  $o/libAACdec/src/block.o $
+  $o/libAACdec/src/channel.o $
+  $o/libAACdec/src/channelinfo.o $
+  $o/libAACdec/src/conceal.o $
+  $o/libAACdec/src/ldfiltbank.o $
+  $o/libAACdec/src/pulsedata.o $
+  $o/libAACdec/src/rvlc.o $
+  $o/libAACdec/src/rvlcbit.o $
+  $o/libAACdec/src/rvlcconceal.o $
+  $o/libAACdec/src/stereo.o $
+  $o/libAACdec/src/usacdec_ace_d4t64.o $
+  $o/libAACdec/src/usacdec_ace_ltp.o $
+  $o/libAACdec/src/usacdec_acelp.o $
+  $o/libAACdec/src/usacdec_fac.o $
+  $o/libAACdec/src/usacdec_lpc.o $
+  $o/libAACdec/src/usacdec_lpd.o $
+  $o/libAACdec/src/usacdec_rom.o $
+  $o/libAACenc/src/aacEnc_ram.o $
+  $o/libAACenc/src/aacEnc_rom.o $
+  $o/libAACenc/src/aacenc.o $
+  $o/libAACenc/src/aacenc_lib.o $
+  $o/libAACenc/src/aacenc_pns.o $
+  $o/libAACenc/src/aacenc_tns.o $
+  $o/libAACenc/src/adj_thr.o $
+  $o/libAACenc/src/band_nrg.o $
+  $o/libAACenc/src/bandwidth.o $
+  $o/libAACenc/src/bit_cnt.o $
+  $o/libAACenc/src/bitenc.o $
+  $o/libAACenc/src/block_switch.o $
+  $o/libAACenc/src/channel_map.o $
+  $o/libAACenc/src/chaosmeasure.o $
+  $o/libAACenc/src/dyn_bits.o $
+  $o/libAACenc/src/grp_data.o $
+  $o/libAACenc/src/intensity.o $
+  $o/libAACenc/src/line_pe.o $
+  $o/libAACenc/src/metadata_compressor.o $
+  $o/libAACenc/src/metadata_main.o $
+  $o/libAACenc/src/mps_main.o $
+  $o/libAACenc/src/ms_stereo.o $
+  $o/libAACenc/src/noisedet.o $
+  $o/libAACenc/src/pnsparam.o $
+  $o/libAACenc/src/pre_echo_control.o $
+  $o/libAACenc/src/psy_configuration.o $
+  $o/libAACenc/src/psy_main.o $
+  $o/libAACenc/src/qc_main.o $
+  $o/libAACenc/src/quantize.o $
+  $o/libAACenc/src/sf_estim.o $
+  $o/libAACenc/src/spreading.o $
+  $o/libAACenc/src/tonality.o $
+  $o/libAACenc/src/transform.o $
+  $o/libArithCoding/src/ac_arith_coder.o $
+  $o/libDRCdec/src/FDK_drcDecLib.o $
+  $o/libDRCdec/src/drcDec_gainDecoder.o $
+  $o/libDRCdec/src/drcDec_reader.o $
+  $o/libDRCdec/src/drcDec_rom.o $
+  $o/libDRCdec/src/drcDec_selectionProcess.o $
+  $o/libDRCdec/src/drcDec_tools.o $
+  $o/libDRCdec/src/drcGainDec_init.o $
+  $o/libDRCdec/src/drcGainDec_preprocess.o $
+  $o/libDRCdec/src/drcGainDec_process.o $
+  $o/libMpegTPDec/src/tpdec_adif.o $
+  $o/libMpegTPDec/src/tpdec_adts.o $
+  $o/libMpegTPDec/src/tpdec_asc.o $
+  $o/libMpegTPDec/src/tpdec_drm.o $
+  $o/libMpegTPDec/src/tpdec_latm.o $
+  $o/libMpegTPDec/src/tpdec_lib.o $
+  $o/libMpegTPEnc/src/tpenc_adif.o $
+  $o/libMpegTPEnc/src/tpenc_adts.o $
+  $o/libMpegTPEnc/src/tpenc_asc.o $
+  $o/libMpegTPEnc/src/tpenc_latm.o $
+  $o/libMpegTPEnc/src/tpenc_lib.o $
+  $o/libSACdec/src/sac_bitdec.o $
+  $o/libSACdec/src/sac_calcM1andM2.o $
+  $o/libSACdec/src/sac_dec.o $
+  $o/libSACdec/src/sac_dec_conceal.o $
+  $o/libSACdec/src/sac_dec_lib.o $
+  $o/libSACdec/src/sac_process.o $
+  $o/libSACdec/src/sac_qmf.o $
+  $o/libSACdec/src/sac_reshapeBBEnv.o $
+  $o/libSACdec/src/sac_rom.o $
+  $o/libSACdec/src/sac_smoothing.o $
+  $o/libSACdec/src/sac_stp.o $
+  $o/libSACdec/src/sac_tsd.o $
+  $o/libSACenc/src/sacenc_bitstream.o $
+  $o/libSACenc/src/sacenc_delay.o $
+  $o/libSACenc/src/sacenc_dmx_tdom_enh.o $
+  $o/libSACenc/src/sacenc_filter.o $
+  $o/libSACenc/src/sacenc_framewindowing.o $
+  $o/libSACenc/src/sacenc_huff_tab.o $
+  $o/libSACenc/src/sacenc_lib.o $
+  $o/libSACenc/src/sacenc_nlc_enc.o $
+  $o/libSACenc/src/sacenc_onsetdetect.o $
+  $o/libSACenc/src/sacenc_paramextract.o $
+  $o/libSACenc/src/sacenc_staticgain.o $
+  $o/libSACenc/src/sacenc_tree.o $
+  $o/libSACenc/src/sacenc_vectorfunctions.o $
+  $o/libSBRdec/src/HFgen_preFlat.o $
+  $o/libSBRdec/src/env_calc.o $
+  $o/libSBRdec/src/env_dec.o $
+  $o/libSBRdec/src/env_extr.o $
+  $o/libSBRdec/src/hbe.o $
+  $o/libSBRdec/src/huff_dec.o $
+  $o/libSBRdec/src/lpp_tran.o $
+  $o/libSBRdec/src/psbitdec.o $
+  $o/libSBRdec/src/psdec.o $
+  $o/libSBRdec/src/psdec_drm.o $
+  $o/libSBRdec/src/psdecrom_drm.o $
+  $o/libSBRdec/src/pvc_dec.o $
+  $o/libSBRdec/src/sbr_deb.o $
+  $o/libSBRdec/src/sbr_dec.o $
+  $o/libSBRdec/src/sbr_ram.o $
+  $o/libSBRdec/src/sbr_rom.o $
+  $o/libSBRdec/src/sbrdec_drc.o $
+  $o/libSBRdec/src/sbrdec_freq_sca.o $
+  $o/libSBRdec/src/sbrdecoder.o $
+  $o/libSBRenc/src/bit_sbr.o $
+  $o/libSBRenc/src/code_env.o $
+  $o/libSBRenc/src/env_bit.o $
+  $o/libSBRenc/src/env_est.o $
+  $o/libSBRenc/src/fram_gen.o $
+  $o/libSBRenc/src/invf_est.o $
+  $o/libSBRenc/src/mh_det.o $
+  $o/libSBRenc/src/nf_est.o $
+  $o/libSBRenc/src/ps_bitenc.o $
+  $o/libSBRenc/src/ps_encode.o $
+  $o/libSBRenc/src/ps_main.o $
+  $o/libSBRenc/src/resampler.o $
+  $o/libSBRenc/src/sbr_encoder.o $
+  $o/libSBRenc/src/sbr_misc.o $
+  $o/libSBRenc/src/sbrenc_freq_sca.o $
+  $o/libSBRenc/src/sbrenc_ram.o $
+  $o/libSBRenc/src/sbrenc_rom.o $
+  $o/libSBRenc/src/ton_corr.o $
+  $o/libSBRenc/src/tran_det.o $
+  $o/libPCMutils/src/limiter.o $
+  $o/libPCMutils/src/pcm_utils.o $
+  $o/libPCMutils/src/pcmdmx_lib.o $
+  $o/libFDK/src/FDK_bitbuffer.o $
+  $o/libFDK/src/FDK_core.o $
+  $o/libFDK/src/FDK_crc.o $
+  $o/libFDK/src/FDK_decorrelate.o $
+  $o/libFDK/src/FDK_hybrid.o $
+  $o/libFDK/src/FDK_lpc.o $
+  $o/libFDK/src/FDK_matrixCalloc.o $
+  $o/libFDK/src/FDK_qmf_domain.o $
+  $o/libFDK/src/FDK_tools_rom.o $
+  $o/libFDK/src/FDK_trigFcts.o $
+  $o/libFDK/src/autocorr2nd.o $
+  $o/libFDK/src/dct.o $
+  $o/libFDK/src/fft.o $
+  $o/libFDK/src/fft_rad2.o $
+  $o/libFDK/src/fixpoint_math.o $
+  $o/libFDK/src/huff_nodes.o $
+  $o/libFDK/src/mdct.o $
+  $o/libFDK/src/nlc_dec.o $
+  $o/libFDK/src/qmf.o $
+  $o/libFDK/src/scale.o $
+  $o/libSYS/src/genericStds.o $
+  $o/libSYS/src/syslib_channelMapDescr.o

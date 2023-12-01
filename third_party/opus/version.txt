@@ -1,0 +1,2 @@
+v=1.4
+download url=https://ftp.osuosl.org/pub/xiph/releases/opus/opus-1.4.tar.gz

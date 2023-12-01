@@ -1,0 +1,35 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "audio_capture - debug (Windows)",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/out/debug/bin//audio_capturetest.exe",
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/out/debug/bin",
+      "visualizerFile": "${workspaceFolder}/build/config/c++/libc++.natvis",
+      "symbolSearchPath": "C:\\usr\\symbols;${workspaceFolder}/out/debug/bin"
+    },
+    {
+      "name": "aactest - debug (Windows)",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/out/debug/bin//aactest.exe",
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/out/debug/bin",
+      "visualizerFile": "${workspaceFolder}/build/config/c++/libc++.natvis",
+      "symbolSearchPath": "C:\\usr\\symbols;${workspaceFolder}/out/debug/bin"
+    },
+    {
+      "name": "test - debug (Windows)",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/out/debug/bin//test.exe",
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/out/debug/bin",
+      "visualizerFile": "${workspaceFolder}/build/config/c++/libc++.natvis",
+      "symbolSearchPath": "C:\\usr\\symbols;${workspaceFolder}/out/debug/bin"
+    },
+  ]
+}

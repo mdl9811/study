@@ -1,0 +1,30 @@
+
+cp = S:\code\github\study\out\windows\host\obj\tools\cp.exe
+
+rule cp
+  command = $cp $in $out
+  description = CP $in $out
+
+sa = win-x86_64/crypto
+
+s=S:/third_party/google/chromium/src/third_party/boringssl/win-x86_64/crypto
+o=third_party/boringssl/win-x86_64/crypto
+
+build $o/chacha/chacha-x86_64-win.asm : cp $s/chacha/chacha-x86_64-win.asm
+build $o/cipher_extra/aes128gcmsiv-x86_64-win.asm : cp $s/cipher_extra/aes128gcmsiv-x86_64-win.asm
+build $o/cipher_extra/chacha20_poly1305_x86_64-win.asm : cp $s/cipher_extra/chacha20_poly1305_x86_64-win.asm
+build $o/fipsmodule/aesni-gcm-x86_64-win.asm : cp $s/fipsmodule/aesni-gcm-x86_64-win.asm
+build $o/fipsmodule/aesni-x86_64-win.asm : cp $s/fipsmodule/aesni-x86_64-win.asm
+build $o/fipsmodule/ghash-ssse3-x86_64-win.asm : cp $s/fipsmodule/ghash-ssse3-x86_64-win.asm
+build $o/fipsmodule/ghash-x86_64-win.asm : cp $s/fipsmodule/ghash-x86_64-win.asm
+build $o/fipsmodule/md5-x86_64-win.asm : cp $s/fipsmodule/md5-x86_64-win.asm
+build $o/fipsmodule/p256-x86_64-asm-win.asm : cp $s/fipsmodule/p256-x86_64-asm-win.asm
+build $o/fipsmodule/p256_beeu-x86_64-asm-win.asm : cp $s/fipsmodule/p256_beeu-x86_64-asm-win.asm
+build $o/fipsmodule/rdrand-x86_64-win.asm : cp $s/fipsmodule/rdrand-x86_64-win.asm
+build $o/fipsmodule/rsaz-avx2-win.asm : cp $s/fipsmodule/rsaz-avx2-win.asm
+build $o/fipsmodule/sha1-x86_64-win.asm : cp $s/fipsmodule/sha1-x86_64-win.asm
+build $o/fipsmodule/sha256-x86_64-win.asm : cp $s/fipsmodule/sha256-x86_64-win.asm
+build $o/fipsmodule/sha512-x86_64-win.asm : cp $s/fipsmodule/sha512-x86_64-win.asm
+build $o/fipsmodule/vpaes-x86_64-win.asm : cp $s/fipsmodule/vpaes-x86_64-win.asm
+build $o/fipsmodule/x86_64-mont-win.asm : cp $s/fipsmodule/x86_64-mont-win.asm
+build $o/fipsmodule/x86_64-mont5-win.asm : cp $s/fipsmodule/x86_64-mont5-win.asm

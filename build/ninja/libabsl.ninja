@@ -1,0 +1,104 @@
+#
+# Copyright (c) 2023 mdl. All rights reserved.
+#
+
+s=third_party/abseil-cpp/absl
+o=$obj/abseil-cpp
+
+CFLAGS = -I$s. $CR_FLAGS $
+  -Wno-unknown-argument
+
+build $o/types/bad_any_cast.o : cxx $s/types/bad_any_cast.cc
+build $o/types/bad_optional_access.o : cxx $s/types/bad_optional_access.cc
+build $o/types/bad_variant_access.o : cxx $s/types/bad_variant_access.cc
+
+build $o/base/internal/raw_logging.o : cxx $s/base/internal/raw_logging.cc
+
+build $o/synchronization/barrier.o : cxx $s/synchronization/barrier.cc
+build $o/synchronization/blocking_counter.o : cxx $s/synchronization/blocking_counter.cc
+build $o/synchronization/internal/create_thread_identity.o : cxx $s/synchronization/internal/create_thread_identity.cc
+build $o/synchronization/internal/futex_waiter.o : cxx $s/synchronization/internal/futex_waiter.cc
+build $o/synchronization/internal/per_thread_sem.o : cxx $s/synchronization/internal/per_thread_sem.cc
+build $o/synchronization/internal/pthread_waiter.o : cxx $s/synchronization/internal/pthread_waiter.cc
+build $o/synchronization/internal/sem_waiter.o : cxx $s/synchronization/internal/sem_waiter.cc
+build $o/synchronization/internal/stdcpp_waiter.o : cxx $s/synchronization/internal/stdcpp_waiter.cc
+build $o/synchronization/internal/waiter_base.o : cxx $s/synchronization/internal/waiter_base.cc
+build $o/synchronization/internal/win32_waiter.o : cxx $s/synchronization/internal/win32_waiter.cc
+build $o/synchronization/mutex.o : cxx $s/synchronization/mutex.cc
+build $o/synchronization/notification.o : cxx $s/synchronization/notification.cc
+build $o/synchronization/internal/graphcycles.o : cxx $s/synchronization/internal/graphcycles.cc
+build $o/synchronization/internal/kernel_timeout.o : cxx $s/synchronization/internal/kernel_timeout.cc
+
+
+build $o/time/civil_time.o : cxx $s/time/civil_time.cc
+build $o/time/clock.o : cxx $s/time/clock.cc
+build $o/time/duration.o : cxx $s/time/duration.cc
+build $o/time/format.o : cxx $s/time/format.cc
+build $o/time/time.o : cxx $s/time/time.cc
+build $o/time/internal/cctz/src/time_zone_fixed.o : cxx $s/time/internal/cctz/src/time_zone_fixed.cc
+build $o/time/internal/cctz/src/time_zone_format.o : cxx $s/time/internal/cctz/src/time_zone_format.cc
+build $o/time/internal/cctz/src/time_zone_if.o : cxx $s/time/internal/cctz/src/time_zone_if.cc
+build $o/time/internal/cctz/src/time_zone_impl.o : cxx $s/time/internal/cctz/src/time_zone_impl.cc
+build $o/time/internal/cctz/src/time_zone_info.o : cxx $s/time/internal/cctz/src/time_zone_info.cc
+build $o/time/internal/cctz/src/time_zone_libc.o : cxx $s/time/internal/cctz/src/time_zone_libc.cc
+build $o/time/internal/cctz/src/time_zone_lookup.o : cxx $s/time/internal/cctz/src/time_zone_lookup.cc
+build $o/time/internal/cctz/src/time_zone_posix.o : cxx $s/time/internal/cctz/src/time_zone_posix.cc
+build $o/time/internal/cctz/src/zone_info_source.o : cxx $s/time/internal/cctz/src/zone_info_source.cc
+
+build $o/base/internal/spinlock_wait.o : cxx $s/base/internal/spinlock_wait.cc
+build $o/base/internal/cycleclock.o : cxx $s/base/internal/cycleclock.cc
+build $o/base/internal/spinlock.o : cxx $s/base/internal/spinlock.cc
+build $o/base/internal/sysinfo.o : cxx $s/base/internal/sysinfo.cc
+build $o/base/internal/thread_identity.o : cxx $s/base/internal/thread_identity.cc
+build $o/base/internal/unscaledcycleclock.o : cxx $s/base/internal/unscaledcycleclock.cc
+build $o/base/internal/low_level_alloc.o : cxx $s/base/internal/low_level_alloc.cc
+
+build $o/debugging/stacktrace.o : cxx $s/debugging/stacktrace.cc
+build $o/debugging/symbolize.o : cxx $s/debugging/symbolize.cc
+
+build $o/numeric/int128.o : cxx $s/numeric/int128.cc
+
+build $lib/absl$LIB : ar $
+  $o/types/bad_any_cast.o $
+  $o/types/bad_optional_access.o $
+  $o/types/bad_variant_access.o $
+  $o/base/internal/raw_logging.o $
+  $o/synchronization/barrier.o $
+  $o/synchronization/blocking_counter.o $
+  $o/synchronization/internal/create_thread_identity.o $
+  $o/synchronization/internal/futex_waiter.o $
+  $o/synchronization/internal/per_thread_sem.o $
+  $o/synchronization/internal/pthread_waiter.o $
+  $o/synchronization/internal/sem_waiter.o $
+  $o/synchronization/internal/stdcpp_waiter.o $
+  $o/synchronization/internal/waiter_base.o $
+  $o/synchronization/internal/win32_waiter.o $
+  $o/synchronization/mutex.o $
+  $o/synchronization/notification.o $
+  $o/synchronization/internal/graphcycles.o $
+  $o/synchronization/internal/kernel_timeout.o $
+  $o/time/civil_time.o $
+  $o/time/clock.o $
+  $o/time/duration.o $
+  $o/time/format.o $
+  $o/time/time.o $
+  $o/time/internal/cctz/src/time_zone_fixed.o $
+  $o/time/internal/cctz/src/time_zone_format.o $
+  $o/time/internal/cctz/src/time_zone_if.o $
+  $o/time/internal/cctz/src/time_zone_impl.o $
+  $o/time/internal/cctz/src/time_zone_info.o $
+  $o/time/internal/cctz/src/time_zone_libc.o $
+  $o/time/internal/cctz/src/time_zone_lookup.o $
+  $o/time/internal/cctz/src/time_zone_posix.o $
+  $o/time/internal/cctz/src/zone_info_source.o $
+  $o/base/internal/spinlock_wait.o $
+  $o/base/internal/cycleclock.o $
+  $o/base/internal/spinlock.o $
+  $o/base/internal/sysinfo.o $
+  $o/base/internal/thread_identity.o $
+  $o/base/internal/unscaledcycleclock.o $
+  $o/base/internal/low_level_alloc.o $
+  $o/debugging/stacktrace.o $
+  $o/debugging/symbolize.o $
+  $o/numeric/int128.o
+

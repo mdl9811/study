@@ -1,0 +1,49 @@
+#
+# Copyright (c) 2023 mdl. All rights reserved.
+#
+
+s=src
+o=$obj/study/src
+
+CFLAGS = $CR_FLAGS
+LDFLAGS = $CR_LDFLAGS
+
+#captures
+build $o/audio_capturetest.o : cxx $s/audio_capturetest.cc
+build $o/capture/audio_record.o : cxx $s/capture/audio_record.cc
+
+build $bin/audio_capturetest.exe : link $
+  $o/audio_capturetest.o $
+  $o/capture/audio_record.o $
+  $lib/base$LIB $lib/c++$LIB $lib/cr$LIB
+  ldflags = /DEBUG /PDB:"$bin/audio_capturetest.pdb"
+
+#-------------------------------------------------------------------------------
+#encoder
+build $o/encoder/aac_encoder.o : cxx $s/encoder/aac_encoder.cc
+  cflags = -Ithird_party/aac/libSYS/include
+
+#decoder
+build $o/decoder/aac_decoder.o : cxx $s/decoder/aac_decoder.cc
+  cflags = -Ithird_party/aac/libSYS/include
+  
+#aac 
+build $o/aactest.o : cxx $s/aactest.cc
+
+build $bin/aactest.exe : link $o/aactest.o $
+  $o/encoder/aac_encoder.o $
+  $o/decoder/aac_decoder.o $
+  $lib/base$LIB $lib/aac$LIB $lib/c++$LIB $lib/cr$LIB
+  ldflags = /DEBUG /PDB:"$bin/aactest.pdb"
+
+#-------------------------------------------------------------------------------
+#test
+build $o/test.o : cxx $s/test.cc
+
+build $bin/test.exe : link $o/test.o $
+  $lib/c++$LIB $lib/cr$LIB $lib/absl$LIB $lib/ssl$LIB
+  ldflags = /DEBUG /PDB:"$bin/test.pdb"  
+
+#-------------------------------------------------------------------------------
+
+include build/windows/base.ninja

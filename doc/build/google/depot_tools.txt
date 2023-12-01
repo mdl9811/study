@@ -1,0 +1,11 @@
+@env
+> set DEPOT_TOOLS_WIN_TOOLCHAIN=0
+
+@git
+git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+
+@branch
+> main
+
+@command <>
+> git reset --hard

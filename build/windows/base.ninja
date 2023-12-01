@@ -1,0 +1,19 @@
+
+#
+# Copyright (c) 2023 mdl. All rights reserved.
+#
+
+build $o/base/thread/thread_win.o : cxx $s/base/thread/thread_win.cc
+build $o/base/time/time.o : cxx $s/base/time/time.cc
+build $o/base/buffer.o : cxx $s/base/buffer.cc
+build $o/base/io_buffer.o : cxx $s/base/io_buffer.cc
+build $o/base/memory/weak_ptr.o : cxx $s/base/memory/weak_ptr.cc
+build $o/base/memory/cache_queue.o : cxx $s/base/memory/cache_queue.cc
+
+build $lib/base$LIB : ar $
+  $o/base/thread/thread_win.o $
+  $o/base/time/time.o $
+  $o/base/buffer.o $
+  $o/base/io_buffer.o $
+  $o/base/memory/weak_ptr.o $
+  $o/base/memory/cache_queue.o

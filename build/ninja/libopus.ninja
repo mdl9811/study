@@ -1,0 +1,285 @@
+#
+# Copyright (c) 2023 mdl. All rights reserved.
+#
+
+s=third_party/opus
+o=$obj/opus
+
+CFLAGS = -I$s. -I$s/include -I$s/celt -I$s/silk -I$s/silk/float -I$s/silk/fixed $
+  -DUSE_ALLOCA -DOPUS_BUILD
+
+build $o/celt/bands.o : cc $s/celt/bands.c
+build $o/celt/celt.o : cc $s/celt/celt.c
+build $o/celt/celt_encoder.o : cc $s/celt/celt_encoder.c
+build $o/celt/celt_decoder.o : cc $s/celt/celt_decoder.c
+build $o/celt/cwrs.o : cc $s/celt/cwrs.c
+build $o/celt/entcode.o : cc $s/celt/entcode.c
+build $o/celt/entdec.o : cc $s/celt/entdec.c
+build $o/celt/entenc.o : cc $s/celt/entenc.c
+build $o/celt/kiss_fft.o : cc $s/celt/kiss_fft.c
+build $o/celt/laplace.o : cc $s/celt/laplace.c
+build $o/celt/mathops.o : cc $s/celt/mathops.c
+build $o/celt/mdct.o : cc $s/celt/mdct.c
+build $o/celt/modes.o : cc $s/celt/modes.c
+build $o/celt/pitch.o : cc $s/celt/pitch.c
+build $o/celt/celt_lpc.o : cc $s/celt/celt_lpc.c
+build $o/celt/quant_bands.o : cc $s/celt/quant_bands.c
+build $o/celt/rate.o : cc $s/celt/rate.c
+build $o/celt/vq.o : cc $s/celt/vq.c
+build $o/silk/CNG.o : cc $s/silk/CNG.c
+build $o/silk/code_signs.o : cc $s/silk/code_signs.c
+build $o/silk/init_decoder.o : cc $s/silk/init_decoder.c
+build $o/silk/decode_core.o : cc $s/silk/decode_core.c
+build $o/silk/decode_frame.o : cc $s/silk/decode_frame.c
+build $o/silk/decode_parameters.o : cc $s/silk/decode_parameters.c
+build $o/silk/decode_indices.o : cc $s/silk/decode_indices.c
+build $o/silk/decode_pulses.o : cc $s/silk/decode_pulses.c
+build $o/silk/decoder_set_fs.o : cc $s/silk/decoder_set_fs.c
+build $o/silk/dec_API.o : cc $s/silk/dec_API.c
+build $o/silk/enc_API.o : cc $s/silk/enc_API.c
+build $o/silk/encode_indices.o : cc $s/silk/encode_indices.c
+build $o/silk/encode_pulses.o : cc $s/silk/encode_pulses.c
+build $o/silk/gain_quant.o : cc $s/silk/gain_quant.c
+build $o/silk/interpolate.o : cc $s/silk/interpolate.c
+build $o/silk/LP_variable_cutoff.o : cc $s/silk/LP_variable_cutoff.c
+build $o/silk/NLSF_decode.o : cc $s/silk/NLSF_decode.c
+build $o/silk/NSQ.o : cc $s/silk/NSQ.c
+build $o/silk/NSQ_del_dec.o : cc $s/silk/NSQ_del_dec.c
+build $o/silk/PLC.o : cc $s/silk/PLC.c
+build $o/silk/shell_coder.o : cc $s/silk/shell_coder.c
+build $o/silk/tables_gain.o : cc $s/silk/tables_gain.c
+build $o/silk/tables_LTP.o : cc $s/silk/tables_LTP.c
+build $o/silk/tables_NLSF_CB_NB_MB.o : cc $s/silk/tables_NLSF_CB_NB_MB.c
+build $o/silk/tables_NLSF_CB_WB.o : cc $s/silk/tables_NLSF_CB_WB.c
+build $o/silk/tables_other.o : cc $s/silk/tables_other.c
+build $o/silk/tables_pitch_lag.o : cc $s/silk/tables_pitch_lag.c
+build $o/silk/tables_pulses_per_block.o : cc $s/silk/tables_pulses_per_block.c
+build $o/silk/VAD.o : cc $s/silk/VAD.c
+build $o/silk/control_audio_bandwidth.o : cc $s/silk/control_audio_bandwidth.c
+build $o/silk/quant_LTP_gains.o : cc $s/silk/quant_LTP_gains.c
+build $o/silk/VQ_WMat_EC.o : cc $s/silk/VQ_WMat_EC.c
+build $o/silk/HP_variable_cutoff.o : cc $s/silk/HP_variable_cutoff.c
+build $o/silk/NLSF_encode.o : cc $s/silk/NLSF_encode.c
+build $o/silk/NLSF_VQ.o : cc $s/silk/NLSF_VQ.c
+build $o/silk/NLSF_unpack.o : cc $s/silk/NLSF_unpack.c
+build $o/silk/NLSF_del_dec_quant.o : cc $s/silk/NLSF_del_dec_quant.c
+build $o/silk/process_NLSFs.o : cc $s/silk/process_NLSFs.c
+build $o/silk/stereo_LR_to_MS.o : cc $s/silk/stereo_LR_to_MS.c
+build $o/silk/stereo_MS_to_LR.o : cc $s/silk/stereo_MS_to_LR.c
+build $o/silk/check_control_input.o : cc $s/silk/check_control_input.c
+build $o/silk/control_SNR.o : cc $s/silk/control_SNR.c
+build $o/silk/init_encoder.o : cc $s/silk/init_encoder.c
+build $o/silk/control_codec.o : cc $s/silk/control_codec.c
+build $o/silk/A2NLSF.o : cc $s/silk/A2NLSF.c
+build $o/silk/ana_filt_bank_1.o : cc $s/silk/ana_filt_bank_1.c
+build $o/silk/biquad_alt.o : cc $s/silk/biquad_alt.c
+build $o/silk/bwexpander_32.o : cc $s/silk/bwexpander_32.c
+build $o/silk/bwexpander.o : cc $s/silk/bwexpander.c
+build $o/silk/debug.o : cc $s/silk/debug.c
+build $o/silk/decode_pitch.o : cc $s/silk/decode_pitch.c
+build $o/silk/inner_prod_aligned.o : cc $s/silk/inner_prod_aligned.c
+build $o/silk/lin2log.o : cc $s/silk/lin2log.c
+build $o/silk/log2lin.o : cc $s/silk/log2lin.c
+build $o/silk/LPC_analysis_filter.o : cc $s/silk/LPC_analysis_filter.c
+build $o/silk/LPC_inv_pred_gain.o : cc $s/silk/LPC_inv_pred_gain.c
+build $o/silk/table_LSF_cos.o : cc $s/silk/table_LSF_cos.c
+build $o/silk/NLSF2A.o : cc $s/silk/NLSF2A.c
+build $o/silk/NLSF_stabilize.o : cc $s/silk/NLSF_stabilize.c
+build $o/silk/NLSF_VQ_weights_laroia.o : cc $s/silk/NLSF_VQ_weights_laroia.c
+build $o/silk/pitch_est_tables.o : cc $s/silk/pitch_est_tables.c
+build $o/silk/resampler.o : cc $s/silk/resampler.c
+build $o/silk/resampler_down2_3.o : cc $s/silk/resampler_down2_3.c
+build $o/silk/resampler_down2.o : cc $s/silk/resampler_down2.c
+build $o/silk/resampler_private_AR2.o : cc $s/silk/resampler_private_AR2.c
+build $o/silk/resampler_private_down_FIR.o : cc $s/silk/resampler_private_down_FIR.c
+build $o/silk/resampler_private_IIR_FIR.o : cc $s/silk/resampler_private_IIR_FIR.c
+build $o/silk/resampler_private_up2_HQ.o : cc $s/silk/resampler_private_up2_HQ.c
+build $o/silk/resampler_rom.o : cc $s/silk/resampler_rom.c
+build $o/silk/sigm_Q15.o : cc $s/silk/sigm_Q15.c
+build $o/silk/sort.o : cc $s/silk/sort.c
+build $o/silk/sum_sqr_shift.o : cc $s/silk/sum_sqr_shift.c
+build $o/silk/stereo_decode_pred.o : cc $s/silk/stereo_decode_pred.c
+build $o/silk/stereo_encode_pred.o : cc $s/silk/stereo_encode_pred.c
+build $o/silk/stereo_find_predictor.o : cc $s/silk/stereo_find_predictor.c
+build $o/silk/stereo_quant_pred.o : cc $s/silk/stereo_quant_pred.c
+build $o/silk/LPC_fit.o : cc $s/silk/LPC_fit.c
+build $o/silk/float/apply_sine_window_FLP.o : cc $s/silk/float/apply_sine_window_FLP.c
+build $o/silk/float/corrMatrix_FLP.o : cc $s/silk/float/corrMatrix_FLP.c
+build $o/silk/float/encode_frame_FLP.o : cc $s/silk/float/encode_frame_FLP.c
+build $o/silk/float/find_LPC_FLP.o : cc $s/silk/float/find_LPC_FLP.c
+build $o/silk/float/find_LTP_FLP.o : cc $s/silk/float/find_LTP_FLP.c
+build $o/silk/float/find_pitch_lags_FLP.o : cc $s/silk/float/find_pitch_lags_FLP.c
+build $o/silk/float/find_pred_coefs_FLP.o : cc $s/silk/float/find_pred_coefs_FLP.c
+build $o/silk/float/LPC_analysis_filter_FLP.o : cc $s/silk/float/LPC_analysis_filter_FLP.c
+build $o/silk/float/LTP_analysis_filter_FLP.o : cc $s/silk/float/LTP_analysis_filter_FLP.c
+build $o/silk/float/LTP_scale_ctrl_FLP.o : cc $s/silk/float/LTP_scale_ctrl_FLP.c
+build $o/silk/float/noise_shape_analysis_FLP.o : cc $s/silk/float/noise_shape_analysis_FLP.c
+build $o/silk/float/process_gains_FLP.o : cc $s/silk/float/process_gains_FLP.c
+build $o/silk/float/regularize_correlations_FLP.o : cc $s/silk/float/regularize_correlations_FLP.c
+build $o/silk/float/residual_energy_FLP.o : cc $s/silk/float/residual_energy_FLP.c
+build $o/silk/float/warped_autocorrelation_FLP.o : cc $s/silk/float/warped_autocorrelation_FLP.c
+build $o/silk/float/wrappers_FLP.o : cc $s/silk/float/wrappers_FLP.c
+build $o/silk/float/autocorrelation_FLP.o : cc $s/silk/float/autocorrelation_FLP.c
+build $o/silk/float/burg_modified_FLP.o : cc $s/silk/float/burg_modified_FLP.c
+build $o/silk/float/bwexpander_FLP.o : cc $s/silk/float/bwexpander_FLP.c
+build $o/silk/float/energy_FLP.o : cc $s/silk/float/energy_FLP.c
+build $o/silk/float/inner_product_FLP.o : cc $s/silk/float/inner_product_FLP.c
+build $o/silk/float/k2a_FLP.o : cc $s/silk/float/k2a_FLP.c
+build $o/silk/float/LPC_inv_pred_gain_FLP.o : cc $s/silk/float/LPC_inv_pred_gain_FLP.c
+build $o/silk/float/pitch_analysis_core_FLP.o : cc $s/silk/float/pitch_analysis_core_FLP.c
+build $o/silk/float/scale_copy_vector_FLP.o : cc $s/silk/float/scale_copy_vector_FLP.c
+build $o/silk/float/scale_vector_FLP.o : cc $s/silk/float/scale_vector_FLP.c
+build $o/silk/float/schur_FLP.o : cc $s/silk/float/schur_FLP.c
+build $o/silk/float/sort_FLP.o : cc $s/silk/float/sort_FLP.c
+build $o/src/opus.o : cc $s/src/opus.c
+build $o/src/opus_decoder.o : cc $s/src/opus_decoder.c
+build $o/src/opus_encoder.o : cc $s/src/opus_encoder.c
+build $o/src/opus_multistream.o : cc $s/src/opus_multistream.c
+build $o/src/opus_multistream_encoder.o : cc $s/src/opus_multistream_encoder.c
+build $o/src/opus_multistream_decoder.o : cc $s/src/opus_multistream_decoder.c
+build $o/src/repacketizer.o : cc $s/src/repacketizer.c
+build $o/src/opus_projection_encoder.o : cc $s/src/opus_projection_encoder.c
+build $o/src/opus_projection_decoder.o : cc $s/src/opus_projection_decoder.c
+build $o/src/mapping_matrix.o : cc $s/src/mapping_matrix.c
+build $o/src/analysis.o : cc $s/src/analysis.c
+build $o/src/mlp.o : cc $s/src/mlp.c
+build $o/src/mlp_data.o : cc $s/src/mlp_data.c
+
+
+build $lib/opus$LIB : ar $
+ $o/celt/bands.o $
+ $o/celt/celt.o $
+ $o/celt/celt_encoder.o $
+ $o/celt/celt_decoder.o $
+ $o/celt/cwrs.o $
+ $o/celt/entcode.o $
+ $o/celt/entdec.o $
+ $o/celt/entenc.o $
+ $o/celt/kiss_fft.o $
+ $o/celt/laplace.o $
+ $o/celt/mathops.o $
+ $o/celt/mdct.o $
+ $o/celt/modes.o $
+ $o/celt/pitch.o $
+ $o/celt/celt_lpc.o $
+ $o/celt/quant_bands.o $
+ $o/celt/rate.o $
+ $o/celt/vq.o $
+ $o/silk/CNG.o $
+ $o/silk/code_signs.o $
+ $o/silk/init_decoder.o $
+ $o/silk/decode_core.o $
+ $o/silk/decode_frame.o $
+ $o/silk/decode_parameters.o $
+ $o/silk/decode_indices.o $
+ $o/silk/decode_pulses.o $
+ $o/silk/decoder_set_fs.o $
+ $o/silk/dec_API.o $
+ $o/silk/enc_API.o $
+ $o/silk/encode_indices.o $
+ $o/silk/encode_pulses.o $
+ $o/silk/gain_quant.o $
+ $o/silk/interpolate.o $
+ $o/silk/LP_variable_cutoff.o $
+ $o/silk/NLSF_decode.o $
+ $o/silk/NSQ.o $
+ $o/silk/NSQ_del_dec.o $
+ $o/silk/PLC.o $
+ $o/silk/shell_coder.o $
+ $o/silk/tables_gain.o $
+ $o/silk/tables_LTP.o $
+ $o/silk/tables_NLSF_CB_NB_MB.o $
+ $o/silk/tables_NLSF_CB_WB.o $
+ $o/silk/tables_other.o $
+ $o/silk/tables_pitch_lag.o $
+ $o/silk/tables_pulses_per_block.o $
+ $o/silk/VAD.o $
+ $o/silk/control_audio_bandwidth.o $
+ $o/silk/quant_LTP_gains.o $
+ $o/silk/VQ_WMat_EC.o $
+ $o/silk/HP_variable_cutoff.o $
+ $o/silk/NLSF_encode.o $
+ $o/silk/NLSF_VQ.o $
+ $o/silk/NLSF_unpack.o $
+ $o/silk/NLSF_del_dec_quant.o $
+ $o/silk/process_NLSFs.o $
+ $o/silk/stereo_LR_to_MS.o $
+ $o/silk/stereo_MS_to_LR.o $
+ $o/silk/check_control_input.o $
+ $o/silk/control_SNR.o $
+ $o/silk/init_encoder.o $
+ $o/silk/control_codec.o $
+ $o/silk/A2NLSF.o $
+ $o/silk/ana_filt_bank_1.o $
+ $o/silk/biquad_alt.o $
+ $o/silk/bwexpander_32.o $
+ $o/silk/bwexpander.o $
+ $o/silk/debug.o $
+ $o/silk/decode_pitch.o $
+ $o/silk/inner_prod_aligned.o $
+ $o/silk/lin2log.o $
+ $o/silk/log2lin.o $
+ $o/silk/LPC_analysis_filter.o $
+ $o/silk/LPC_inv_pred_gain.o $
+ $o/silk/table_LSF_cos.o $
+ $o/silk/NLSF2A.o $
+ $o/silk/NLSF_stabilize.o $
+ $o/silk/NLSF_VQ_weights_laroia.o $
+ $o/silk/pitch_est_tables.o $
+ $o/silk/resampler.o $
+ $o/silk/resampler_down2_3.o $
+ $o/silk/resampler_down2.o $
+ $o/silk/resampler_private_AR2.o $
+ $o/silk/resampler_private_down_FIR.o $
+ $o/silk/resampler_private_IIR_FIR.o $
+ $o/silk/resampler_private_up2_HQ.o $
+ $o/silk/resampler_rom.o $
+ $o/silk/sigm_Q15.o $
+ $o/silk/sort.o $
+ $o/silk/sum_sqr_shift.o $
+ $o/silk/stereo_decode_pred.o $
+ $o/silk/stereo_encode_pred.o $
+ $o/silk/stereo_find_predictor.o $
+ $o/silk/stereo_quant_pred.o $
+ $o/silk/LPC_fit.o $
+ $o/silk/float/apply_sine_window_FLP.o $
+ $o/silk/float/corrMatrix_FLP.o $
+ $o/silk/float/encode_frame_FLP.o $
+ $o/silk/float/find_LPC_FLP.o $
+ $o/silk/float/find_LTP_FLP.o $
+ $o/silk/float/find_pitch_lags_FLP.o $
+ $o/silk/float/find_pred_coefs_FLP.o $
+ $o/silk/float/LPC_analysis_filter_FLP.o $
+ $o/silk/float/LTP_analysis_filter_FLP.o $
+ $o/silk/float/LTP_scale_ctrl_FLP.o $
+ $o/silk/float/noise_shape_analysis_FLP.o $
+ $o/silk/float/process_gains_FLP.o $
+ $o/silk/float/regularize_correlations_FLP.o $
+ $o/silk/float/residual_energy_FLP.o $
+ $o/silk/float/warped_autocorrelation_FLP.o $
+ $o/silk/float/wrappers_FLP.o $
+ $o/silk/float/autocorrelation_FLP.o $
+ $o/silk/float/burg_modified_FLP.o $
+ $o/silk/float/bwexpander_FLP.o $
+ $o/silk/float/energy_FLP.o $
+ $o/silk/float/inner_product_FLP.o $
+ $o/silk/float/k2a_FLP.o $
+ $o/silk/float/LPC_inv_pred_gain_FLP.o $
+ $o/silk/float/pitch_analysis_core_FLP.o $
+ $o/silk/float/scale_copy_vector_FLP.o $
+ $o/silk/float/scale_vector_FLP.o $
+ $o/silk/float/schur_FLP.o $
+ $o/silk/float/sort_FLP.o $
+ $o/src/opus.o $
+ $o/src/opus_decoder.o $
+ $o/src/opus_encoder.o $
+ $o/src/opus_multistream.o $
+ $o/src/opus_multistream_encoder.o $
+ $o/src/opus_multistream_decoder.o $
+ $o/src/repacketizer.o $
+ $o/src/opus_projection_encoder.o $
+ $o/src/opus_projection_decoder.o $
+ $o/src/mapping_matrix.o $
+ $o/src/analysis.o $
+ $o/src/mlp.o $
+ $o/src/mlp_data.o 

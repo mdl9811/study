@@ -1,0 +1,30 @@
+#
+# Copyright (c) 2023 mdl. All rights reserved.
+#
+
+sa = $s/win-x86_64/crypto
+
+nasm = $bin/nasm$EXE
+
+rule nasm
+  command = $nasm -fwin64 $in -o $out
+  description = NASM $out
+
+build $o/chacha/chacha-x86_64-win.o : nasm $sa/chacha/chacha-x86_64-win.asm | $nasm
+build $o/cipher_extra/aes128gcmsiv-x86_64-win.o : nasm $sa/cipher_extra/aes128gcmsiv-x86_64-win.asm | $nasm
+build $o/cipher_extra/chacha20_poly1305_x86_64-win.o : nasm $sa/cipher_extra/chacha20_poly1305_x86_64-win.asm | $nasm
+build $o/fipsmodule/aesni-gcm-x86_64-win.o : nasm $sa/fipsmodule/aesni-gcm-x86_64-win.asm | $nasm
+build $o/fipsmodule/aesni-x86_64-win.o : nasm $sa/fipsmodule/aesni-x86_64-win.asm | $nasm
+build $o/fipsmodule/ghash-ssse3-x86_64-win.o : nasm $sa/fipsmodule/ghash-ssse3-x86_64-win.asm | $nasm
+build $o/fipsmodule/ghash-x86_64-win.o : nasm $sa/fipsmodule/ghash-x86_64-win.asm | $nasm
+build $o/fipsmodule/md5-x86_64-win.o : nasm $sa/fipsmodule/md5-x86_64-win.asm | $nasm
+build $o/fipsmodule/p256-x86_64-asm-win.o : nasm $sa/fipsmodule/p256-x86_64-asm-win.asm | $nasm
+build $o/fipsmodule/p256_beeu-x86_64-asm-win.o : nasm $sa/fipsmodule/p256_beeu-x86_64-asm-win.asm | $nasm
+build $o/fipsmodule/rdrand-x86_64-win.o : nasm $sa/fipsmodule/rdrand-x86_64-win.asm | $nasm
+build $o/fipsmodule/rsaz-avx2-win.o : nasm $sa/fipsmodule/rsaz-avx2-win.asm | $nasm
+build $o/fipsmodule/sha1-x86_64-win.o : nasm $sa/fipsmodule/sha1-x86_64-win.asm | $nasm
+build $o/fipsmodule/sha256-x86_64-win.o : nasm $sa/fipsmodule/sha256-x86_64-win.asm | $nasm
+build $o/fipsmodule/sha512-x86_64-win.o : nasm $sa/fipsmodule/sha512-x86_64-win.asm | $nasm
+build $o/fipsmodule/vpaes-x86_64-win.o : nasm $sa/fipsmodule/vpaes-x86_64-win.asm | $nasm
+build $o/fipsmodule/x86_64-mont-win.o : nasm $sa/fipsmodule/x86_64-mont-win.asm | $nasm
+build $o/fipsmodule/x86_64-mont5-win.o : nasm $sa/fipsmodule/x86_64-mont5-win.asm | $nasm

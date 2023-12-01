@@ -1,0 +1,922 @@
+#
+# Copyright (c) 2023 mdl. All rights reserved.
+#
+
+s=third_party/libcr
+o=$obj/libcr
+
+CFLAGS = -I$s. $CR_FLAGS
+build $o/cr.o : cxx build/amalgamation/libcr.cc
+  cflags = -DBASE_PLATFORM
+
+build $o/base/allocator/allocator_extension.o : cxx $s/base/allocator/allocator_extension.cc
+build $o/base/allocator/dispatcher/dispatcher.o : cxx $s/base/allocator/dispatcher/dispatcher.cc
+build $o/base/allocator/dispatcher/internal/dispatch_data.o : cxx $s/base/allocator/dispatcher/internal/dispatch_data.cc
+build $o/base/allocator/dispatcher/reentry_guard.o : cxx $s/base/allocator/dispatcher/reentry_guard.cc
+build $o/base/allocator/dispatcher/tls.o : cxx $s/base/allocator/dispatcher/tls.cc
+build $o/base/allocator/partition_allocator/address_pool_manager.o : cxx $s/base/allocator/partition_allocator/address_pool_manager.cc
+build $o/base/allocator/partition_allocator/address_pool_manager_bitmap.o : cxx $s/base/allocator/partition_allocator/address_pool_manager_bitmap.cc
+build $o/base/allocator/partition_allocator/address_space_randomization.o : cxx $s/base/allocator/partition_allocator/address_space_randomization.cc
+build $o/base/allocator/partition_allocator/allocation_guard.o : cxx $s/base/allocator/partition_allocator/allocation_guard.cc
+build $o/base/allocator/partition_allocator/compressed_pointer.o : cxx $s/base/allocator/partition_allocator/compressed_pointer.cc
+build $o/base/allocator/partition_allocator/dangling_raw_ptr_checks.o : cxx $s/base/allocator/partition_allocator/dangling_raw_ptr_checks.cc
+build $o/base/allocator/partition_allocator/gwp_asan_support.o : cxx $s/base/allocator/partition_allocator/gwp_asan_support.cc
+build $o/base/allocator/partition_allocator/memory_reclaimer.o : cxx $s/base/allocator/partition_allocator/memory_reclaimer.cc
+build $o/base/allocator/partition_allocator/oom.o : cxx $s/base/allocator/partition_allocator/oom.cc
+build $o/base/allocator/partition_allocator/oom_callback.o : cxx $s/base/allocator/partition_allocator/oom_callback.cc
+build $o/base/allocator/partition_allocator/page_allocator.o : cxx $s/base/allocator/partition_allocator/page_allocator.cc
+build $o/base/allocator/partition_allocator/partition_address_space.o : cxx $s/base/allocator/partition_allocator/partition_address_space.cc
+build $o/base/allocator/partition_allocator/partition_alloc.o : cxx $s/base/allocator/partition_allocator/partition_alloc.cc
+build $o/base/allocator/partition_allocator/partition_alloc_hooks.o : cxx $s/base/allocator/partition_allocator/partition_alloc_hooks.cc
+build $o/base/allocator/partition_allocator/partition_bucket.o : cxx $s/base/allocator/partition_allocator/partition_bucket.cc
+build $o/base/allocator/partition_allocator/partition_dcheck_helper.o : cxx $s/base/allocator/partition_allocator/partition_dcheck_helper.cc
+build $o/base/allocator/partition_allocator/partition_freelist_entry.o : cxx $s/base/allocator/partition_allocator/partition_freelist_entry.cc
+build $o/base/allocator/partition_allocator/partition_oom.o : cxx $s/base/allocator/partition_allocator/partition_oom.cc
+build $o/base/allocator/partition_allocator/partition_page.o : cxx $s/base/allocator/partition_allocator/partition_page.cc
+build $o/base/allocator/partition_allocator/partition_root.o : cxx $s/base/allocator/partition_allocator/partition_root.cc
+build $o/base/allocator/partition_allocator/partition_stats.o : cxx $s/base/allocator/partition_allocator/partition_stats.cc
+build $o/base/allocator/partition_allocator/random.o : cxx $s/base/allocator/partition_allocator/random.cc
+build $o/base/allocator/partition_allocator/reservation_offset_table.o : cxx $s/base/allocator/partition_allocator/reservation_offset_table.cc
+build $o/base/allocator/partition_allocator/spinning_mutex.o : cxx $s/base/allocator/partition_allocator/spinning_mutex.cc
+build $o/base/allocator/partition_allocator/tagging.o : cxx $s/base/allocator/partition_allocator/tagging.cc
+build $o/base/allocator/partition_allocator/thread_cache.o : cxx $s/base/allocator/partition_allocator/thread_cache.cc
+build $o/base/allocator/partition_allocator/thread_isolation/pkey.o : cxx $s/base/allocator/partition_allocator/thread_isolation/pkey.cc
+build $o/base/allocator/partition_allocator/thread_isolation/thread_isolation.o : cxx $s/base/allocator/partition_allocator/thread_isolation/thread_isolation.cc
+build $o/base/allocator/partition_allocator/partition_alloc_base/check.o : cxx $s/base/allocator/partition_allocator/partition_alloc_base/check.cc
+build $o/base/allocator/partition_allocator/partition_alloc_base/cpu.o : cxx $s/base/allocator/partition_allocator/partition_alloc_base/cpu.cc
+build $o/base/allocator/partition_allocator/partition_alloc_base/debug/alias.o : cxx $s/base/allocator/partition_allocator/partition_alloc_base/debug/alias.cc
+build $o/base/allocator/partition_allocator/partition_alloc_base/debug/stack_trace.o : cxx $s/base/allocator/partition_allocator/partition_alloc_base/debug/stack_trace.cc
+build $o/base/allocator/partition_allocator/partition_alloc_base/log_message.o : cxx $s/base/allocator/partition_allocator/partition_alloc_base/log_message.cc
+build $o/base/allocator/partition_allocator/partition_alloc_base/logging.o : cxx $s/base/allocator/partition_allocator/partition_alloc_base/logging.cc
+build $o/base/allocator/partition_allocator/partition_alloc_base/memory/ref_counted.o : cxx $s/base/allocator/partition_allocator/partition_alloc_base/memory/ref_counted.cc
+build $o/base/allocator/partition_allocator/partition_alloc_base/rand_util.o : cxx $s/base/allocator/partition_allocator/partition_alloc_base/rand_util.cc
+build $o/base/allocator/partition_allocator/partition_alloc_base/strings/cstring_builder.o : cxx $s/base/allocator/partition_allocator/partition_alloc_base/strings/cstring_builder.cc
+build $o/base/allocator/partition_allocator/partition_alloc_base/strings/safe_sprintf.o : cxx $s/base/allocator/partition_allocator/partition_alloc_base/strings/safe_sprintf.cc
+build $o/base/allocator/partition_allocator/partition_alloc_base/strings/string_util.o : cxx $s/base/allocator/partition_allocator/partition_alloc_base/strings/string_util.cc
+build $o/base/allocator/partition_allocator/partition_alloc_base/strings/stringprintf.o : cxx $s/base/allocator/partition_allocator/partition_alloc_base/strings/stringprintf.cc
+build $o/base/allocator/partition_allocator/partition_alloc_base/threading/platform_thread.o : cxx $s/base/allocator/partition_allocator/partition_alloc_base/threading/platform_thread.cc
+build $o/base/allocator/partition_allocator/partition_alloc_base/time/time.o : cxx $s/base/allocator/partition_allocator/partition_alloc_base/time/time.cc
+build $o/base/allocator/partition_allocator/partition_alloc_base/time/time_override.o : cxx $s/base/allocator/partition_allocator/partition_alloc_base/time/time_override.cc
+build $o/base/allocator/partition_allocator/partition_alloc_base/debug/stack_trace_win.o : cxx $s/base/allocator/partition_allocator/partition_alloc_base/debug/stack_trace_win.cc
+build $o/base/allocator/partition_allocator/partition_alloc_base/memory/page_size_win.o : cxx $s/base/allocator/partition_allocator/partition_alloc_base/memory/page_size_win.cc
+build $o/base/allocator/partition_allocator/partition_alloc_base/process/process_handle_win.o : cxx $s/base/allocator/partition_allocator/partition_alloc_base/process/process_handle_win.cc
+build $o/base/allocator/partition_allocator/partition_alloc_base/rand_util_win.o : cxx $s/base/allocator/partition_allocator/partition_alloc_base/rand_util_win.cc
+build $o/base/allocator/partition_allocator/partition_alloc_base/scoped_clear_last_error_win.o : cxx $s/base/allocator/partition_allocator/partition_alloc_base/scoped_clear_last_error_win.cc
+build $o/base/allocator/partition_allocator/partition_alloc_base/threading/platform_thread_win.o : cxx $s/base/allocator/partition_allocator/partition_alloc_base/threading/platform_thread_win.cc
+build $o/base/allocator/partition_allocator/partition_alloc_base/time/time_win.o : cxx $s/base/allocator/partition_allocator/partition_alloc_base/time/time_win.cc
+build $o/base/at_exit.o : cxx $s/base/at_exit.cc
+build $o/base/barrier_closure.o : cxx $s/base/barrier_closure.cc
+build $o/base/base64.o : cxx $s/base/base64.cc
+build $o/base/base64url.o : cxx $s/base/base64url.cc
+build $o/base/big_endian.o : cxx $s/base/big_endian.cc
+build $o/base/callback_list.o : cxx $s/base/callback_list.cc
+build $o/base/check.o : cxx $s/base/check.cc
+build $o/base/check_is_test.o : cxx $s/base/check_is_test.cc
+build $o/base/check_op.o : cxx $s/base/check_op.cc
+build $o/base/command_line.o : cxx $s/base/command_line.cc
+build $o/base/containers/flat_tree.o : cxx $s/base/containers/flat_tree.cc
+build $o/base/containers/intrusive_heap.o : cxx $s/base/containers/intrusive_heap.cc
+build $o/base/containers/linked_list.o : cxx $s/base/containers/linked_list.cc
+build $o/base/cpu_reduction_experiment.o : cxx $s/base/cpu_reduction_experiment.cc
+build $o/base/debug/alias.o : cxx $s/base/debug/alias.cc
+build $o/base/debug/asan_invalid_access.o : cxx $s/base/debug/asan_invalid_access.cc
+build $o/base/debug/asan_service.o : cxx $s/base/debug/asan_service.cc
+build $o/base/debug/buffered_dwarf_reader.o : cxx $s/base/debug/buffered_dwarf_reader.cc
+build $o/base/debug/debugger.o : cxx $s/base/debug/debugger.cc
+build $o/base/debug/dump_without_crashing.o : cxx $s/base/debug/dump_without_crashing.cc
+build $o/base/debug/dwarf_line_no.o : cxx $s/base/debug/dwarf_line_no.cc
+build $o/base/debug/profiler.o : cxx $s/base/debug/profiler.cc
+build $o/base/debug/task_trace.o : cxx $s/base/debug/task_trace.cc
+build $o/base/environment.o : cxx $s/base/environment.cc
+build $o/base/feature_list.o : cxx $s/base/feature_list.cc
+build $o/base/features.o : cxx $s/base/features.cc
+build $o/base/files/file.o : cxx $s/base/files/file.cc
+build $o/base/files/file_path.o : cxx $s/base/files/file_path.cc
+build $o/base/files/file_tracing.o : cxx $s/base/files/file_tracing.cc
+build $o/base/files/memory_mapped_file.o : cxx $s/base/files/memory_mapped_file.cc
+build $o/base/files/safe_base_name.o : cxx $s/base/files/safe_base_name.cc
+build $o/base/files/scoped_file.o : cxx $s/base/files/scoped_file.cc
+build $o/base/functional/callback_helpers.o : cxx $s/base/functional/callback_helpers.cc
+build $o/base/functional/callback_internal.o : cxx $s/base/functional/callback_internal.cc
+build $o/base/hash/legacy_hash.o : cxx $s/base/hash/legacy_hash.cc
+build $o/base/json/json_parser.o : cxx $s/base/json/json_parser.cc
+build $o/base/json/json_reader.o : cxx $s/base/json/json_reader.cc
+build $o/base/json/json_string_value_serializer.o : cxx $s/base/json/json_string_value_serializer.cc
+build $o/base/json/json_value_converter.o : cxx $s/base/json/json_value_converter.cc
+build $o/base/json/json_writer.o : cxx $s/base/json/json_writer.cc
+build $o/base/json/string_escape.o : cxx $s/base/json/string_escape.cc
+build $o/base/json/values_util.o : cxx $s/base/json/values_util.cc
+build $o/base/lazy_instance_helpers.o : cxx $s/base/lazy_instance_helpers.cc
+build $o/base/location.o : cxx $s/base\location.cc
+build $o/base/logging.o : cxx $s/base/logging.cc
+build $o/base/memory/aligned_memory.o : cxx $s/base/memory/aligned_memory.cc
+build $o/base/memory/memory_pressure_listener.o : cxx $s/base/memory/memory_pressure_listener.cc
+build $o/base/memory/memory_pressure_monitor.o : cxx $s/base/memory/memory_pressure_monitor.cc
+build $o/base/memory/nonscannable_memory.o : cxx $s/base/memory/nonscannable_memory.cc
+build $o/base/memory/platform_shared_memory_handle.o : cxx $s/base/memory/platform_shared_memory_handle.cc
+build $o/base/memory/platform_shared_memory_region.o : cxx $s/base/memory/platform_shared_memory_region.cc
+build $o/base/memory/raw_ptr_asan_bound_arg_tracker.o : cxx $s/base/memory/raw_ptr_asan_bound_arg_tracker.cc
+build $o/base/memory/raw_ptr_asan_hooks.o : cxx $s/base/memory/raw_ptr_asan_hooks.cc
+build $o/base/memory/raw_ptr_asan_service.o : cxx $s/base/memory/raw_ptr_asan_service.cc
+build $o/base/memory/read_only_shared_memory_region.o : cxx $s/base/memory/read_only_shared_memory_region.cc
+build $o/base/memory/ref_counted.o : cxx $s/base/memory/ref_counted.cc
+build $o/base/memory/ref_counted_memory.o : cxx $s/base/memory/ref_counted_memory.cc
+build $o/base/memory/shared_memory_mapper.o : cxx $s/base/memory/shared_memory_mapper.cc
+build $o/base/memory/shared_memory_mapping.o : cxx $s/base/memory/shared_memory_mapping.cc
+build $o/base/memory/shared_memory_security_policy.o : cxx $s/base/memory/shared_memory_security_policy.cc
+build $o/base/memory/shared_memory_tracker.o : cxx $s/base/memory/shared_memory_tracker.cc
+build $o/base/memory/unsafe_shared_memory_pool.o : cxx $s/base/memory/unsafe_shared_memory_pool.cc
+build $o/base/memory/unsafe_shared_memory_region.o : cxx $s/base/memory/unsafe_shared_memory_region.cc
+build $o/base/memory/weak_ptr.o : cxx $s/base/memory/weak_ptr.cc
+build $o/base/memory/writable_shared_memory_region.o : cxx $s/base/memory/writable_shared_memory_region.cc
+build $o/base/message_loop/message_pump.o : cxx $s/base/message_loop/message_pump.cc
+build $o/base/message_loop/message_pump_default.o : cxx $s/base/message_loop/message_pump_default.cc
+build $o/base/message_loop/work_id_provider.o : cxx $s/base/message_loop/work_id_provider.cc
+build $o/base/metrics/bucket_ranges.o : cxx $s/base/metrics/bucket_ranges.cc
+build $o/base/metrics/crc32.o : cxx $s/base/metrics/crc32.cc
+build $o/base/metrics/dummy_histogram.o : cxx $s/base/metrics/dummy_histogram.cc
+build $o/base/metrics/field_trial.o : cxx $s/base/metrics/field_trial.cc
+build $o/base/metrics/field_trial_list_including_low_anonymity.o : cxx $s/base/metrics/field_trial_list_including_low_anonymity.cc
+build $o/base/metrics/field_trial_param_associator.o : cxx $s/base/metrics/field_trial_param_associator.cc
+build $o/base/metrics/field_trial_params.o : cxx $s/base/metrics/field_trial_params.cc
+build $o/base/metrics/histogram.o : cxx $s/base/metrics/histogram.cc
+build $o/base/metrics/histogram_base.o : cxx $s/base/metrics/histogram_base.cc
+build $o/base/metrics/histogram_delta_serialization.o : cxx $s/base/metrics/histogram_delta_serialization.cc
+build $o/base/metrics/histogram_functions.o : cxx $s/base/metrics/histogram_functions.cc
+build $o/base/metrics/histogram_samples.o : cxx $s/base/metrics/histogram_samples.cc
+build $o/base/metrics/histogram_shared_memory.o : cxx $s/base/metrics/histogram_shared_memory.cc
+build $o/base/metrics/histogram_snapshot_manager.o : cxx $s/base/metrics/histogram_snapshot_manager.cc
+build $o/base/metrics/metrics_hashes.o : cxx $s/base/metrics/metrics_hashes.cc
+build $o/base/metrics/persistent_histogram_allocator.o : cxx $s/base/metrics/persistent_histogram_allocator.cc
+build $o/base/metrics/persistent_memory_allocator.o : cxx $s/base/metrics/persistent_memory_allocator.cc
+build $o/base/metrics/persistent_sample_map.o : cxx $s/base/metrics/persistent_sample_map.cc
+build $o/base/metrics/ranges_manager.o : cxx $s/base/metrics/ranges_manager.cc
+build $o/base/metrics/sample_map.o : cxx $s/base/metrics/sample_map.cc
+build $o/base/metrics/sample_vector.o : cxx $s/base/metrics/sample_vector.cc
+build $o/base/metrics/single_sample_metrics.o : cxx $s/base/metrics/single_sample_metrics.cc
+build $o/base/metrics/sparse_histogram.o : cxx $s/base/metrics/sparse_histogram.cc
+build $o/base/metrics/statistics_recorder.o : cxx $s/base/metrics/statistics_recorder.cc
+build $o/base/metrics/user_metrics.o : cxx $s/base/metrics/user_metrics.cc
+build $o/base/observer_list_internal.o : cxx $s/base/observer_list_internal.cc
+build $o/base/observer_list_threadsafe.o : cxx $s/base/observer_list_threadsafe.cc
+build $o/base/observer_list_types.o : cxx $s/base/observer_list_types.cc
+build $o/base/one_shot_event.o : cxx $s/base/one_shot_event.cc
+build $o/base/pending_task.o : cxx $s/base/pending_task.cc
+build $o/base/pickle.o : cxx $s/base/pickle.cc
+build $o/base/base_switches.o : cxx $s/base/base_switches.cc
+build $o/base/power_monitor/battery_level_provider.o : cxx $s/base/power_monitor/battery_level_provider.cc
+build $o/base/power_monitor/battery_state_sampler.o : cxx $s/base/power_monitor/battery_state_sampler.cc
+build $o/base/power_monitor/moving_average.o : cxx $s/base/power_monitor/moving_average.cc
+build $o/base/power_monitor/power_monitor.o : cxx $s/base/power_monitor/power_monitor.cc
+build $o/base/power_monitor/power_monitor_device_source.o : cxx $s/base/power_monitor/power_monitor_device_source.cc
+build $o/base/power_monitor/power_monitor_features.o : cxx $s/base/power_monitor/power_monitor_features.cc
+build $o/base/power_monitor/power_monitor_source.o : cxx $s/base/power_monitor/power_monitor_source.cc
+build $o/base/power_monitor/sampling_event_source.o : cxx $s/base/power_monitor/sampling_event_source.cc
+build $o/base/power_monitor/timer_sampling_event_source.o : cxx $s/base/power_monitor/timer_sampling_event_source.cc
+build $o/base/process/current_process.o : cxx $s/base/process/current_process.cc
+build $o/base/process/environment_internal.o : cxx $s/base/process/environment_internal.cc
+build $o/base/process/process_handle.o : cxx $s/base/process/process_handle.cc
+build $o/base/profiler/frame.o : cxx $s/base/profiler/frame.cc
+build $o/base/profiler/metadata_recorder.o : cxx $s/base/profiler/metadata_recorder.cc
+build $o/base/profiler/module_cache.o : cxx $s/base/profiler/module_cache.cc
+build $o/base/profiler/sample_metadata.o : cxx $s/base/profiler/sample_metadata.cc
+build $o/base/profiler/sampling_profiler_thread_token.o : cxx $s/base/profiler/sampling_profiler_thread_token.cc
+build $o/base/profiler/stack_buffer.o : cxx $s/base/profiler/stack_buffer.cc
+build $o/base/profiler/stack_copier.o : cxx $s/base/profiler/stack_copier.cc
+build $o/base/profiler/stack_copier_suspend.o : cxx $s/base/profiler/stack_copier_suspend.cc
+build $o/base/profiler/stack_sampler.o : cxx $s/base/profiler/stack_sampler.cc
+build $o/base/profiler/stack_sampling_profiler.o : cxx $s/base/profiler/stack_sampling_profiler.cc
+build $o/base/profiler/unwinder.o : cxx $s/base/profiler/unwinder.cc
+build $o/base/rand_util.o : cxx $s/base/rand_util.cc
+build $o/base/run_loop.o : cxx $s/base/run_loop.cc
+build $o/base/sampling_heap_profiler/lock_free_address_hash_set.o : cxx $s/base/sampling_heap_profiler/lock_free_address_hash_set.cc
+build $o/base/sampling_heap_profiler/poisson_allocation_sampler.o : cxx $s/base/sampling_heap_profiler/poisson_allocation_sampler.cc
+build $o/base/sampling_heap_profiler/sampling_heap_profiler.o : cxx $s/base/sampling_heap_profiler/sampling_heap_profiler.cc
+build $o/base/scoped_add_feature_flags.o : cxx $s/base/scoped_add_feature_flags.cc
+build $o/base/scoped_environment_variable_override.o : cxx $s/base/scoped_environment_variable_override.cc
+build $o/base/sequence_checker.o : cxx $s/base/sequence_checker.cc
+build $o/base/sequence_checker_impl.o : cxx $s/base/sequence_checker_impl.cc
+build $o/base/sequence_token.o : cxx $s/base/sequence_token.cc
+build $o/base/strings/abseil_string_number_conversions.o : cxx $s/base/strings/abseil_string_number_conversions.cc
+build $o/base/strings/escape.o : cxx $s/base/strings/escape.cc
+build $o/base/strings/latin1_string_conversions.o : cxx $s/base/strings/latin1_string_conversions.cc
+build $o/base/strings/pattern.o : cxx $s/base/strings/pattern.cc
+build $o/base/strings/safe_sprintf.o : cxx $s/base/strings/safe_sprintf.cc
+build $o/base/strings/strcat.o : cxx $s/base/strings/strcat.cc
+build $o/base/strings/string_number_conversions.o : cxx $s/base/strings/string_number_conversions.cc
+build $o/base/strings/string_split.o : cxx $s/base/strings/string_split.cc
+build $o/base/strings/string_util.o : cxx $s/base/strings/string_util.cc
+build $o/base/strings/string_util_constants.o : cxx $s/base/strings/string_util_constants.cc
+build $o/base/strings/stringprintf.o : cxx $s/base/strings/stringprintf.cc
+build $o/base/strings/utf_offset_string_conversions.o : cxx $s/base/strings/utf_offset_string_conversions.cc
+build $o/base/strings/utf_ostream_operators.o : cxx $s/base/strings/utf_ostream_operators.cc
+build $o/base/strings/utf_string_conversion_utils.o : cxx $s/base/strings/utf_string_conversion_utils.cc
+build $o/base/strings/utf_string_conversions.o : cxx $s/base/strings/utf_string_conversions.cc
+build $o/base/substring_set_matcher/matcher_string_pattern.o : cxx $s/base/substring_set_matcher/matcher_string_pattern.cc
+build $o/base/substring_set_matcher/substring_set_matcher.o : cxx $s/base/substring_set_matcher/substring_set_matcher.cc
+build $o/base/supports_user_data.o : cxx $s/base/supports_user_data.cc
+build $o/base/synchronization/atomic_flag.o : cxx $s/base/synchronization/atomic_flag.cc
+build $o/base/synchronization/lock.o : cxx $s/base/synchronization/lock.cc
+build $o/base/synchronization/waitable_event.o : cxx $s/base/synchronization/waitable_event.cc
+build $o/base/syslog_logging.o : cxx $s/base/syslog_logging.cc
+build $o/base/system/system_monitor.o : cxx $s/base/system/system_monitor.cc
+build $o/base/task/cancelable_task_tracker.o : cxx $s/base/task/cancelable_task_tracker.cc
+build $o/base/task/common/checked_lock_impl.o : cxx $s/base/task/common/checked_lock_impl.cc
+build $o/base/task/common/lazy_now.o : cxx $s/base/task/common/lazy_now.cc
+build $o/base/task/common/operations_controller.o : cxx $s/base/task/common/operations_controller.cc
+build $o/base/task/common/scoped_defer_task_posting.o : cxx $s/base/task/common/scoped_defer_task_posting.cc
+build $o/base/task/common/task_annotator.o : cxx $s/base/task/common/task_annotator.cc
+build $o/base/task/current_thread.o : cxx $s/base/task/current_thread.cc
+build $o/base/task/default_delayed_task_handle_delegate.o : cxx $s/base/task/default_delayed_task_handle_delegate.cc
+build $o/base/task/deferred_sequenced_task_runner.o : cxx $s/base/task/deferred_sequenced_task_runner.cc
+build $o/base/task/delayed_task_handle.o : cxx $s/base/task/delayed_task_handle.cc
+build $o/base/task/lazy_thread_pool_task_runner.o : cxx $s/base/task/lazy_thread_pool_task_runner.cc
+build $o/base/task/post_job.o : cxx $s/base/task/post_job.cc
+build $o/base/task/scoped_set_task_priority_for_current_thread.o : cxx $s/base/task/scoped_set_task_priority_for_current_thread.cc
+build $o/base/task/sequence_manager/associated_thread_id.o : cxx $s/base/task/sequence_manager/associated_thread_id.cc
+build $o/base/task/sequence_manager/atomic_flag_set.o : cxx $s/base/task/sequence_manager/atomic_flag_set.cc
+build $o/base/task/sequence_manager/delayed_task_handle_delegate.o : cxx $s/base/task/sequence_manager/delayed_task_handle_delegate.cc
+build $o/base/task/sequence_manager/enqueue_order_generator.o : cxx $s/base/task/sequence_manager/enqueue_order_generator.cc
+build $o/base/task/sequence_manager/fence.o : cxx $s/base/task/sequence_manager/fence.cc
+build $o/base/task/sequence_manager/sequence_manager.o : cxx $s/base/task/sequence_manager/sequence_manager.cc
+build $o/base/task/sequence_manager/sequence_manager_impl.o : cxx $s/base/task/sequence_manager/sequence_manager_impl.cc
+build $o/base/task/sequence_manager/sequenced_task_source.o : cxx $s/base/task/sequence_manager/sequenced_task_source.cc
+build $o/base/task/sequence_manager/task_order.o : cxx $s/base/task/sequence_manager/task_order.cc
+build $o/base/task/sequence_manager/task_queue.o : cxx $s/base/task/sequence_manager/task_queue.cc
+build $o/base/task/sequence_manager/task_queue_impl.o : cxx $s/base/task/sequence_manager/task_queue_impl.cc
+build $o/base/task/sequence_manager/task_queue_selector.o : cxx $s/base/task/sequence_manager/task_queue_selector.cc
+build $o/base/task/sequence_manager/tasks.o : cxx $s/base/task/sequence_manager/tasks.cc
+build $o/base/task/sequence_manager/thread_controller.o : cxx $s/base/task/sequence_manager/thread_controller.cc
+build $o/base/task/sequence_manager/thread_controller_impl.o : cxx $s/base/task/sequence_manager/thread_controller_impl.cc
+build $o/base/task/sequence_manager/thread_controller_power_monitor.o : cxx $s/base/task/sequence_manager/thread_controller_power_monitor.cc
+build $o/base/task/sequence_manager/thread_controller_with_message_pump_impl.o : cxx $s/base/task/sequence_manager/thread_controller_with_message_pump_impl.cc
+build $o/base/task/sequence_manager/time_domain.o : cxx $s/base/task/sequence_manager/time_domain.cc
+build $o/base/task/sequence_manager/wake_up_queue.o : cxx $s/base/task/sequence_manager/wake_up_queue.cc
+build $o/base/task/sequence_manager/work_deduplicator.o : cxx $s/base/task/sequence_manager/work_deduplicator.cc
+build $o/base/task/sequence_manager/work_queue.o : cxx $s/base/task/sequence_manager/work_queue.cc
+build $o/base/task/sequence_manager/work_queue_sets.o : cxx $s/base/task/sequence_manager/work_queue_sets.cc
+build $o/base/task/sequenced_task_runner.o : cxx $s/base/task/sequenced_task_runner.cc
+build $o/base/task/single_thread_task_executor.o : cxx $s/base/task/single_thread_task_executor.cc
+build $o/base/task/single_thread_task_runner.o : cxx $s/base/task/single_thread_task_runner.cc
+build $o/base/task/task_features.o : cxx $s/base/task/task_features.cc
+build $o/base/task/task_runner.o : cxx $s/base/task/task_runner.cc
+build $o/base/task/task_traits.o : cxx $s/base/task/task_traits.cc
+build $o/base/task/thread_pool.o : cxx $s/base/task/thread_pool.cc
+build $o/base/task/thread_pool/delayed_priority_queue.o : cxx $s/base/task/thread_pool/delayed_priority_queue.cc
+build $o/base/task/thread_pool/delayed_task_manager.o : cxx $s/base/task/thread_pool/delayed_task_manager.cc
+build $o/base/task/thread_pool/environment_config.o : cxx $s/base/task/thread_pool/environment_config.cc
+build $o/base/task/thread_pool/job_task_source.o : cxx $s/base/task/thread_pool/job_task_source.cc
+build $o/base/task/thread_pool/pooled_parallel_task_runner.o : cxx $s/base/task/thread_pool/pooled_parallel_task_runner.cc
+build $o/base/task/thread_pool/pooled_sequenced_task_runner.o : cxx $s/base/task/thread_pool/pooled_sequenced_task_runner.cc
+build $o/base/task/thread_pool/pooled_single_thread_task_runner_manager.o : cxx $s/base/task/thread_pool/pooled_single_thread_task_runner_manager.cc
+build $o/base/task/thread_pool/pooled_task_runner_delegate.o : cxx $s/base/task/thread_pool/pooled_task_runner_delegate.cc
+build $o/base/task/thread_pool/priority_queue.o : cxx $s/base/task/thread_pool/priority_queue.cc
+build $o/base/task/thread_pool/sequence.o : cxx $s/base/task/thread_pool/sequence.cc
+build $o/base/task/thread_pool/service_thread.o : cxx $s/base/task/thread_pool/service_thread.cc
+build $o/base/task/thread_pool/task.o : cxx $s/base/task/thread_pool/task.cc
+build $o/base/task/thread_pool/task_source.o : cxx $s/base/task/thread_pool/task_source.cc
+build $o/base/task/thread_pool/task_source_sort_key.o : cxx $s/base/task/thread_pool/task_source_sort_key.cc
+build $o/base/task/thread_pool/task_tracker.o : cxx $s/base/task/thread_pool/task_tracker.cc
+build $o/base/task/thread_pool/thread_group.o : cxx $s/base/task/thread_pool/thread_group.cc
+build $o/base/task/thread_pool/thread_group_impl.o : cxx $s/base/task/thread_pool/thread_group_impl.cc
+build $o/base/task/thread_pool/thread_pool_impl.o : cxx $s/base/task/thread_pool/thread_pool_impl.cc
+build $o/base/task/thread_pool/thread_pool_instance.o : cxx $s/base/task/thread_pool/thread_pool_instance.cc
+build $o/base/task/thread_pool/worker_thread.o : cxx $s/base/task/thread_pool/worker_thread.cc
+build $o/base/task/thread_pool/worker_thread_set.o : cxx $s/base/task/thread_pool/worker_thread_set.cc
+build $o/base/third_party/cityhash/city.o : cxx $s/base/third_party/cityhash/city.cc
+build $o/base/third_party/cityhash_v103/src/city_v103.o : cxx $s/base/third_party/cityhash_v103/src/city_v103.cc
+build $o/base/third_party/nspr/prtime.o : cxx $s/base/third_party/nspr/prtime.cc
+build $o/base/threading/hang_watcher.o : cxx $s/base/threading/hang_watcher.cc
+build $o/base/threading/platform_thread.o : cxx $s/base/threading/platform_thread.cc
+build $o/base/threading/platform_thread_ref.o : cxx $s/base/threading/platform_thread_ref.cc
+build $o/base/threading/post_task_and_reply_impl.o : cxx $s/base/threading/post_task_and_reply_impl.cc
+build $o/base/threading/scoped_blocking_call.o : cxx $s/base/threading/scoped_blocking_call.cc
+build $o/base/threading/scoped_blocking_call_internal.o : cxx $s/base/threading/scoped_blocking_call_internal.cc
+build $o/base/threading/scoped_thread_priority.o : cxx $s/base/threading/scoped_thread_priority.cc
+build $o/base/threading/sequence_local_storage_map.o : cxx $s/base/threading/sequence_local_storage_map.cc
+build $o/base/threading/sequence_local_storage_slot.o : cxx $s/base/threading/sequence_local_storage_slot.cc
+build $o/base/threading/simple_thread.o : cxx $s/base/threading/simple_thread.cc
+build $o/base/threading/thread.o : cxx $s/base/threading/thread.cc
+build $o/base/threading/thread_checker.o : cxx $s/base/threading/thread_checker.cc
+build $o/base/threading/thread_checker_impl.o : cxx $s/base/threading/thread_checker_impl.cc
+build $o/base/threading/thread_collision_warner.o : cxx $s/base/threading/thread_collision_warner.cc
+build $o/base/threading/thread_id_name_manager.o : cxx $s/base/threading/thread_id_name_manager.cc
+build $o/base/threading/thread_local_storage.o : cxx $s/base/threading/thread_local_storage.cc
+build $o/base/threading/thread_restrictions.o : cxx $s/base/threading/thread_restrictions.cc
+build $o/base/threading/watchdog.o : cxx $s/base/threading/watchdog.cc
+build $o/base/time/clock.o : cxx $s/base/time/clock.cc
+build $o/base/time/default_clock.o : cxx $s/base/time/default_clock.cc
+build $o/base/time/default_tick_clock.o : cxx $s/base/time/default_tick_clock.cc
+build $o/base/time/tick_clock.o : cxx $s/base/time/tick_clock.cc
+build $o/base/time/time.o : cxx $s/base/time/time.cc
+build $o/base/time/time_delta_from_string.o : cxx $s/base/time/time_delta_from_string.cc
+build $o/base/time/time_override.o : cxx $s/base/time/time_override.cc
+build $o/base/time/time_to_iso8601.o : cxx $s/base/time/time_to_iso8601.cc
+build $o/base/timer/elapsed_timer.o : cxx $s/base/timer/elapsed_timer.cc
+build $o/base/timer/lap_timer.o : cxx $s/base/timer/lap_timer.cc
+build $o/base/timer/timer.o : cxx $s/base/timer/timer.cc
+build $o/base/timer/wall_clock_timer.o : cxx $s/base/timer/wall_clock_timer.cc
+build $o/base/token.o : cxx $s/base/token.cc
+build $o/base/trace_event/heap_profiler_allocation_context.o : cxx $s/base/trace_event/heap_profiler_allocation_context.cc
+build $o/base/trace_event/heap_profiler_allocation_context_tracker.o : cxx $s/base/trace_event/heap_profiler_allocation_context_tracker.cc
+build $o/base/trace_event/memory_allocator_dump_guid.o : cxx $s/base/trace_event/memory_allocator_dump_guid.cc
+build $o/base/trace_event/trace_id_helper.o : cxx $s/base/trace_event/trace_id_helper.cc
+build $o/base/trace_event/trace_event_stub.o : cxx $s/base/trace_event/trace_event_stub.cc
+build $o/base/unguessable_token.o : cxx $s/base/unguessable_token.cc
+build $o/base/uuid.o : cxx $s/base/uuid.cc
+build $o/base/value_iterators.o : cxx $s/base/value_iterators.cc
+build $o/base/values.o : cxx $s/base/values.cc
+build $o/base/version.o : cxx $s/base/version.cc
+build $o/base/vlog.o : cxx $s/base/vlog.cc
+build $o/base/hash/md5_boringssl.o : cxx $s/base/hash/md5_boringssl.cc
+build $o/base/hash/sha1_boringssl.o : cxx $s/base/hash/sha1_boringssl.cc
+build $o/base/base_paths.o : cxx $s/base/base_paths.cc
+build $o/base/cpu.o : cxx $s/base/cpu.cc
+build $o/base/debug/crash_logging.o : cxx $s/base/debug/crash_logging.cc
+build $o/base/debug/stack_trace.o : cxx $s/base/debug/stack_trace.cc
+build $o/base/files/file_enumerator.o : cxx $s/base/files/file_enumerator.cc
+build $o/base/files/file_proxy.o : cxx $s/base/files/file_proxy.cc
+build $o/base/files/file_util.o : cxx $s/base/files/file_util.cc
+build $o/base/files/important_file_writer.o : cxx $s/base/files/important_file_writer.cc
+build $o/base/files/important_file_writer_cleaner.o : cxx $s/base/files/important_file_writer_cleaner.cc
+build $o/base/files/scoped_temp_dir.o : cxx $s/base/files/scoped_temp_dir.cc
+build $o/base/json/json_file_value_serializer.o : cxx $s/base/json/json_file_value_serializer.cc
+build $o/base/memory/discardable_memory.o : cxx $s/base/memory/discardable_memory.cc
+build $o/base/memory/discardable_memory_allocator.o : cxx $s/base/memory/discardable_memory_allocator.cc
+build $o/base/metrics/persistent_histogram_storage.o : cxx $s/base/metrics/persistent_histogram_storage.cc
+build $o/base/native_library.o : cxx $s/base/native_library.cc
+build $o/base/path_service.o : cxx $s/base/path_service.cc
+build $o/base/process/process_metrics.o : cxx $s/base/process/process_metrics.cc
+build $o/base/scoped_native_library.o : cxx $s/base/scoped_native_library.cc
+build $o/base/system/sys_info.o : cxx $s/base/system/sys_info.cc
+build $o/base/task/thread_pool/initialization_util.o : cxx $s/base/task/thread_pool/initialization_util.cc
+build $o/base/base_paths_win.o : cxx $s/base/base_paths_win.cc
+build $o/base/memory/discardable_shared_memory.o : cxx $s/base/memory/discardable_shared_memory.cc
+build $o/base/process/kill.o : cxx $s/base/process/kill.cc
+build $o/base/process/launch.o : cxx $s/base/process/launch.cc
+build $o/base/process/memory.o : cxx $s/base/process/memory.cc
+build $o/base/process/process_iterator.o : cxx $s/base/process/process_iterator.cc
+build $o/base/allocator/partition_alloc_features.o : cxx $s/base/allocator/partition_alloc_features.cc
+build $o/base/allocator/partition_alloc_support.o : cxx $s/base/allocator/partition_alloc_support.cc
+build $o/base/debug/debugger_win.o : cxx $s/base/debug/debugger_win.cc
+build $o/base/debug/gdi_debug_util_win.o : cxx $s/base/debug/gdi_debug_util_win.cc
+build $o/base/debug/handle_hooks_win.o : cxx $s/base/debug/handle_hooks_win.cc
+build $o/base/debug/invalid_access_win.o : cxx $s/base/debug/invalid_access_win.cc
+build $o/base/debug/stack_trace_win.o : cxx $s/base/debug/stack_trace_win.cc
+build $o/base/enterprise_util.o : cxx $s/base/enterprise_util.cc
+build $o/base/enterprise_util_win.o : cxx $s/base/enterprise_util_win.cc
+build $o/base/file_version_info_win.o : cxx $s/base/file_version_info_win.cc
+build $o/base/files/file_enumerator_win.o : cxx $s/base/files/file_enumerator_win.cc
+build $o/base/files/file_path_watcher_win.o : cxx $s/base/files/file_path_watcher_win.cc
+build $o/base/files/file_util_win.o : cxx $s/base/files/file_util_win.cc
+build $o/base/files/file_win.o : cxx $s/base/files/file_win.cc
+build $o/base/files/memory_mapped_file_win.o : cxx $s/base/files/memory_mapped_file_win.cc
+build $o/base/logging_win.o : cxx $s/base/logging_win.cc
+build $o/base/memory/page_size_win.o : cxx $s/base/memory/page_size_win.cc
+build $o/base/memory/platform_shared_memory_mapper_win.o : cxx $s/base/memory/platform_shared_memory_mapper_win.cc
+build $o/base/memory/platform_shared_memory_region_win.o : cxx $s/base/memory/platform_shared_memory_region_win.cc
+build $o/base/message_loop/message_pump_win.o : cxx $s/base/message_loop/message_pump_win.cc
+build $o/base/native_library_win.o : cxx $s/base/native_library_win.cc
+build $o/base/power_monitor/battery_level_provider_win.o : cxx $s/base/power_monitor/battery_level_provider_win.cc
+build $o/base/power_monitor/power_monitor_device_source_win.o : cxx $s/base/power_monitor/power_monitor_device_source_win.cc
+build $o/base/power_monitor/speed_limit_observer_win.o : cxx $s/base/power_monitor/speed_limit_observer_win.cc
+build $o/base/process/kill_win.o : cxx $s/base/process/kill_win.cc
+build $o/base/process/launch_win.o : cxx $s/base/process/launch_win.cc
+build $o/base/process/memory_win.o : cxx $s/base/process/memory_win.cc
+build $o/base/process/process_handle_win.o : cxx $s/base/process/process_handle_win.cc
+build $o/base/process/process_info_win.o : cxx $s/base/process/process_info_win.cc
+build $o/base/process/process_iterator_win.o : cxx $s/base/process/process_iterator_win.cc
+build $o/base/process/process_metrics_win.o : cxx $s/base/process/process_metrics_win.cc
+build $o/base/process/process_win.o : cxx $s/base/process/process_win.cc
+build $o/base/profiler/module_cache_win.o : cxx $s/base/profiler/module_cache_win.cc
+build $o/base/profiler/native_unwinder_win.o : cxx $s/base/profiler/native_unwinder_win.cc
+build $o/base/profiler/stack_sampler_win.o : cxx $s/base/profiler/stack_sampler_win.cc
+build $o/base/profiler/suspendable_thread_delegate_win.o : cxx $s/base/profiler/suspendable_thread_delegate_win.cc
+build $o/base/profiler/win32_stack_frame_unwinder.o : cxx $s/base/profiler/win32_stack_frame_unwinder.cc
+build $o/base/rand_util_win.o : cxx $s/base/rand_util_win.cc
+build $o/base/scoped_clear_last_error_win.o : cxx $s/base/scoped_clear_last_error_win.cc
+build $o/base/strings/strcat_win.o : cxx $s/base/strings/strcat_win.cc
+build $o/base/strings/string_number_conversions_win.o : cxx $s/base/strings/string_number_conversions_win.cc
+build $o/base/strings/string_split_win.o : cxx $s/base/strings/string_split_win.cc
+build $o/base/strings/string_util_win.o : cxx $s/base/strings/string_util_win.cc
+build $o/base/strings/sys_string_conversions_win.o : cxx $s/base/strings/sys_string_conversions_win.cc
+build $o/base/sync_socket_win.o : cxx $s/base/sync_socket_win.cc
+build $o/base/synchronization/condition_variable_win.o : cxx $s/base/synchronization/condition_variable_win.cc
+build $o/base/synchronization/lock_impl_win.o : cxx $s/base/synchronization/lock_impl_win.cc
+build $o/base/synchronization/waitable_event_watcher_win.o : cxx $s/base/synchronization/waitable_event_watcher_win.cc
+build $o/base/synchronization/waitable_event_win.o : cxx $s/base/synchronization/waitable_event_win.cc
+build $o/base/system/sys_info_win.o : cxx $s/base/system/sys_info_win.cc
+build $o/base/threading/platform_thread_win.o : cxx $s/base/threading/platform_thread_win.cc
+build $o/base/threading/thread_local_storage_win.o : cxx $s/base/threading/thread_local_storage_win.cc
+build $o/base/timer/hi_res_timer_manager_win.o : cxx $s/base/timer/hi_res_timer_manager_win.cc
+build $o/base/win/access_control_list.o : cxx $s/base/win/access_control_list.cc
+build $o/base/win/access_token.o : cxx $s/base/win/access_token.cc
+build $o/base/win/atl_throw.o : cxx $s/base/win/atl_throw.cc
+build $o/base/win/com_init_balancer.o : cxx $s/base/win/com_init_balancer.cc
+build $o/base/win/com_init_check_hook.o : cxx $s/base/win/com_init_check_hook.cc
+build $o/base/win/com_init_util.o : cxx $s/base/win/com_init_util.cc
+build $o/base/win/core_winrt_util.o : cxx $s/base/win/core_winrt_util.cc
+build $o/base/win/dark_mode_support.o : cxx $s/base/win/dark_mode_support.cc
+build $o/base/win/default_apps_util.o : cxx $s/base/win/default_apps_util.cc
+build $o/base/win/embedded_i18n/language_selector.o : cxx $s/base/win/embedded_i18n/language_selector.cc
+build $o/base/win/enum_variant.o : cxx $s/base/win/enum_variant.cc
+build $o/base/win/event_trace_controller.o : cxx $s/base/win/event_trace_controller.cc
+build $o/base/win/event_trace_provider.o : cxx $s/base/win/event_trace_provider.cc
+build $o/base/win/hstring_reference.o : cxx $s/base/win/hstring_reference.cc
+build $o/base/win/i18n.o : cxx $s/base/win/i18n.cc
+build $o/base/win/iat_patch_function.o : cxx $s/base/win/iat_patch_function.cc
+build $o/base/win/message_window.o : cxx $s/base/win/message_window.cc
+build $o/base/win/nt_status.o : cxx $s/base/win/nt_status.cc
+build $o/base/win/object_watcher.o : cxx $s/base/win/object_watcher.cc
+build $o/base/win/patch_util.o : cxx $s/base/win/patch_util.cc
+build $o/base/win/pe_image_reader.o : cxx $s/base/win/pe_image_reader.cc
+build $o/base/win/process_startup_helper.o : cxx $s/base/win/process_startup_helper.cc
+build $o/base/win/resource_exhaustion.o : cxx $s/base/win/resource_exhaustion.cc
+build $o/base/win/resource_util.o : cxx $s/base/win/resource_util.cc
+build $o/base/win/scoped_bstr.o : cxx $s/base/win/scoped_bstr.cc
+build $o/base/win/scoped_com_initializer.o : cxx $s/base/win/scoped_com_initializer.cc
+build $o/base/win/scoped_handle.o : cxx $s/base/win/scoped_handle.cc
+build $o/base/win/scoped_process_information.o : cxx $s/base/win/scoped_process_information.cc
+build $o/base/win/scoped_variant.o : cxx $s/base/win/scoped_variant.cc
+build $o/base/win/scoped_winrt_initializer.o : cxx $s/base/win/scoped_winrt_initializer.cc
+build $o/base/win/security_descriptor.o : cxx $s/base/win/security_descriptor.cc
+build $o/base/win/security_util.o : cxx $s/base/win/security_util.cc
+build $o/base/win/shortcut.o : cxx $s/base/win/shortcut.cc
+build $o/base/win/sid.o : cxx $s/base/win/sid.cc
+build $o/base/win/startup_information.o : cxx $s/base/win/startup_information.cc
+build $o/base/win/variant_vector.o : cxx $s/base/win/variant_vector.cc
+build $o/base/win/vector.o : cxx $s/base/win/vector.cc
+build $o/base/win/windows_version.o : cxx $s/base/win/windows_version.cc
+build $o/base/win/winrt_storage_util.o : cxx $s/base/win/winrt_storage_util.cc
+build $o/base/win/wmi.o : cxx $s/base/win/wmi.cc
+build $o/base/win/static_constants.o : cxx $s/base/win/static_constants.cc
+build $o/base/win/wrapped_window_proc.o : cxx $s/base/win/wrapped_window_proc.cc
+build $o/base/win/pe_image.o : cxx $s/base/win/pe_image.cc
+build $o/base/files/file_path_watcher.o : cxx $s/base/files/file_path_watcher.cc
+build $o/base/sync_socket.o : cxx $s/base/sync_socket.cc
+build $o/base/third_party/double_conversion/double-conversion/bignum-dtoa.o : cxx $s/base/third_party/double_conversion//double-conversion/bignum-dtoa.cc
+build $o/base/third_party/double_conversion/double-conversion/bignum.o : cxx $s/base/third_party/double_conversion//double-conversion/bignum.cc
+build $o/base/third_party/double_conversion/double-conversion/cached-powers.o : cxx $s/base/third_party/double_conversion//double-conversion/cached-powers.cc
+build $o/base/third_party/double_conversion/double-conversion/double-to-string.o : cxx $s/base/third_party/double_conversion//double-conversion/double-to-string.cc
+build $o/base/third_party/double_conversion/double-conversion/fast-dtoa.o : cxx $s/base/third_party/double_conversion//double-conversion/fast-dtoa.cc
+build $o/base/third_party/double_conversion/double-conversion/fixed-dtoa.o : cxx $s/base/third_party/double_conversion//double-conversion/fixed-dtoa.cc
+build $o/base/third_party/double_conversion/double-conversion/string-to-double.o : cxx $s/base/third_party/double_conversion//double-conversion/string-to-double.cc
+build $o/base/third_party/double_conversion/double-conversion/strtod.o : cxx $s/base/third_party/double_conversion//double-conversion/strtod.cc
+
+
+
+build $lib/cr.lib : ar $
+  $o/cr.o $
+  $o/base/allocator/allocator_extension.o $
+  $o/base/allocator/dispatcher/dispatcher.o $
+  $o/base/allocator/dispatcher/internal/dispatch_data.o $
+  $o/base/allocator/dispatcher/reentry_guard.o $
+  $o/base/allocator/dispatcher/tls.o $
+  $o/base/allocator/partition_allocator/address_pool_manager.o $
+  $o/base/allocator/partition_allocator/address_pool_manager_bitmap.o $
+  $o/base/allocator/partition_allocator/address_space_randomization.o $
+  $o/base/allocator/partition_allocator/allocation_guard.o $
+  $o/base/allocator/partition_allocator/compressed_pointer.o $
+  $o/base/allocator/partition_allocator/dangling_raw_ptr_checks.o $
+  $o/base/allocator/partition_allocator/gwp_asan_support.o $
+  $o/base/allocator/partition_allocator/memory_reclaimer.o $
+  $o/base/allocator/partition_allocator/oom.o $
+  $o/base/allocator/partition_allocator/oom_callback.o $
+  $o/base/allocator/partition_allocator/page_allocator.o $
+  $o/base/allocator/partition_allocator/partition_address_space.o $
+  $o/base/allocator/partition_allocator/partition_alloc.o $
+  $o/base/allocator/partition_allocator/partition_alloc_hooks.o $
+  $o/base/allocator/partition_allocator/partition_bucket.o $
+  $o/base/allocator/partition_allocator/partition_dcheck_helper.o $
+  $o/base/allocator/partition_allocator/partition_freelist_entry.o $
+  $o/base/allocator/partition_allocator/partition_oom.o $
+  $o/base/allocator/partition_allocator/partition_page.o $
+  $o/base/allocator/partition_allocator/partition_root.o $
+  $o/base/allocator/partition_allocator/partition_stats.o $
+  $o/base/allocator/partition_allocator/random.o $
+  $o/base/allocator/partition_allocator/reservation_offset_table.o $
+  $o/base/allocator/partition_allocator/spinning_mutex.o $
+  $o/base/allocator/partition_allocator/tagging.o $
+  $o/base/allocator/partition_allocator/thread_cache.o $
+  $o/base/allocator/partition_allocator/thread_isolation/pkey.o $
+  $o/base/allocator/partition_allocator/thread_isolation/thread_isolation.o $
+  $o/base/allocator/partition_allocator/partition_alloc_base/check.o $
+  $o/base/allocator/partition_allocator/partition_alloc_base/cpu.o $
+  $o/base/allocator/partition_allocator/partition_alloc_base/debug/alias.o $
+  $o/base/allocator/partition_allocator/partition_alloc_base/debug/stack_trace.o $
+  $o/base/allocator/partition_allocator/partition_alloc_base/log_message.o $
+  $o/base/allocator/partition_allocator/partition_alloc_base/logging.o $
+  $o/base/allocator/partition_allocator/partition_alloc_base/memory/ref_counted.o $
+  $o/base/allocator/partition_allocator/partition_alloc_base/rand_util.o $
+  $o/base/allocator/partition_allocator/partition_alloc_base/strings/cstring_builder.o $
+  $o/base/allocator/partition_allocator/partition_alloc_base/strings/safe_sprintf.o $
+  $o/base/allocator/partition_allocator/partition_alloc_base/strings/string_util.o $
+  $o/base/allocator/partition_allocator/partition_alloc_base/strings/stringprintf.o $
+  $o/base/allocator/partition_allocator/partition_alloc_base/threading/platform_thread.o $
+  $o/base/allocator/partition_allocator/partition_alloc_base/time/time.o $
+  $o/base/allocator/partition_allocator/partition_alloc_base/time/time_override.o $
+  $o/base/allocator/partition_allocator/partition_alloc_base/debug/stack_trace_win.o $
+  $o/base/allocator/partition_allocator/partition_alloc_base/memory/page_size_win.o $
+  $o/base/allocator/partition_allocator/partition_alloc_base/process/process_handle_win.o $
+  $o/base/allocator/partition_allocator/partition_alloc_base/rand_util_win.o $
+  $o/base/allocator/partition_allocator/partition_alloc_base/scoped_clear_last_error_win.o $
+  $o/base/allocator/partition_allocator/partition_alloc_base/threading/platform_thread_win.o $
+  $o/base/allocator/partition_allocator/partition_alloc_base/time/time_win.o $
+  $o/base/at_exit.o $
+  $o/base/barrier_closure.o $
+  $o/base/base64.o $
+  $o/base/base64url.o $
+  $o/base/big_endian.o $
+  $o/base/callback_list.o $
+  $o/base/check.o $
+  $o/base/check_is_test.o $
+  $o/base/check_op.o $
+  $o/base/command_line.o $
+  $o/base/containers/flat_tree.o $
+  $o/base/containers/intrusive_heap.o $
+  $o/base/containers/linked_list.o $
+  $o/base/cpu_reduction_experiment.o $
+  $o/base/debug/alias.o $
+  $o/base/debug/asan_invalid_access.o $
+  $o/base/debug/asan_service.o $
+  $o/base/debug/buffered_dwarf_reader.o $
+  $o/base/debug/debugger.o $
+  $o/base/debug/dump_without_crashing.o $
+  $o/base/debug/dwarf_line_no.o $
+  $o/base/debug/profiler.o $
+  $o/base/debug/task_trace.o $
+  $o/base/environment.o $
+  $o/base/feature_list.o $
+  $o/base/features.o $
+  $o/base/files/file.o $
+  $o/base/files/file_path.o $
+  $o/base/files/file_tracing.o $
+  $o/base/files/memory_mapped_file.o $
+  $o/base/files/safe_base_name.o $
+  $o/base/files/scoped_file.o $
+  $o/base/functional/callback_helpers.o $
+  $o/base/functional/callback_internal.o $
+  $o/base/hash/legacy_hash.o $
+  $o/base/json/json_parser.o $
+  $o/base/json/json_reader.o $
+  $o/base/json/json_string_value_serializer.o $
+  $o/base/json/json_value_converter.o $
+  $o/base/json/json_writer.o $
+  $o/base/json/string_escape.o $
+  $o/base/json/values_util.o $
+  $o/base/lazy_instance_helpers.o $
+  $o/base/location.o $
+  $o/base/logging.o $
+  $o/base/memory/aligned_memory.o $
+  $o/base/memory/memory_pressure_listener.o $
+  $o/base/memory/memory_pressure_monitor.o $
+  $o/base/memory/nonscannable_memory.o $
+  $o/base/memory/platform_shared_memory_handle.o $
+  $o/base/memory/platform_shared_memory_region.o $
+  $o/base/memory/raw_ptr_asan_bound_arg_tracker.o $
+  $o/base/memory/raw_ptr_asan_hooks.o $
+  $o/base/memory/raw_ptr_asan_service.o $
+  $o/base/memory/read_only_shared_memory_region.o $
+  $o/base/memory/ref_counted.o $
+  $o/base/memory/ref_counted_memory.o $
+  $o/base/memory/shared_memory_mapper.o $
+  $o/base/memory/shared_memory_mapping.o $
+  $o/base/memory/shared_memory_security_policy.o $
+  $o/base/memory/shared_memory_tracker.o $
+  $o/base/memory/unsafe_shared_memory_pool.o $
+  $o/base/memory/unsafe_shared_memory_region.o $
+  $o/base/memory/weak_ptr.o $
+  $o/base/memory/writable_shared_memory_region.o $
+  $o/base/message_loop/message_pump.o $
+  $o/base/message_loop/message_pump_default.o $
+  $o/base/message_loop/work_id_provider.o $
+  $o/base/metrics/bucket_ranges.o $
+  $o/base/metrics/crc32.o $
+  $o/base/metrics/dummy_histogram.o $
+  $o/base/metrics/field_trial.o $
+  $o/base/metrics/field_trial_list_including_low_anonymity.o $
+  $o/base/metrics/field_trial_param_associator.o $
+  $o/base/metrics/field_trial_params.o $
+  $o/base/metrics/histogram.o $
+  $o/base/metrics/histogram_base.o $
+  $o/base/metrics/histogram_delta_serialization.o $
+  $o/base/metrics/histogram_functions.o $
+  $o/base/metrics/histogram_samples.o $
+  $o/base/metrics/histogram_shared_memory.o $
+  $o/base/metrics/histogram_snapshot_manager.o $
+  $o/base/metrics/metrics_hashes.o $
+  $o/base/metrics/persistent_histogram_allocator.o $
+  $o/base/metrics/persistent_memory_allocator.o $
+  $o/base/metrics/persistent_sample_map.o $
+  $o/base/metrics/ranges_manager.o $
+  $o/base/metrics/sample_map.o $
+  $o/base/metrics/sample_vector.o $
+  $o/base/metrics/single_sample_metrics.o $
+  $o/base/metrics/sparse_histogram.o $
+  $o/base/metrics/statistics_recorder.o $
+  $o/base/metrics/user_metrics.o $
+  $o/base/observer_list_internal.o $
+  $o/base/observer_list_threadsafe.o $
+  $o/base/observer_list_types.o $
+  $o/base/one_shot_event.o $
+  $o/base/pending_task.o $
+  $o/base/pickle.o $
+  $o/base/base_switches.o $
+  $o/base/power_monitor/battery_level_provider.o $
+  $o/base/power_monitor/battery_state_sampler.o $
+  $o/base/power_monitor/moving_average.o $
+  $o/base/power_monitor/power_monitor.o $
+  $o/base/power_monitor/power_monitor_device_source.o $
+  $o/base/power_monitor/power_monitor_features.o $
+  $o/base/power_monitor/power_monitor_source.o $
+  $o/base/power_monitor/sampling_event_source.o $
+  $o/base/power_monitor/timer_sampling_event_source.o $
+  $o/base/process/current_process.o $
+  $o/base/process/environment_internal.o $
+  $o/base/process/process_handle.o $
+  $o/base/profiler/frame.o $
+  $o/base/profiler/metadata_recorder.o $
+  $o/base/profiler/module_cache.o $
+  $o/base/profiler/sample_metadata.o $
+  $o/base/profiler/sampling_profiler_thread_token.o $
+  $o/base/profiler/stack_buffer.o $
+  $o/base/profiler/stack_copier.o $
+  $o/base/profiler/stack_copier_suspend.o $
+  $o/base/profiler/stack_sampler.o $
+  $o/base/profiler/stack_sampling_profiler.o $
+  $o/base/profiler/unwinder.o $
+  $o/base/rand_util.o $
+  $o/base/run_loop.o $
+  $o/base/sampling_heap_profiler/lock_free_address_hash_set.o $
+  $o/base/sampling_heap_profiler/poisson_allocation_sampler.o $
+  $o/base/sampling_heap_profiler/sampling_heap_profiler.o $
+  $o/base/scoped_add_feature_flags.o $
+  $o/base/scoped_environment_variable_override.o $
+  $o/base/sequence_checker.o $
+  $o/base/sequence_checker_impl.o $
+  $o/base/sequence_token.o $
+  $o/base/strings/abseil_string_number_conversions.o $
+  $o/base/strings/escape.o $
+  $o/base/strings/latin1_string_conversions.o $
+  $o/base/strings/pattern.o $
+  $o/base/strings/safe_sprintf.o $
+  $o/base/strings/strcat.o $
+  $o/base/strings/string_number_conversions.o $
+  $o/base/strings/string_split.o $
+  $o/base/strings/string_util.o $
+  $o/base/strings/string_util_constants.o $
+  $o/base/strings/stringprintf.o $
+  $o/base/strings/utf_offset_string_conversions.o $
+  $o/base/strings/utf_ostream_operators.o $
+  $o/base/strings/utf_string_conversion_utils.o $
+  $o/base/strings/utf_string_conversions.o $
+  $o/base/substring_set_matcher/matcher_string_pattern.o $
+  $o/base/substring_set_matcher/substring_set_matcher.o $
+  $o/base/supports_user_data.o $
+  $o/base/synchronization/atomic_flag.o $
+  $o/base/synchronization/lock.o $
+  $o/base/synchronization/waitable_event.o $
+  $o/base/syslog_logging.o $
+  $o/base/system/system_monitor.o $
+  $o/base/task/cancelable_task_tracker.o $
+  $o/base/task/common/checked_lock_impl.o $
+  $o/base/task/common/lazy_now.o $
+  $o/base/task/common/operations_controller.o $
+  $o/base/task/common/scoped_defer_task_posting.o $
+  $o/base/task/common/task_annotator.o $
+  $o/base/task/current_thread.o $
+  $o/base/task/default_delayed_task_handle_delegate.o $
+  $o/base/task/deferred_sequenced_task_runner.o $
+  $o/base/task/delayed_task_handle.o $
+  $o/base/task/lazy_thread_pool_task_runner.o $
+  $o/base/task/post_job.o $
+  $o/base/task/scoped_set_task_priority_for_current_thread.o $
+  $o/base/task/sequence_manager/associated_thread_id.o $
+  $o/base/task/sequence_manager/atomic_flag_set.o $
+  $o/base/task/sequence_manager/delayed_task_handle_delegate.o $
+  $o/base/task/sequence_manager/enqueue_order_generator.o $
+  $o/base/task/sequence_manager/fence.o $
+  $o/base/task/sequence_manager/sequence_manager.o $
+  $o/base/task/sequence_manager/sequence_manager_impl.o $
+  $o/base/task/sequence_manager/sequenced_task_source.o $
+  $o/base/task/sequence_manager/task_order.o $
+  $o/base/task/sequence_manager/task_queue.o $
+  $o/base/task/sequence_manager/task_queue_impl.o $
+  $o/base/task/sequence_manager/task_queue_selector.o $
+  $o/base/task/sequence_manager/tasks.o $
+  $o/base/task/sequence_manager/thread_controller.o $
+  $o/base/task/sequence_manager/thread_controller_impl.o $
+  $o/base/task/sequence_manager/thread_controller_power_monitor.o $
+  $o/base/task/sequence_manager/thread_controller_with_message_pump_impl.o $
+  $o/base/task/sequence_manager/time_domain.o $
+  $o/base/task/sequence_manager/wake_up_queue.o $
+  $o/base/task/sequence_manager/work_deduplicator.o $
+  $o/base/task/sequence_manager/work_queue.o $
+  $o/base/task/sequence_manager/work_queue_sets.o $
+  $o/base/task/sequenced_task_runner.o $
+  $o/base/task/single_thread_task_executor.o $
+  $o/base/task/single_thread_task_runner.o $
+  $o/base/task/task_features.o $
+  $o/base/task/task_runner.o $
+  $o/base/task/task_traits.o $
+  $o/base/task/thread_pool.o $
+  $o/base/task/thread_pool/delayed_priority_queue.o $
+  $o/base/task/thread_pool/delayed_task_manager.o $
+  $o/base/task/thread_pool/environment_config.o $
+  $o/base/task/thread_pool/job_task_source.o $
+  $o/base/task/thread_pool/pooled_parallel_task_runner.o $
+  $o/base/task/thread_pool/pooled_sequenced_task_runner.o $
+  $o/base/task/thread_pool/pooled_single_thread_task_runner_manager.o $
+  $o/base/task/thread_pool/pooled_task_runner_delegate.o $
+  $o/base/task/thread_pool/priority_queue.o $
+  $o/base/task/thread_pool/sequence.o $
+  $o/base/task/thread_pool/service_thread.o $
+  $o/base/task/thread_pool/task.o $
+  $o/base/task/thread_pool/task_source.o $
+  $o/base/task/thread_pool/task_source_sort_key.o $
+  $o/base/task/thread_pool/task_tracker.o $
+  $o/base/task/thread_pool/thread_group.o $
+  $o/base/task/thread_pool/thread_group_impl.o $
+  $o/base/task/thread_pool/thread_pool_impl.o $
+  $o/base/task/thread_pool/thread_pool_instance.o $
+  $o/base/task/thread_pool/worker_thread.o $
+  $o/base/task/thread_pool/worker_thread_set.o $
+  $o/base/third_party/cityhash/city.o $
+  $o/base/third_party/cityhash_v103/src/city_v103.o $
+  $o/base/third_party/nspr/prtime.o $
+  $o/base/threading/hang_watcher.o $
+  $o/base/threading/platform_thread.o $
+  $o/base/threading/platform_thread_ref.o $
+  $o/base/threading/post_task_and_reply_impl.o $
+  $o/base/threading/scoped_blocking_call.o $
+  $o/base/threading/scoped_blocking_call_internal.o $
+  $o/base/threading/scoped_thread_priority.o $
+  $o/base/threading/sequence_local_storage_map.o $
+  $o/base/threading/sequence_local_storage_slot.o $
+  $o/base/threading/simple_thread.o $
+  $o/base/threading/thread.o $
+  $o/base/threading/thread_checker.o $
+  $o/base/threading/thread_checker_impl.o $
+  $o/base/threading/thread_collision_warner.o $
+  $o/base/threading/thread_id_name_manager.o $
+  $o/base/threading/thread_local_storage.o $
+  $o/base/threading/thread_restrictions.o $
+  $o/base/threading/watchdog.o $
+  $o/base/time/clock.o $
+  $o/base/time/default_clock.o $
+  $o/base/time/default_tick_clock.o $
+  $o/base/time/tick_clock.o $
+  $o/base/time/time.o $
+  $o/base/time/time_delta_from_string.o $
+  $o/base/time/time_override.o $
+  $o/base/time/time_to_iso8601.o $
+  $o/base/timer/elapsed_timer.o $
+  $o/base/timer/lap_timer.o $
+  $o/base/timer/timer.o $
+  $o/base/timer/wall_clock_timer.o $
+  $o/base/token.o $
+  $o/base/trace_event/heap_profiler_allocation_context.o $
+  $o/base/trace_event/heap_profiler_allocation_context_tracker.o $
+  $o/base/trace_event/memory_allocator_dump_guid.o $
+  $o/base/trace_event/trace_id_helper.o $
+  $o/base/trace_event/trace_event_stub.o $
+  $o/base/unguessable_token.o $
+  $o/base/uuid.o $
+  $o/base/value_iterators.o $
+  $o/base/values.o $
+  $o/base/version.o $
+  $o/base/vlog.o $
+  $o/base/hash/md5_boringssl.o $
+  $o/base/hash/sha1_boringssl.o $
+  $o/base/base_paths.o $
+  $o/base/cpu.o $
+  $o/base/debug/crash_logging.o $
+  $o/base/debug/stack_trace.o $
+  $o/base/files/file_enumerator.o $
+  $o/base/files/file_proxy.o $
+  $o/base/files/file_util.o $
+  $o/base/files/important_file_writer.o $
+  $o/base/files/important_file_writer_cleaner.o $
+  $o/base/files/scoped_temp_dir.o $
+  $o/base/json/json_file_value_serializer.o $
+  $o/base/memory/discardable_memory.o $
+  $o/base/memory/discardable_memory_allocator.o $
+  $o/base/metrics/persistent_histogram_storage.o $
+  $o/base/native_library.o $
+  $o/base/path_service.o $
+  $o/base/process/process_metrics.o $
+  $o/base/scoped_native_library.o $
+  $o/base/system/sys_info.o $
+  $o/base/task/thread_pool/initialization_util.o $
+  $o/base/base_paths_win.o $
+  $o/base/memory/discardable_shared_memory.o $
+  $o/base/process/kill.o $
+  $o/base/process/launch.o $
+  $o/base/process/memory.o $
+  $o/base/process/process_iterator.o $
+  $o/base/allocator/partition_alloc_features.o $
+  $o/base/allocator/partition_alloc_support.o $
+  $o/base/debug/debugger_win.o $
+  $o/base/debug/gdi_debug_util_win.o $
+  $o/base/debug/handle_hooks_win.o $
+  $o/base/debug/invalid_access_win.o $
+  $o/base/debug/stack_trace_win.o $
+  $o/base/enterprise_util.o $
+  $o/base/enterprise_util_win.o $
+  $o/base/file_version_info_win.o $
+  $o/base/files/file_enumerator_win.o $
+  $o/base/files/file_path_watcher_win.o $
+  $o/base/files/file_util_win.o $
+  $o/base/files/file_win.o $
+  $o/base/files/memory_mapped_file_win.o $
+  $o/base/logging_win.o $
+  $o/base/memory/page_size_win.o $
+  $o/base/memory/platform_shared_memory_mapper_win.o $
+  $o/base/memory/platform_shared_memory_region_win.o $
+  $o/base/message_loop/message_pump_win.o $
+  $o/base/native_library_win.o $
+  $o/base/power_monitor/battery_level_provider_win.o $
+  $o/base/power_monitor/power_monitor_device_source_win.o $
+  $o/base/power_monitor/speed_limit_observer_win.o $
+  $o/base/process/kill_win.o $
+  $o/base/process/launch_win.o $
+  $o/base/process/memory_win.o $
+  $o/base/process/process_handle_win.o $
+  $o/base/process/process_info_win.o $
+  $o/base/process/process_iterator_win.o $
+  $o/base/process/process_metrics_win.o $
+  $o/base/process/process_win.o $
+  $o/base/profiler/module_cache_win.o $
+  $o/base/profiler/native_unwinder_win.o $
+  $o/base/profiler/stack_sampler_win.o $
+  $o/base/profiler/suspendable_thread_delegate_win.o $
+  $o/base/profiler/win32_stack_frame_unwinder.o $
+  $o/base/rand_util_win.o $
+  $o/base/scoped_clear_last_error_win.o $
+  $o/base/strings/strcat_win.o $
+  $o/base/strings/string_number_conversions_win.o $
+  $o/base/strings/string_split_win.o $
+  $o/base/strings/string_util_win.o $
+  $o/base/strings/sys_string_conversions_win.o $
+  $o/base/sync_socket_win.o $
+  $o/base/synchronization/condition_variable_win.o $
+  $o/base/synchronization/lock_impl_win.o $
+  $o/base/synchronization/waitable_event_watcher_win.o $
+  $o/base/synchronization/waitable_event_win.o $
+  $o/base/system/sys_info_win.o $
+  $o/base/threading/platform_thread_win.o $
+  $o/base/threading/thread_local_storage_win.o $
+  $o/base/timer/hi_res_timer_manager_win.o $
+  $o/base/win/access_control_list.o $
+  $o/base/win/access_token.o $
+  $o/base/win/atl_throw.o $
+  $o/base/win/com_init_balancer.o $
+  $o/base/win/com_init_check_hook.o $
+  $o/base/win/com_init_util.o $
+  $o/base/win/core_winrt_util.o $
+  $o/base/win/dark_mode_support.o $
+  $o/base/win/default_apps_util.o $
+  $o/base/win/embedded_i18n/language_selector.o $
+  $o/base/win/enum_variant.o $
+  $o/base/win/event_trace_controller.o $
+  $o/base/win/event_trace_provider.o $
+  $o/base/win/hstring_reference.o $
+  $o/base/win/i18n.o $
+  $o/base/win/iat_patch_function.o $
+  $o/base/win/message_window.o $
+  $o/base/win/nt_status.o $
+  $o/base/win/object_watcher.o $
+  $o/base/win/patch_util.o $
+  $o/base/win/pe_image_reader.o $
+  $o/base/win/process_startup_helper.o $
+  $o/base/win/resource_exhaustion.o $
+  $o/base/win/resource_util.o $
+  $o/base/win/scoped_bstr.o $
+  $o/base/win/scoped_com_initializer.o $
+  $o/base/win/scoped_handle.o $
+  $o/base/win/scoped_process_information.o $
+  $o/base/win/scoped_variant.o $
+  $o/base/win/scoped_winrt_initializer.o $
+  $o/base/win/security_descriptor.o $
+  $o/base/win/security_util.o $
+  $o/base/win/shortcut.o $
+  $o/base/win/sid.o $
+  $o/base/win/startup_information.o $
+  $o/base/win/variant_vector.o $
+  $o/base/win/vector.o $
+  $o/base/win/windows_version.o $
+  $o/base/win/winrt_storage_util.o $
+  $o/base/win/wmi.o $
+  $o/base/win/static_constants.o $
+  $o/base/win/wrapped_window_proc.o $
+  $o/base/win/pe_image.o $
+  $o/base/files/file_path_watcher.o $
+  $o/base/sync_socket.o $
+  $o/base/third_party/double_conversion/double-conversion/bignum-dtoa.o $
+  $o/base/third_party/double_conversion/double-conversion/bignum.o $
+  $o/base/third_party/double_conversion/double-conversion/cached-powers.o $
+  $o/base/third_party/double_conversion/double-conversion/double-to-string.o $
+  $o/base/third_party/double_conversion/double-conversion/fast-dtoa.o $
+  $o/base/third_party/double_conversion/double-conversion/fixed-dtoa.o $
+  $o/base/third_party/double_conversion/double-conversion/string-to-double.o $
+  $o/base/third_party/double_conversion/double-conversion/strtod.o
