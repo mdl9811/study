@@ -1,23 +1,19 @@
 #include "src/encoder/aac_encoder.h"
 #include <functional>
-#include "src/base/logging.h"
+#include "src/base/log.h"
 #include "third_party/aac/libAACenc/include/aacenc_lib.h"
 
 extern "C" {
 #include "third_party/aac/libAACenc/include/aacenc_lib.h"
 }
 
-#if BUILDFLAG(IS_WIN)
-#include "src/base/thread/thread_win.h"
-#endif
-
 namespace {
-#define CHECK_AAC(fun, result)                                 \
-  h = fun;                                                     \
-  if ((h) != AACENC_OK) {                                      \
-    Release();                                                 \
-    LOG(ERROR) << result << " error coed: " << h << std::endl; \
-    return false;                                              \
+#define CHECK_AAC(fun, result)                    \
+  h = fun;                                        \
+  if ((h) != AACENC_OK) {                         \
+    Reset();                                      \
+    LOG(ERROR) << result << " error coed: " << h; \
+    return false;                                 \
   }  // namespace
 
 }  // namespace
@@ -29,8 +25,7 @@ const int kOutputBufferSize = 1024 * 16;
 AACEcoder::AACEcoder(api::EncodeAudioSink* sink, uint32_t id)
     : sink_(sink),
       session_id_(id),
-      output_buffer_(new char[kOutputBufferSize]),
-      run_loop_(std::make_unique<RunLoop>("__ENCODER_AUDIO__")) {}
+      output_buffer_(new char[kOutputBufferSize]) {}
 AACEcoder::~AACEcoder() = default;
 
 bool AACEcoder::Initialize(api::AudioFormat* format,
@@ -90,35 +85,35 @@ bool AACEcoder::Initialize(api::AudioFormat* format,
   AACENC_InfoStruct aac_info;
   CHECK_AAC(aacEncInfo(aac_handle_, &aac_info), "aacEncInfo failed");
 
-  frame_len_ = frame_len;
-
   init_done_ = true;
   audio_format_ = *format;
-  run_loop_->Start();
   return true;
+}
+
+void AACEcoder::Reset() {
+  aac_handle_ ? aacEncClose(&aac_handle_) : AACENC_ERROR();
+  aac_handle_ = nullptr;
 }
 
 void AACEcoder::Release() {
-  aac_handle_ ? aacEncClose(&aac_handle_) : AACENC_ERROR();
-
-  aac_handle_ = nullptr;
   if (!init_done_)
     return;
-  run_loop_->Stop();
+  Reset();
   init_done_ = false;
 }
 
-bool AACEcoder::EncodeAudio(const char* data, size_t size) {
+bool AACEcoder::EncodeAudio(std::unique_ptr<base::Buffer> buffer) {
   if (!init_done_)
     return false;
 
-  auto buffer = base::IOBuffer::New(data, size, base::IOBuffer::AUDIO_ENCODED);
-  run_loop_->PostTask(
-      std::bind(&AACEcoder::HandleEncode, this, std::move(buffer)));
+  if (!buffer || (buffer->type() != base::Buffer::AUDIO_ENCODED))
+    return false;
+
+  HandleEncode(std::move(buffer));
   return true;
 }
 
-void AACEcoder::HandleEncode(scoped_refptr<base::IOBuffer> buffer) {
+void AACEcoder::HandleEncode(std::unique_ptr<base::Buffer> buffer) {
   if (!init_done_)
     return;
   struct {
@@ -137,11 +132,11 @@ void AACEcoder::HandleEncode(scoped_refptr<base::IOBuffer> buffer) {
   int out_size = kOutputBufferSize;
   int out_elem_size = 1;
 
-  char* input_ptr = buffer->data();
+  const char* input_ptr = buffer->data();
 
   var.in_args.numInSamples = buffer->size() / in_elem_size;
   var.in_buf.numBufs = 1;
-  var.in_buf.bufs = reinterpret_cast<void**>(&input_ptr);
+  var.in_buf.bufs = reinterpret_cast<void**>(const_cast<char**>(&input_ptr));
   var.in_buf.bufferIdentifiers = &in_identifier;
   var.in_buf.bufSizes = &in_size;
   var.in_buf.bufElSizes = &in_elem_size;

@@ -8,17 +8,12 @@
 #include <memory>
 #include "src/api/audio/audio_format.h"
 #include "src/api/audio/capture_sink.h"
-#include "src/base/thread/thread_runloop.h"
 #include "src/config/config_site.h"
 
 #if BUILDFLAG(IS_WIN)
-namespace _LIB_NAMESPACE::base {
-class ThreadWin;
-}
-
 #include <windows.h>
+
 #include <mmsystem.h>
-using RunLoop = _LIB_NAMESPACE::base::ThreadWin;
 
 class IMMDeviceEnumerator;
 class IMMDeviceCollection;
@@ -40,12 +35,13 @@ class AudioRecord {
 
   bool Initialize(const api::AudioFormat* format);
 
-  void Relase();
+  void Release();
 
   void GetAudioFormat(api::AudioFormat* format);
 
- private:
   void HandleReader();
+
+ private:
   void HandleAudioBuffer();
   void Reset();
 
@@ -62,7 +58,6 @@ class AudioRecord {
 
   api::CaptureAudioSink* sink_ = nullptr;
 
-  std::unique_ptr<RunLoop> run_loop_;
   void* event_handle_ = nullptr;
   bool init_done_ = false;
   bool start_capture_ = false;

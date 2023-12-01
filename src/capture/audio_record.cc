@@ -1,27 +1,21 @@
 #include "src/capture/audio_record.h"
-#include "src/base/logging.h"
+#include "src/base/log.h"
 
 #if BUILDFLAG(IS_WIN)
 #include <Audioclient.h>
 #include <Mmdeviceapi.h>
-#include "src/base/thread/thread_win.h"
 #endif
-
-#if BUILDFLAG(IS_POSIX)
-#include "src/base/thread/thread_posix.h"
-#endif
-
 namespace {
 #if BUILDFLAG(IS_WIN)
 const IID kIIDIMMDeviceEnumerator = __uuidof(IMMDeviceEnumerator);
 const CLSID kCLSIDMMDeviceEnumerator = __uuidof(MMDeviceEnumerator);
 const IID kIIDIAudioClient = __uuidof(IAudioClient);
 
-#define TEST_OUT_LOG(flag, debug_val, ...)              \
-  if (flag) {                                           \
-    Reset();                                            \
-    LOG(INFO) << debug_val << __VA_ARGS__ << std::endl; \
-    return false;                                       \
+#define TEST_OUT_LOG(flag, debug_val, ...) \
+  if (flag) {                              \
+    Reset();                               \
+    LOG(INFO) << debug_val << __VA_ARGS__; \
+    return false;                          \
   }
 
 #endif
@@ -30,14 +24,11 @@ const IID kIIDIAudioClient = __uuidof(IAudioClient);
 #define REFTIMES_PER_SEC 10000000
 #define REFTIMES_PER_MILLISEC 10000
 
-const char kAudioEnventName[] = "AudioEventCallback";
-
 }  // namespace
 
 namespace _LIB_NAMESPACE::collection {
 
-AudioRecord::AudioRecord(api::CaptureAudioSink* sink)
-    : sink_(sink), run_loop_(std::make_unique<RunLoop>("__AUDIO_RECORD__")) {}
+AudioRecord::AudioRecord(api::CaptureAudioSink* sink) : sink_(sink) {}
 
 AudioRecord::~AudioRecord() = default;
 
@@ -97,8 +88,6 @@ bool AudioRecord::Initialize(const api::AudioFormat* format) {
 
   if (format)
     audio_format_ = *format;
-
-  run_loop_->Start();
   return true;
 }
 
@@ -107,7 +96,6 @@ bool AudioRecord::Start() {
     return false;
   auto hr = audio_client_->Start();
   TEST_OUT_LOG(FAILED(hr), "AudioClient Start Faild result:", hr);
-  run_loop_->PostTask(std::bind(&AudioRecord::HandleReader, this));
 
   start_capture_ = true;
   return true;
@@ -127,8 +115,7 @@ void AudioRecord::GetAudioFormat(api::AudioFormat* format) {
 }
 
 void AudioRecord::HandleReader() {
-  if (WaitForSingleObject(event_handle_, 1) != WAIT_OBJECT_0) {
-    run_loop_->PostTask(std::bind(&AudioRecord::HandleReader, this));
+  if (WaitForSingleObject(event_handle_, 0) != WAIT_OBJECT_0) {
     return;
   }
   HandleAudioBuffer();
@@ -143,8 +130,7 @@ void AudioRecord::HandleAudioBuffer() {
   UINT32 packet_size = 0;
   auto hr = iaudio_capture_client_->GetNextPacketSize(&packet_size);
   if (FAILED(hr)) {
-    LOG(ERROR) << "IAudioCaptureClient GetNextPacketSize Faild result:" << hr
-               << std::endl;
+    LOG(ERROR) << "IAudioCaptureClient GetNextPacketSize Faild result:" << hr;
     return;
   }
 
@@ -154,8 +140,7 @@ void AudioRecord::HandleAudioBuffer() {
     hr = iaudio_capture_client_->GetBuffer((BYTE**)&data, &buffer_size, &flags,
                                            NULL, NULL);
     if (FAILED(hr)) {
-      LOG(ERROR) << "IAudioCaptureClient GetBuffer Faild result:" << hr
-                 << std::endl;
+      LOG(ERROR) << "IAudioCaptureClient GetBuffer Faild result:" << hr;
       return;
     }
 
@@ -169,15 +154,13 @@ void AudioRecord::HandleAudioBuffer() {
 
     hr = iaudio_capture_client_->ReleaseBuffer(buffer_size);
     if (FAILED(hr)) {
-      LOG(ERROR) << "IAudioCaptureClient ReleaseBuffer Faild result:" << hr
-                 << std::endl;
+      LOG(ERROR) << "IAudioCaptureClient ReleaseBuffer Faild result:" << hr;
       return;
     }
 
     hr = iaudio_capture_client_->GetNextPacketSize(&packet_size);
     if (FAILED(hr)) {
-      LOG(ERROR) << "IAudioCaptureClient GetNextPacketSize Faild result:" << hr
-                 << std::endl;
+      LOG(ERROR) << "IAudioCaptureClient GetNextPacketSize Faild result:" << hr;
       return;
     }
 
@@ -185,7 +168,6 @@ void AudioRecord::HandleAudioBuffer() {
   }
 
 #endif
-  run_loop_->PostTask(std::bind(&AudioRecord::HandleReader, this));
   return;
 }
 
@@ -203,11 +185,10 @@ void AudioRecord::Reset() {
   event_handle_ = nullptr;
 }
 
-void AudioRecord::Relase() {
+void AudioRecord::Release() {
   if (!init_done_)
     return;
   init_done_ = false;
-  run_loop_->Stop();
   Reset();
 }
 

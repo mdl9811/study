@@ -3,7 +3,7 @@
 #
 
 OPT_CFLAGS = $ARCH_CFLAGS $TARGET_CFLAGS $LTO -MTd -DDEBUG -D_DEBUG $
-  -fmsc-version=1934 -DWIN32 -DWIN32_LEAN_AND_MEAN $
+  -fmsc-version=1934 -DWIN32 -DWIN32_LEAN_AND_MEAN -D_WIN32 $
   -DUNICODE -D_UNICODE -DNOMINMAX -DWINAPI_FAMILY=WINAPI_FAMILY_DESKTOP_APP $
   -D_WINDOWS -DNTDDI_VERSION=NTDDI_WIN10_FE -D_WIN32_WINNT=_WIN32_WINNT_WIN10 $
   -DWINVER=_WIN32_WINNT_WIN10 -DPSAPI_VERSION=2 -D_ATL_NO_OPENGL -D_SECURE_ATL $
@@ -17,9 +17,9 @@ OPT_CFLAGS = $ARCH_CFLAGS $TARGET_CFLAGS $LTO -MTd -DDEBUG -D_DEBUG $
   -Wno-builtin-macro-redefined -ffile-compilation-dir=. $
   -no-canonical-prefixes -ftrivial-auto-var-init=pattern -fstrict-aliasing $
   -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare $
+  -Ithird_party/libcr -Ibuild/config/chrome/gen $
   -Ithird_party/libc++/src/include -Ithird_party/libc++ -Ithird_party/zlib $
   -Wno-pragma-pack -Wno-ignored-attributes -Wno-ignored-pragma-intrinsic /GR- $
-  -Ibuild/config/chrome/gen  -Ithird_party/libcr $
   /Z7
 
 OPT_LDFLAGS = kernel32.lib user32.lib advapi32.lib ole32.lib winmm.lib dbghelp.lib $

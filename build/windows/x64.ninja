@@ -23,9 +23,9 @@ OPT_LDFLAGS = /machine:x64 $OPT_LDFLAGS
 
 OPT_CFLAGS = $ARCH_CFLAGS $OPT_CFLAGS
 
-CR_FLAGS = -I. -Ithird_party/libc++ -Ithird_party/libc++/src/include $
+CR_FLAGS = -I. -Ithird_party/libcr -Ithird_party/libc++ $
+  -Ithird_party/libc++/src/include $
   -Ithird_party/abseil-cpp $
-  -Ithird_party/libcr $
   -Ithird_party/boringssl/src/include $
   -Ithird_party/abseil-cpp
 

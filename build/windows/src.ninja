@@ -15,7 +15,7 @@ build $o/capture/audio_record.o : cxx $s/capture/audio_record.cc
 build $bin/audio_capturetest.exe : link $
   $o/audio_capturetest.o $
   $o/capture/audio_record.o $
-  $lib/base$LIB $lib/c++$LIB $lib/cr$LIB
+  $lib/base$LIB $lib/aac$LIB $lib/c++$LIB $lib/cr$LIB $lib/absl$LIB $lib/ssl$LIB
   ldflags = /DEBUG /PDB:"$bin/audio_capturetest.pdb"
 
 #-------------------------------------------------------------------------------
@@ -33,7 +33,7 @@ build $o/aactest.o : cxx $s/aactest.cc
 build $bin/aactest.exe : link $o/aactest.o $
   $o/encoder/aac_encoder.o $
   $o/decoder/aac_decoder.o $
-  $lib/base$LIB $lib/aac$LIB $lib/c++$LIB $lib/cr$LIB
+  $lib/base$LIB $lib/aac$LIB $lib/c++$LIB $lib/cr$LIB $lib/absl$LIB $lib/ssl$LIB
   ldflags = /DEBUG /PDB:"$bin/aactest.pdb"
 
 #-------------------------------------------------------------------------------

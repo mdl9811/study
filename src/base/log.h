@@ -2,11 +2,10 @@
 // Copyright (c) 2023 mdl. All rights reserved.
 //
 
-// TODO: (mdl)
 #ifndef SRC_BASE_LOGGING_H_
 #define SRC_BASE_LOGGING_H_
-#include <iostream>
 
-#define LOG(EVENT) std::cout
+// 主要是为了 以后可以替换log
+#include "base/logging.h"
 
 #endif
