@@ -37,7 +37,7 @@ class AACTest : public study::api::EncodeAudioSink, protected base::Thread {
     format.channels = 2;         // 声道数
     format.bit_depth = 16;       // 位深
     format.sample_rate = 48000;  // 采样率
-    aac_encoder_.Initialize(&format, 64000, 23, 512);
+    aac_encoder_.Initialize(&format, 64000, 2, 1024);
   }
 
   void CleanUp() override { aac_encoder_.Release(); }

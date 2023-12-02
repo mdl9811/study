@@ -86,6 +86,11 @@ bool AACEcoder::Initialize(api::AudioFormat* format,
 
   init_done_ = true;
   audio_format_ = *format;
+
+
+  //TT_MAP_RAW 头有点特殊
+
+
   return true;
 }
 
