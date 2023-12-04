@@ -17,3 +17,5 @@ build test : phony $bin/test$EXE
 build aactest : phony $bin/aactest$EXE
 build audio_capturetest : phony $bin/audio_capturetest$EXE
 
+
+build all : phony test aactest audio_capturetest

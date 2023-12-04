@@ -6,8 +6,8 @@
 #include "base/run_loop.h"
 #include "base/threading/thread.h"
 #include "base/time/time.h"
-#include "src/api/audio/encode_sink.h"
 #include "src/base/log.h"
+#include "src/call/audio/encode_sink.h"
 #include "src/config/config_list.h"
 #include "src/decoder/aac_decoder.h"
 #include "src/encoder/aac_encoder.h"
@@ -15,7 +15,7 @@
 #include "base/at_exit.h"
 #include "base/task/single_thread_task_executor.h"
 
-class AACTest : public study::api::EncodeAudioSink, protected base::Thread {
+class AACTest : public study::call::EncodeAudioSink, protected base::Thread {
  public:
   explicit AACTest() : aac_encoder_(this, 0), base::Thread("AAC_THREAD") {
     StartWithOptions(base::Thread::Options(base::MessagePumpType::DEFAULT, 0));
@@ -33,11 +33,11 @@ class AACTest : public study::api::EncodeAudioSink, protected base::Thread {
 
  private:
   void Init() override {
-    study::api::AudioFormat format;
-    format.channels = 2;         // 声道数
-    format.bit_depth = 16;       // 位深
-    format.sample_rate = 48000;  // 采样率
-    aac_encoder_.Initialize(&format, 64000, 2, 1024);
+    study::base::AudioFormat format(study::base::AudioFormat::kEncode);
+    format.encode.channels = 2;         // 声道数
+    format.encode.bits = 16;            // 位深
+    format.encode.sample_rate = 48000;  // 采样率
+    aac_encoder_.Initialize(&format, 64000, 2, 0, 1024);
   }
 
   void CleanUp() override { aac_encoder_.Release(); }

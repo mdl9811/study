@@ -2,13 +2,13 @@
 // Copyright (c) 2023 mdl. All rights reserved.
 //
 
-#ifndef SRC_API_AUDIO_DECODE_SINK_H_
-#define SRC_API_AUDIO_DECODE_SINK_H_
+#ifndef SRC_CALL_AUDIO_DECODE_SINK_H_
+#define SRC_CALL_AUDIO_DECODE_SINK_H_
 #include <stdint.h>
 #include "src/base/buffer.h"
 #include "src/config/config_site.h"
 
-namespace _LIB_NAMESPACE::api {
+namespace _LIB_NAMESPACE::call {
 
 class DecodeAudioSink {
  public:
@@ -18,6 +18,6 @@ class DecodeAudioSink {
   virtual void OnDecodeAudio(std::unique_ptr<base::Buffer>) = 0;
 };
 
-}  // namespace _LIB_NAMESPACE::api
+}  // namespace _LIB_NAMESPACE::call
 
 #endif

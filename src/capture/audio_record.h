@@ -7,8 +7,8 @@
 
 #include <atomic>
 #include <memory>
-#include "src/api/audio/audio_format.h"
-#include "src/api/audio/capture_sink.h"
+#include "src/base/audio/audio_format.h"
+#include "src/call/audio/capture_sink.h"
 #include "src/config/config_site.h"
 
 #if BUILDFLAG(IS_WIN)
@@ -26,7 +26,7 @@ class IAudioClient;
 namespace _LIB_NAMESPACE::collection {
 class AudioRecord {
  public:
-  explicit AudioRecord(api::CaptureAudioSink* callback);
+  explicit AudioRecord(call::CaptureAudioSink* callback);
 
   AudioRecord(const AudioRecord&) = delete;
   AudioRecord& operator=(const AudioRecord&) = delete;
@@ -34,11 +34,11 @@ class AudioRecord {
   bool Start();
   void Stop();
 
-  bool Initialize(const api::AudioFormat* format);
+  bool Initialize(const base::AudioFormat* format);
 
   void Release();
 
-  void GetAudioFormat(api::AudioFormat* format);
+  void GetAudioFormat(base::AudioFormat* format);
 
   void HandleReader(uint64_t block, bool* done);
 
@@ -57,13 +57,13 @@ class AudioRecord {
   WAVEFORMATEX format_;
 #endif
 
-  api::CaptureAudioSink* sink_ = nullptr;
+  call::CaptureAudioSink* sink_ = nullptr;
 
   void* event_handle_ = nullptr;
   bool init_done_ = false;
   std::atomic_bool start_capture_ = false;
 
-  api::AudioFormat audio_format_;
+  base::AudioFormat audio_format_;
 };
 
 }  // namespace _LIB_NAMESPACE::collection

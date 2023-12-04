@@ -21,21 +21,26 @@ namespace _LIB_NAMESPACE::encoder {
 
 const int kOutputBufferSize = 1024 * 16;
 
-AACEcoder::AACEcoder(api::EncodeAudioSink* sink, uint32_t id)
+AACEcoder::AACEcoder(call::EncodeAudioSink* sink, uint32_t id)
     : sink_(sink),
       session_id_(id),
       output_buffer_(new char[kOutputBufferSize]) {}
 AACEcoder::~AACEcoder() = default;
 
-bool AACEcoder::Initialize(api::AudioFormat* format,
+bool AACEcoder::Initialize(base::AudioFormat* format,
                            uint32_t bitrate,
                            uint16_t aot,
+                           uint16_t mode,
                            uint16_t frame_len) {
   if (init_done_ || !format)
     return false;
+
+  if (format && (format->type != base::AudioFormat::kEncode))
+    return false;
   auto h = AACENC_OK;
   // 打开 aac编码器
-  CHECK_AAC(aacEncOpen(&aac_handle_, 0, format->channels), "aacEncOpen failed");
+  CHECK_AAC(aacEncOpen(&aac_handle_, 0, format->encode.channels),
+            "aacEncOpen failed");
 
   // 设置模式 lc ld
   CHECK_AAC(aacEncoder_SetParam(aac_handle_, AACENC_AOT, aot),
@@ -46,14 +51,14 @@ bool AACEcoder::Initialize(api::AudioFormat* format,
             "aacEncoder_SetParam failed");
 
   // 设置 采样率
-  CHECK_AAC(
-      aacEncoder_SetParam(aac_handle_, AACENC_SAMPLERATE, format->sample_rate),
-      "aacEncoder_SetParam failed");
+  CHECK_AAC(aacEncoder_SetParam(aac_handle_, AACENC_SAMPLERATE,
+                                format->encode.sample_rate),
+            "aacEncoder_SetParam failed");
 
   // 声道模式
-  CHECK_AAC(
-      aacEncoder_SetParam(aac_handle_, AACENC_CHANNELMODE, format->channels),
-      "aacEncoder_SetParam failed");
+  CHECK_AAC(aacEncoder_SetParam(aac_handle_, AACENC_CHANNELMODE,
+                                format->encode.channels),
+            "aacEncoder_SetParam failed");
 
   // 设置 pcm数据格式
   CHECK_AAC(aacEncoder_SetParam(aac_handle_, AACENC_CHANNELORDER, 1),
@@ -64,6 +69,7 @@ bool AACEcoder::Initialize(api::AudioFormat* format,
             "aacEncoder_SetParam failed");
 
   // 设置 编码帧是ADTS AAC-LC[TT_MP4_ADTS] AAC_LD[TT_MP4_RAW]
+#if 0
   uint8_t mode = TT_MP4_ADTS;
   switch (aot) {
     case AOT_AAC_LC:
@@ -73,7 +79,7 @@ bool AACEcoder::Initialize(api::AudioFormat* format,
       mode = TT_MP4_RAW;
       break;
   }
-
+#endif
   CHECK_AAC(aacEncoder_SetParam(aac_handle_, AACENC_TRANSMUX, mode),
             "aacEncoder_SetParam failed");
 
@@ -87,9 +93,7 @@ bool AACEcoder::Initialize(api::AudioFormat* format,
   init_done_ = true;
   audio_format_ = *format;
 
-
-  //TT_MAP_RAW 头有点特殊
-
+  // TT_MAP_RAW 头有点特殊
 
   return true;
 }
@@ -129,7 +133,7 @@ void AACEcoder::HandleEncode(std::unique_ptr<base::Buffer> buffer) {
   memset(&var, 0, sizeof(var));
 
   int in_identifier = IN_AUDIO_DATA;
-  int in_elem_size = audio_format_.bit_depth / 8;
+  int in_elem_size = audio_format_.encode.bits / 8;
   int in_size = buffer->size();
 
   int out_identifier = OUT_BITSTREAM_DATA;

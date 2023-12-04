@@ -5,7 +5,11 @@
 
 build $o/base/buffer.o : cxx $s/base/buffer.cc
 build $o/base/io_buffer.o : cxx $s/base/io_buffer.cc
+build $o/base//audio/aac_util.o : cxx $s/base/audio/aac_util.cc
+build $o/base//audio/audio_format.o : cxx $s/base/audio/audio_format.cc
 
 build $lib/base$LIB : ar $
   $o/base/buffer.o $
-  $o/base/io_buffer.o
+  $o/base/io_buffer.o $
+  $o/base//audio/aac_util.o $
+  $o/base//audio/audio_format.o

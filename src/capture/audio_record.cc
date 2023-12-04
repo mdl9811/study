@@ -28,13 +28,16 @@ const IID kIIDIAudioClient = __uuidof(IAudioClient);
 
 namespace _LIB_NAMESPACE::collection {
 
-AudioRecord::AudioRecord(api::CaptureAudioSink* sink) : sink_(sink) {}
+AudioRecord::AudioRecord(call::CaptureAudioSink* sink) : sink_(sink) {}
 
 AudioRecord::~AudioRecord() = default;
 
-bool AudioRecord::Initialize(const api::AudioFormat* format) {
+bool AudioRecord::Initialize(const base::AudioFormat* format) {
   if (init_done_)
     return false;
+  if (format && (format->type != base::AudioFormat::kCapture))
+    return false;
+
 #if BUILDFLAG(IS_WIN)
   CoInitializeEx(NULL, COINIT_APARTMENTTHREADED);
   auto hr = CoCreateInstance(kCLSIDMMDeviceEnumerator, NULL, CLSCTX_ALL,
@@ -51,16 +54,11 @@ bool AudioRecord::Initialize(const api::AudioFormat* format) {
   hr = imm_device_->Activate(kIIDIAudioClient, CLSCTX_ALL, NULL,
                              (void**)&audio_client_);
   TEST_OUT_LOG(FAILED(hr), "Activate Faild result:", hr);
-  // 默认
-  audio_format_.channels = 2;         // 声道数
-  audio_format_.bit_depth = 16;       // 位深
-  audio_format_.sample_rate = 48000;  // 采样率
 
   format_.wFormatTag = WAVE_FORMAT_PCM;
-  format_.nChannels = format ? format->channels : audio_format_.channels;
-  format_.nSamplesPerSec =
-      format ? format->sample_rate : audio_format_.sample_rate;
-  format_.wBitsPerSample = format ? format->bit_depth : audio_format_.bit_depth;
+  format_.nChannels = format->capture.channels;
+  format_.nSamplesPerSec = format->capture.sample_rate;
+  format_.wBitsPerSample = format->capture.bits;
   format_.nBlockAlign = format_.nChannels * (format_.wBitsPerSample / 8);
   format_.nAvgBytesPerSec = format_.nSamplesPerSec * format_.nBlockAlign;
   format_.cbSize = 0;
@@ -109,7 +107,7 @@ void AudioRecord::Stop() {
   SetEvent(event_handle_);
 }
 
-void AudioRecord::GetAudioFormat(api::AudioFormat* format) {
+void AudioRecord::GetAudioFormat(base::AudioFormat* format) {
   if (!init_done_)
     return;
   *format = audio_format_;

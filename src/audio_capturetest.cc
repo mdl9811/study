@@ -21,14 +21,14 @@ namespace {
 const uint32_t kAudioCollectionTime = 1'000 * 5;
 }  // namespace
 
-class AudioRecordTest : public study::api::CaptureAudioSink,
+class AudioRecordTest : public study::call::CaptureAudioSink,
                         public base::Thread {
  public:
   AudioRecordTest()
       : audio_record_(this), base::Thread("AUDIO_RECORD_THREAD") {}
   ~AudioRecordTest() override = default;
 
-  void GetAudioFormat(study::api::AudioFormat* format) {
+  void GetAudioFormat(study::base::AudioFormat* format) {
     audio_record_.GetAudioFormat(format);
   }
 
@@ -37,10 +37,10 @@ class AudioRecordTest : public study::api::CaptureAudioSink,
 
     out.open(study::kAudioWriteFilePath,
              std::ios::out | std::ios::binary | std::ios::app);
-    study::api::AudioFormat format;
-    format.channels = 2;         // 声道数
-    format.bit_depth = 16;       // 位深
-    format.sample_rate = 48000;  // 采样率
+    study::base::AudioFormat format(study::base::AudioFormat::kCapture);
+    format.capture.bits = 2;             // 声道数
+    format.capture.bits = 16;            // 位深
+    format.capture.sample_rate = 48000;  // 采样率
     audio_record_.Initialize(&format);
 
     audio_record_.Start();
@@ -111,7 +111,7 @@ int main(int argc, char* argv[]) {
 
   AudioRecordTest audio_record_test;
   audio_record_test.Start();
-  study::api::AudioFormat format;
+  study::base::AudioFormat format;
   audio_record_test.GetAudioFormat(&format);
 
   auto task_runner = base::SequencedTaskRunner::GetCurrentDefault();
