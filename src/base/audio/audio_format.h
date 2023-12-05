@@ -38,6 +38,8 @@ struct AudioFormat {
       uint32_t sample_rate;  // 采样率
     } encode;
     struct {
+      uint8_t channels;      // 声道数
+      uint32_t sample_rate;  // 采样率
     } decode;
   };  // namespace _LIB_NAMESPACE::base
 

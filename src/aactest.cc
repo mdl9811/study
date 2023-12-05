@@ -15,9 +15,14 @@
 #include "base/at_exit.h"
 #include "base/task/single_thread_task_executor.h"
 
-class AACTest : public study::call::EncodeAudioSink, protected base::Thread {
+class AACTest : protected base::Thread,
+                public study::call::EncodeAudioSink,
+                public study::call::DecodeAudioSink {
  public:
-  explicit AACTest() : aac_encoder_(this, 0), base::Thread("AAC_THREAD") {
+  explicit AACTest()
+      : base::Thread("AAC_THREAD"),
+        aac_encoder_(this, 0),
+        aac_decoder_(this, 0) {
     StartWithOptions(base::Thread::Options(base::MessagePumpType::DEFAULT, 0));
   }
   ~AACTest() override { Stop(); }
@@ -33,11 +38,16 @@ class AACTest : public study::call::EncodeAudioSink, protected base::Thread {
 
  private:
   void Init() override {
-    study::base::AudioFormat format(study::base::AudioFormat::kEncode);
-    format.encode.channels = 2;         // 声道数
-    format.encode.bits = 16;            // 位深
-    format.encode.sample_rate = 48000;  // 采样率
-    aac_encoder_.Initialize(&format, 64000, 2, 0, 1024);
+    study::base::AudioFormat eformat(study::base::AudioFormat::kEncode);
+    eformat.encode.channels = 2;         // 声道数
+    eformat.encode.bits = 16;            // 位深
+    eformat.encode.sample_rate = 48000;  // 采样率
+    aac_encoder_.Initialize(&eformat, 64000, 2, 0, 1024);
+
+    study::base::AudioFormat dformat(study::base::AudioFormat::kDecode);
+    dformat.decode.channels = 2;
+    dformat.decode.sample_rate = 48000;
+    aac_decoder_.Initialize(&dformat, 2, 0);
   }
 
   void CleanUp() override { aac_encoder_.Release(); }
@@ -48,9 +58,11 @@ class AACTest : public study::call::EncodeAudioSink, protected base::Thread {
   void OnEncodeAudio(std::unique_ptr<study::base::Buffer> buffer) override {
     LOG(INFO) << "EncodeAudio size: " << buffer->size();
   }
+  void OnDecodeAudio(std::unique_ptr<study::base::Buffer>) override {}
 
  private:
   study::encoder::AACEcoder aac_encoder_;
+  study::decoder::AACDecoder aac_decoder_;
 };
 
 int main(int argc, char* argv[]) {

@@ -21,14 +21,20 @@ class AACDecoder {
   virtual ~AACDecoder();
 
   // aot lc ld 算法模式  lc aot == 2算法快 低复杂度
-  // mode 0 是TT_MP4_RAW 2是TT_MP4_ADTS
-  bool Initialize(base::AudioFormat* format, uint16_t aot, uint16_t mode);
+  // type 0 是TT_MP4_RAW 2是TT_MP4_ADTS
+  bool Initialize(base::AudioFormat* format, uint16_t aot, uint16_t type);
   bool DecodeAudio(std::unique_ptr<base::Buffer> buffer);
 
   void Release();
 
  private:
   void Reset();
+  void GetRawConfig(std::unique_ptr<uint8_t[]>* conf,
+                    uint32_t* size,
+                    base::AudioFormat* format,
+                    uint8_t aot,
+                    uint8_t type);
+
   void HandleDecode(std::unique_ptr<base::Buffer> buffer);
 
  private:

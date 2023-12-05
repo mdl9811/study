@@ -7,7 +7,7 @@ extern "C" {
 }
 
 namespace {
-#define CHECK_AAC(fun, result)                    \
+#define CHECK_AAC_ENC(fun, result)            \
   h = fun;                                        \
   if ((h) != AACENC_OK) {                         \
     Reset();                                      \
@@ -30,7 +30,7 @@ AACEcoder::~AACEcoder() = default;
 bool AACEcoder::Initialize(base::AudioFormat* format,
                            uint32_t bitrate,
                            uint16_t aot,
-                           uint16_t mode,
+                           uint16_t type,
                            uint16_t frame_len) {
   if (init_done_ || !format)
     return false;
@@ -39,34 +39,35 @@ bool AACEcoder::Initialize(base::AudioFormat* format,
     return false;
   auto h = AACENC_OK;
   // 打开 aac编码器
-  CHECK_AAC(aacEncOpen(&aac_handle_, 0, format->encode.channels),
-            "aacEncOpen failed");
+  CHECK_AAC_ENC(aacEncOpen(&aac_handle_, 0, format->encode.channels),
+                "aacEncOpen failed");
 
   // 设置模式 lc ld
-  CHECK_AAC(aacEncoder_SetParam(aac_handle_, AACENC_AOT, aot),
-            "aacEncoder_SetParam failed");
+  CHECK_AAC_ENC(aacEncoder_SetParam(aac_handle_, AACENC_AOT, aot),
+                "aacEncoder_SetParam failed");
 
   // 设置 输入帧长
-  CHECK_AAC(aacEncoder_SetParam(aac_handle_, AACENC_GRANULE_LENGTH, frame_len),
-            "aacEncoder_SetParam failed");
+  CHECK_AAC_ENC(
+      aacEncoder_SetParam(aac_handle_, AACENC_GRANULE_LENGTH, frame_len),
+      "aacEncoder_SetParam failed");
 
   // 设置 采样率
-  CHECK_AAC(aacEncoder_SetParam(aac_handle_, AACENC_SAMPLERATE,
-                                format->encode.sample_rate),
-            "aacEncoder_SetParam failed");
+  CHECK_AAC_ENC(aacEncoder_SetParam(aac_handle_, AACENC_SAMPLERATE,
+                                    format->encode.sample_rate),
+                "aacEncoder_SetParam failed");
 
   // 声道模式
-  CHECK_AAC(aacEncoder_SetParam(aac_handle_, AACENC_CHANNELMODE,
-                                format->encode.channels),
-            "aacEncoder_SetParam failed");
+  CHECK_AAC_ENC(aacEncoder_SetParam(aac_handle_, AACENC_CHANNELMODE,
+                                    format->encode.channels),
+                "aacEncoder_SetParam failed");
 
   // 设置 pcm数据格式
-  CHECK_AAC(aacEncoder_SetParam(aac_handle_, AACENC_CHANNELORDER, 1),
-            "aacEncoder_SetParam failed");
+  CHECK_AAC_ENC(aacEncoder_SetParam(aac_handle_, AACENC_CHANNELORDER, 1),
+                "aacEncoder_SetParam failed");
 
   // 设置 编码码率
-  CHECK_AAC(aacEncoder_SetParam(aac_handle_, AACENC_BITRATE, bitrate),
-            "aacEncoder_SetParam failed");
+  CHECK_AAC_ENC(aacEncoder_SetParam(aac_handle_, AACENC_BITRATE, bitrate),
+                "aacEncoder_SetParam failed");
 
   // 设置 编码帧是ADTS AAC-LC[TT_MP4_ADTS] AAC_LD[TT_MP4_RAW]
 #if 0
@@ -80,15 +81,15 @@ bool AACEcoder::Initialize(base::AudioFormat* format,
       break;
   }
 #endif
-  CHECK_AAC(aacEncoder_SetParam(aac_handle_, AACENC_TRANSMUX, mode),
-            "aacEncoder_SetParam failed");
+  CHECK_AAC_ENC(aacEncoder_SetParam(aac_handle_, AACENC_TRANSMUX, type),
+                "aacEncoder_SetParam failed");
 
   // 初始化编码器
-  CHECK_AAC(aacEncEncode(aac_handle_, NULL, NULL, NULL, NULL),
-            "aacEncEncode failed");
+  CHECK_AAC_ENC(aacEncEncode(aac_handle_, NULL, NULL, NULL, NULL),
+                "aacEncEncode failed");
 
   AACENC_InfoStruct aac_info;
-  CHECK_AAC(aacEncInfo(aac_handle_, &aac_info), "aacEncInfo failed");
+  CHECK_AAC_ENC(aacEncInfo(aac_handle_, &aac_info), "aacEncInfo failed");
 
   init_done_ = true;
   audio_format_ = *format;
