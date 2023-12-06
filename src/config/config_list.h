@@ -4,7 +4,7 @@
 #include "src/config/config_site.h"
 
 namespace _LIB_NAMESPACE {
-const char kAudioWriteFilePath[] = "H:\\temp\\audio\\1.pcm";
+const char kAudioWriteFilePath[] = "S:\\temp\\1.pcm";
 }
 
 #endif

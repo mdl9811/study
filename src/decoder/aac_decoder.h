@@ -9,6 +9,7 @@
 #include "src/config/config_site.h"
 
 struct AAC_DECODER_INSTANCE;
+
 namespace _LIB_NAMESPACE::decoder {
 class AACDecoder {
  public:
@@ -29,8 +30,7 @@ class AACDecoder {
 
  private:
   void Reset();
-  void GetRawConfig(std::unique_ptr<uint8_t[]>* conf,
-                    uint32_t* size,
+  bool GetRawConfig(void* info,
                     base::AudioFormat* format,
                     uint8_t aot,
                     uint8_t type);

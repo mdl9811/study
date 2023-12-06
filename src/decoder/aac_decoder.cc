@@ -20,7 +20,7 @@ namespace {
   if ((h) != AACENC_OK) {                         \
     aacEncClose(&encoder_handle);                 \
     LOG(ERROR) << result << " error coed: " << h; \
-    return;                                       \
+    return false;                                 \
   }  // namespace
 
 const int kOutputBufferSize = 2048 * 16;
@@ -50,33 +50,26 @@ bool AACDecoder::Initialize(base::AudioFormat* format,
   if (!decoder_handle_)
     return false;
 
-  std::unique_ptr<uint8_t[]> conf;
-  uint32_t conf_size = 0;
-  GetRawConfig(&conf, &conf_size, format, aot, type);
-
-  if (!conf.get())
+  AACENC_InfoStruct aac_info;
+  if (!GetRawConfig(&aac_info, format, aot, type))
     return false;
-  uint8_t* cb[] = {conf.get()};
-  CHECK_AAC_DEC(aacDecoder_ConfigRaw(decoder_handle_, cb, &conf_size);
+  uint8_t* cb[] = {aac_info.confBuf};
+  CHECK_AAC_DEC(aacDecoder_ConfigRaw(decoder_handle_, cb, &aac_info.confSize);
                 , "aacDecoder_ConfigRaw faild");
 
-  CHECK_AAC_DEC(aacDecoder_SetParam(decoder_handle_, AAC_CONCEAL_METHOD, 1),
+  CHECK_AAC_DEC(aacDecoder_SetParam(decoder_handle_, AAC_CONCEAL_METHOD, 0),
                 "AAC_CONCEAL_METHOD faild");
-  CHECK_AAC_DEC(aacDecoder_SetParam(decoder_handle_, AAC_PCM_LIMITER_ENABLE, 0),
-                "AAC_PCM_LIMITER_ENABLE faild");
 
   init_done_ = true;
   return true;
 }
 
-void AACDecoder::GetRawConfig(std::unique_ptr<uint8_t[]>* conf,
-                              uint32_t* size,
+bool AACDecoder::GetRawConfig(void* info,
                               base::AudioFormat* format,
                               uint8_t aot,
                               uint8_t type) {
   auto h = AACENC_OK;
   struct AACENCODER* encoder_handle = nullptr;
-  // 打开 aac编码器
   CHECK_AAC_ENC(aacEncOpen(&encoder_handle, 0, format->decode.channels),
                 "aacEncOpen failed");
 
@@ -84,13 +77,32 @@ void AACDecoder::GetRawConfig(std::unique_ptr<uint8_t[]>* conf,
   CHECK_AAC_ENC(aacEncoder_SetParam(encoder_handle, AACENC_AOT, aot),
                 "aacEncoder_SetParam failed");
 
+  // 设置 采样率
   CHECK_AAC_ENC(aacEncoder_SetParam(encoder_handle, AACENC_SAMPLERATE,
                                     format->decode.sample_rate),
                 "aacEncoder_SetParam failed");
+
   // 声道模式
   CHECK_AAC_ENC(aacEncoder_SetParam(encoder_handle, AACENC_CHANNELMODE,
                                     format->decode.channels),
                 "aacEncoder_SetParam failed");
+
+  // 设置 pcm数据格式
+  CHECK_AAC_ENC(aacEncoder_SetParam(encoder_handle, AACENC_CHANNELORDER, 1),
+                "aacEncoder_SetParam failed");
+
+  // 设置 编码帧是ADTS AAC-LC[TT_MP4_ADTS] AAC_LD[TT_MP4_RAW]
+#if 0
+  uint8_t mode = TT_MP4_ADTS;
+  switch (aot) {
+    case AOT_AAC_LC:
+      mode = TT_MP4_ADTS;
+      break;
+    case AOT_ER_AAC_LD:
+      mode = TT_MP4_RAW;
+      break;
+  }
+#endif
 
   CHECK_AAC_ENC(aacEncoder_SetParam(encoder_handle, AACENC_TRANSMUX, type),
                 "aacEncoder_SetParam failed");
@@ -101,10 +113,13 @@ void AACDecoder::GetRawConfig(std::unique_ptr<uint8_t[]>* conf,
 
   AACENC_InfoStruct aac_info;
   CHECK_AAC_ENC(aacEncInfo(encoder_handle, &aac_info), "aacEncInfo failed");
-  *size = aac_info.confSize;
-  auto buffer = new uint8_t[*size];
-  memcpy(buffer, aac_info.confBuf, *size);
-  (*conf).reset(buffer);
+
+  CHECK_AAC_ENC(
+      aacEncInfo(encoder_handle, reinterpret_cast<AACENC_InfoStruct*>(info)),
+      "aacEncInfo failed");
+  aacEncClose(&encoder_handle);
+  encoder_handle = nullptr;
+  return true;
 }
 
 bool AACDecoder::DecodeAudio(std::unique_ptr<base::Buffer> buffer) {
@@ -118,18 +133,27 @@ bool AACDecoder::DecodeAudio(std::unique_ptr<base::Buffer> buffer) {
   uint32_t valid = buffer->size();
   auto d = buffer->data<uint8_t>();
   auto size = buffer->size();
+  auto output_buffer = output_buffer_->data();
+
+  char da[2048 * 16];
 
   do {
-    CHECK_AAC_DEC(aacDecoder_Fill(decoder_handle_, &d, &size, &valid),
-                  "aacDecoder_Fill failed");
+    h = aacDecoder_Fill(decoder_handle_, &d, &size, &valid);
     d += (buffer->size() - valid);
     size -= (buffer->size() - valid);
 
-    CHECK_AAC_DEC(
-        aacDecoder_DecodeFrame(
-            decoder_handle_, reinterpret_cast<INT_PCM*>(output_buffer_->data()),
-            kOutputBufferSize / sizeof(INT_PCM), 0),
-        "aacDecoder_DecodeFrame failed");
+    if (h == AAC_DEC_NOT_ENOUGH_BITS)
+      continue;
+    if (h != AAC_DEC_OK)
+      return false;
+
+    h = aacDecoder_DecodeFrame(decoder_handle_,
+                               reinterpret_cast<INT_PCM*>(output_buffer),
+                               kOutputBufferSize / sizeof(INT_PCM), 0);
+    if (h == AAC_DEC_NOT_ENOUGH_BITS)
+      continue;
+    if (h != AAC_DEC_OK)
+      return false;
 
     auto info = aacDecoder_GetStreamInfo(decoder_handle_);
 

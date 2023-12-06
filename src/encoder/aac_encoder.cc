@@ -84,6 +84,7 @@ bool AACEcoder::Initialize(base::AudioFormat* format,
       break;
   }
 #endif
+
   CHECK_AAC_ENC(aacEncoder_SetParam(aac_handle_, AACENC_TRANSMUX, type),
                 "aacEncoder_SetParam failed");
 
@@ -137,7 +138,7 @@ void AACEcoder::HandleEncode(std::unique_ptr<base::Buffer> buffer) {
   memset(&var, 0, sizeof(var));
 
   int in_identifier = IN_AUDIO_DATA;
-  int in_elem_size = audio_format_.encode.bits / 8;
+  int in_elem_size = 2;
   int in_size = buffer->size();
 
   int out_identifier = OUT_BITSTREAM_DATA;
@@ -146,7 +147,7 @@ void AACEcoder::HandleEncode(std::unique_ptr<base::Buffer> buffer) {
 
   const char* input_ptr = buffer->data();
 
-  var.in_args.numInSamples = buffer->size() / in_elem_size;
+  var.in_args.numInSamples = buffer->size() / 2;
   var.in_buf.numBufs = 1;
   var.in_buf.bufs = reinterpret_cast<void**>(const_cast<char**>(&input_ptr));
   var.in_buf.bufferIdentifiers = &in_identifier;

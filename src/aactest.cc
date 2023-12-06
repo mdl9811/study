@@ -42,12 +42,12 @@ class AACTest : protected base::Thread,
     eformat.encode.channels = 2;         // 声道数
     eformat.encode.bits = 16;            // 位深
     eformat.encode.sample_rate = 48000;  // 采样率
-    aac_encoder_.Initialize(&eformat, 64000, 2, 0, 1024);
+    aac_encoder_.Initialize(&eformat, 64000, 23, 0, 512);
 
     study::base::AudioFormat dformat(study::base::AudioFormat::kDecode);
     dformat.decode.channels = 2;
     dformat.decode.sample_rate = 48000;
-    aac_decoder_.Initialize(&dformat, 2, 0);
+    aac_decoder_.Initialize(&dformat, 23, 0);
   }
 
   void CleanUp() override {
@@ -62,7 +62,7 @@ class AACTest : protected base::Thread,
     LOG(INFO) << "EncodeAudio size: " << size;
 
     auto buf = study::base::Buffer::New(buffer, size,
-                                        study::base::Buffer::AUDIO_ENCODED);
+                                        study::base::Buffer::AUDIO_DECODED);
     aac_decoder_.DecodeAudio(std::move(buf));
   }
 
