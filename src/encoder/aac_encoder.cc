@@ -33,7 +33,6 @@ AACEcoder::~AACEcoder() = default;
 bool AACEcoder::Initialize(base::AudioFormat* format,
                            uint32_t bitrate,
                            uint16_t aot,
-                           uint16_t type,
                            uint16_t frame_len) {
   if (init_done_ || !format)
     return false;
@@ -73,17 +72,15 @@ bool AACEcoder::Initialize(base::AudioFormat* format,
                 "aacEncoder_SetParam failed");
 
   // 设置 编码帧是ADTS AAC-LC[TT_MP4_ADTS] AAC_LD[TT_MP4_RAW]
-#if 0
-  uint8_t mode = TT_MP4_ADTS;
+  uint8_t type = TT_MP4_ADTS;
   switch (aot) {
     case AOT_AAC_LC:
-      mode = TT_MP4_ADTS;
+      type = TT_MP4_ADTS;
       break;
     case AOT_ER_AAC_LD:
-      mode = TT_MP4_RAW;
+      type = TT_MP4_RAW;
       break;
   }
-#endif
 
   CHECK_AAC_ENC(aacEncoder_SetParam(aac_handle_, AACENC_TRANSMUX, type),
                 "aacEncoder_SetParam failed");

@@ -27,9 +27,6 @@ class Buffer {
     return New(str.data(), str.size(), type);
   }
   static std::unique_ptr<Buffer> New(size_t size, Type type = DATA);
-  static std::unique_ptr<Buffer> New(Buffer* buf, size_t n, Type type = DATA) {
-    return New(buf->data(), n, type);
-  }
 
   template <typename T = char>
   T* data() {

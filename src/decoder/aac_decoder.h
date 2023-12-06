@@ -23,7 +23,7 @@ class AACDecoder {
 
   // aot lc ld 算法模式  lc aot == 2算法快 低复杂度
   // type 0 是TT_MP4_RAW 2是TT_MP4_ADTS
-  bool Initialize(base::AudioFormat* format, uint16_t aot, uint16_t type);
+  bool Initialize(base::AudioFormat* format, uint16_t aot);
   bool DecodeAudio(std::unique_ptr<base::Buffer> buffer);
 
   void Release();

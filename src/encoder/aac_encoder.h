@@ -34,7 +34,6 @@ class AACEcoder {
   bool Initialize(base::AudioFormat* format,
                   uint32_t bitrate,
                   uint16_t aot,
-                  uint16_t type,
                   uint16_t frame_len);
   bool EncodeAudio(std::unique_ptr<base::Buffer> buffer);
 

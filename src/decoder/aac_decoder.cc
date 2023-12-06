@@ -37,13 +37,21 @@ AACDecoder::AACDecoder(call::DecodeAudioSink* sink, uint32_t id)
 
 AACDecoder::~AACDecoder() = default;
 
-bool AACDecoder::Initialize(base::AudioFormat* format,
-                            uint16_t aot,
-                            uint16_t type) {
+bool AACDecoder::Initialize(base::AudioFormat* format, uint16_t aot) {
   if (init_done_)
     return false;
   if (format && (format->type != base::AudioFormat::kDecode))
     return false;
+
+  uint8_t type = TT_MP4_ADTS;
+  switch (aot) {
+    case AOT_AAC_LC:
+      type = TT_MP4_ADTS;
+      break;
+    case AOT_ER_AAC_LD:
+      type = TT_MP4_RAW;
+      break;
+  }
 
   AAC_DECODER_ERROR h = AAC_DEC_OK;
   decoder_handle_ = aacDecoder_Open(static_cast<TRANSPORT_TYPE>(type), 1);
@@ -91,19 +99,6 @@ bool AACDecoder::GetRawConfig(void* info,
   CHECK_AAC_ENC(aacEncoder_SetParam(encoder_handle, AACENC_CHANNELORDER, 1),
                 "aacEncoder_SetParam failed");
 
-  // 设置 编码帧是ADTS AAC-LC[TT_MP4_ADTS] AAC_LD[TT_MP4_RAW]
-#if 0
-  uint8_t mode = TT_MP4_ADTS;
-  switch (aot) {
-    case AOT_AAC_LC:
-      mode = TT_MP4_ADTS;
-      break;
-    case AOT_ER_AAC_LD:
-      mode = TT_MP4_RAW;
-      break;
-  }
-#endif
-
   CHECK_AAC_ENC(aacEncoder_SetParam(encoder_handle, AACENC_TRANSMUX, type),
                 "aacEncoder_SetParam failed");
 
@@ -142,8 +137,6 @@ bool AACDecoder::DecodeAudio(std::unique_ptr<base::Buffer> buffer) {
     d += (buffer->size() - valid);
     size -= (buffer->size() - valid);
 
-    if (h == AAC_DEC_NOT_ENOUGH_BITS)
-      continue;
     if (h != AAC_DEC_OK)
       return false;
 
