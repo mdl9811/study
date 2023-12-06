@@ -21,9 +21,15 @@ class OpusDecoder {
 
   virtual ~OpusDecoder() = default;
 
+  bool Initialize(base::AudioFormat* format);
+  bool DecodeAudio(std::unique_ptr<base::Buffer> buffer);
+
+  void Release();
+
  private:
   call::DecodeAudioSink* sink_;
   uint32_t id_;
+  bool init_done_ = false;
 };
 }  // namespace _LIB_NAMESPACE::decoder
 
