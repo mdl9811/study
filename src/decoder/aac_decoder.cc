@@ -130,8 +130,6 @@ bool AACDecoder::DecodeAudio(std::unique_ptr<base::Buffer> buffer) {
   auto size = buffer->size();
   auto output_buffer = output_buffer_->data();
 
-  char da[2048 * 16];
-
   do {
     h = aacDecoder_Fill(decoder_handle_, &d, &size, &valid);
     d += (buffer->size() - valid);

@@ -19,10 +19,11 @@ class AACTest : protected base::Thread,
                 public study::call::EncodeAudioSink,
                 public study::call::DecodeAudioSink {
  public:
-  explicit AACTest()
+  explicit AACTest(uint32_t sample_bits)
       : base::Thread("AAC_THREAD"),
         aac_encoder_(this, 0),
-        aac_decoder_(this, 0) {
+        aac_decoder_(this, 0),
+        sample_bits_(sample_bits) {
     StartWithOptions(base::Thread::Options(base::MessagePumpType::DEFAULT, 0));
   }
   ~AACTest() override { Stop(); }
@@ -42,7 +43,7 @@ class AACTest : protected base::Thread,
     eformat.encode.channels = 2;         // 声道数
     eformat.encode.bits = 16;            // 位深
     eformat.encode.sample_rate = 48000;  // 采样率
-    aac_encoder_.Initialize(&eformat, 64000, 23, 512);
+    aac_encoder_.Initialize(&eformat, 64000, 23, sample_bits_);
 
     study::base::AudioFormat dformat(study::base::AudioFormat::kDecode);
     dformat.decode.channels = 2;
@@ -72,6 +73,7 @@ class AACTest : protected base::Thread,
   }
 
  private:
+  uint32_t sample_bits_;
   study::encoder::AACEcoder aac_encoder_;
   study::decoder::AACDecoder aac_decoder_;
 };
@@ -84,7 +86,9 @@ int main(int argc, char* argv[]) {
   settings.log_file_path = L".";
   logging::InitLogging(settings);
 
-  AACTest aac_test;
+  // 采样点数
+  const uint32_t kSampleBits = 512;
+  AACTest aac_test(kSampleBits);
 
   std::ifstream in(study::kAudioWriteFilePath, std::ios::in | std::ios::binary);
 
@@ -92,9 +96,9 @@ int main(int argc, char* argv[]) {
     return 0;
 
   while (!in.eof()) {
-    char* data = new char[512 * 4];
-    in.read(data, 512 * 4);
-    aac_test.EncodeAudio(data, 512 * 4);
+    char* data = new char[kSampleBits * 4];
+    in.read(data, kSampleBits * 4);
+    aac_test.EncodeAudio(data, kSampleBits * 4);
     delete[] data;
   }
 
