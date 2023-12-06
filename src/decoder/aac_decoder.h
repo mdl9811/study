@@ -42,7 +42,6 @@ class AACDecoder {
 
   std::unique_ptr<base::Buffer> output_buffer_;
   call::DecodeAudioSink* sink_;
-  base::AudioFormat audio_format_;
   bool init_done_ = false;
 };
 }  // namespace _LIB_NAMESPACE::decoder

@@ -28,10 +28,6 @@ class AudioRecordTest : public study::call::CaptureAudioSink,
       : audio_record_(this), base::Thread("AUDIO_RECORD_THREAD") {}
   ~AudioRecordTest() override = default;
 
-  void GetAudioFormat(study::base::AudioFormat* format) {
-    audio_record_.GetAudioFormat(format);
-  }
-
   void Start() {
     StartWithOptions(base::Thread::Options(base::MessagePumpType::DEFAULT, 0));
 
@@ -111,8 +107,6 @@ int main(int argc, char* argv[]) {
 
   AudioRecordTest audio_record_test;
   audio_record_test.Start();
-  study::base::AudioFormat format;
-  audio_record_test.GetAudioFormat(&format);
 
   auto task_runner = base::SequencedTaskRunner::GetCurrentDefault();
 

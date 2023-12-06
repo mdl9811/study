@@ -62,8 +62,6 @@ class AudioRecord {
   void* event_handle_ = nullptr;
   bool init_done_ = false;
   std::atomic_bool start_capture_ = false;
-
-  base::AudioFormat audio_format_;
 };
 
 }  // namespace _LIB_NAMESPACE::collection

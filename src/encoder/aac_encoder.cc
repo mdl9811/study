@@ -93,9 +93,6 @@ bool AACEcoder::Initialize(base::AudioFormat* format,
   CHECK_AAC_ENC(aacEncInfo(aac_handle_, &aac_info), "aacEncInfo failed");
 
   init_done_ = true;
-  audio_format_ = *format;
-
-  // TT_MAP_RAW 头有点特殊
 
   return true;
 }

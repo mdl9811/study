@@ -46,9 +46,7 @@ class AACEcoder {
  private:
   uint32_t session_id_;
   struct AACENCODER* aac_handle_ = nullptr;
-
   call::EncodeAudioSink* sink_;
-  base::AudioFormat audio_format_;
 
   std::unique_ptr<base::Buffer> output_buffer_;
   bool init_done_ = false;

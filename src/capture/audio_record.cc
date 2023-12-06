@@ -83,9 +83,6 @@ bool AudioRecord::Initialize(const base::AudioFormat* format) {
 
 #endif
   init_done_ = true;
-
-  if (format)
-    audio_format_ = *format;
   return true;
 }
 
@@ -105,12 +102,6 @@ void AudioRecord::Stop() {
   audio_client_->Stop();
   start_capture_.store(false);
   SetEvent(event_handle_);
-}
-
-void AudioRecord::GetAudioFormat(base::AudioFormat* format) {
-  if (!init_done_)
-    return;
-  *format = audio_format_;
 }
 
 void AudioRecord::HandleReader(uint64_t block, bool* done) {
