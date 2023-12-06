@@ -50,15 +50,25 @@ class AACTest : protected base::Thread,
     aac_decoder_.Initialize(&dformat, 2, 0);
   }
 
-  void CleanUp() override { aac_encoder_.Release(); }
+  void CleanUp() override {
+    aac_encoder_.Release();
+    aac_decoder_.Release();
+  }
   void DispatchAACEncode(std::unique_ptr<study::base::Buffer> buffer) {
     aac_encoder_.EncodeAudio(std::move(buffer));
   }
 
   void OnEncodeAudio(const study::base::Buffer* buffer, size_t size) override {
     LOG(INFO) << "EncodeAudio size: " << size;
+
+    auto buf = study::base::Buffer::New(buffer, size,
+                                        study::base::Buffer::AUDIO_ENCODED);
+    aac_decoder_.DecodeAudio(std::move(buf));
   }
-  void OnDecodeAudio(const study::base::Buffer* buffer, size_t size) override {}
+
+  void OnDecodeAudio(const study::base::Buffer* buffer, size_t size) override {
+    LOG(INFO) << "OnDecodeAudio size: " << size;
+  }
 
  private:
   study::encoder::AACEcoder aac_encoder_;
