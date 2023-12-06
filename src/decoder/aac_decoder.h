@@ -35,13 +35,12 @@ class AACDecoder {
                     uint8_t aot,
                     uint8_t type);
 
-  void HandleDecode(std::unique_ptr<base::Buffer> buffer);
-
  private:
   uint32_t session_id_;
 
   struct AAC_DECODER_INSTANCE* decoder_handle_ = nullptr;
 
+  std::unique_ptr<base::Buffer> output_buffer_;
   call::DecodeAudioSink* sink_;
   base::AudioFormat audio_format_;
   bool init_done_ = false;

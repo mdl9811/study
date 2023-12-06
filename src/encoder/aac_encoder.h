@@ -51,7 +51,7 @@ class AACEcoder {
   call::EncodeAudioSink* sink_;
   base::AudioFormat audio_format_;
 
-  std::unique_ptr<char[]> output_buffer_;
+  std::unique_ptr<base::Buffer> output_buffer_;
   bool init_done_ = false;
 };
 }  // namespace _LIB_NAMESPACE::encoder

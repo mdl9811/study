@@ -55,10 +55,10 @@ class AACTest : protected base::Thread,
     aac_encoder_.EncodeAudio(std::move(buffer));
   }
 
-  void OnEncodeAudio(std::unique_ptr<study::base::Buffer> buffer) override {
-    LOG(INFO) << "EncodeAudio size: " << buffer->size();
+  void OnEncodeAudio(const study::base::Buffer* buffer, size_t size) override {
+    LOG(INFO) << "EncodeAudio size: " << size;
   }
-  void OnDecodeAudio(std::unique_ptr<study::base::Buffer>) override {}
+  void OnDecodeAudio(const study::base::Buffer* buffer, size_t size) override {}
 
  private:
   study::encoder::AACEcoder aac_encoder_;

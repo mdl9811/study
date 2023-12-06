@@ -7,7 +7,7 @@ extern "C" {
 }
 
 namespace {
-#define CHECK_AAC_ENC(fun, result)            \
+#define CHECK_AAC_ENC(fun, result)                \
   h = fun;                                        \
   if ((h) != AACENC_OK) {                         \
     Reset();                                      \
@@ -15,16 +15,19 @@ namespace {
     return false;                                 \
   }  // namespace
 
+const int kOutputBufferSize = 1024 * 16;
 }  // namespace
 
 namespace _LIB_NAMESPACE::encoder {
 
-const int kOutputBufferSize = 1024 * 16;
-
 AACEcoder::AACEcoder(call::EncodeAudioSink* sink, uint32_t id)
     : sink_(sink),
       session_id_(id),
-      output_buffer_(new char[kOutputBufferSize]) {}
+      output_buffer_(
+          base::Buffer::New(kOutputBufferSize, base::Buffer::AUDIO_ENCODED)) {
+  output_buffer_->session(session_id_);
+}
+
 AACEcoder::~AACEcoder() = default;
 
 bool AACEcoder::Initialize(base::AudioFormat* format,
@@ -123,7 +126,7 @@ bool AACEcoder::EncodeAudio(std::unique_ptr<base::Buffer> buffer) {
 }
 
 void AACEcoder::HandleEncode(std::unique_ptr<base::Buffer> buffer) {
-  if (!init_done_)
+  if (!init_done_ || !sink_)
     return;
   struct {
     AACENC_BufDesc in_buf, out_buf;
@@ -150,7 +153,7 @@ void AACEcoder::HandleEncode(std::unique_ptr<base::Buffer> buffer) {
   var.in_buf.bufSizes = &in_size;
   var.in_buf.bufElSizes = &in_elem_size;
 
-  void* ptr = output_buffer_.get();
+  void* ptr = output_buffer_->data();
   var.out_buf.numBufs = 1;
   var.out_buf.bufs = &ptr;
   var.out_buf.bufferIdentifiers = &out_identifier;
@@ -163,12 +166,7 @@ void AACEcoder::HandleEncode(std::unique_ptr<base::Buffer> buffer) {
     return;
   }
 
-  if (sink_) {
-    auto buf = base::Buffer::New(output_buffer_.get(), var.out_args.numOutBytes,
-                                 base::Buffer::AUDIO_ENCODED);
-    buf->session(session_id_);
-    sink_->OnEncodeAudio(std::move(buf));
-  }
+  sink_->OnEncodeAudio(output_buffer_.get(), var.out_args.numOutBytes);
 }
 
 }  // namespace _LIB_NAMESPACE::encoder

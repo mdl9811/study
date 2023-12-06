@@ -15,7 +15,7 @@ class DecodeAudioSink {
   virtual ~DecodeAudioSink() {}
 
   // 接收 encode 后的数据
-  virtual void OnDecodeAudio(std::unique_ptr<base::Buffer>) = 0;
+  virtual void OnDecodeAudio(const study::base::Buffer*, size_t size) = 0;
 };
 
 }  // namespace _LIB_NAMESPACE::call

@@ -44,6 +44,8 @@ struct AudioFormat {
   };  // namespace _LIB_NAMESPACE::base
 
   AudioType type = AudioType::kNone;
+
+  bool enabled_copy = false;
 };
 
 }  // namespace _LIB_NAMESPACE::base

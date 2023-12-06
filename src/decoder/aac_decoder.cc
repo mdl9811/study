@@ -23,11 +23,18 @@ namespace {
     return;                                       \
   }  // namespace
 
+const int kOutputBufferSize = 2048 * 16;
 }  // namespace
 
 namespace _LIB_NAMESPACE::decoder {
 AACDecoder::AACDecoder(call::DecodeAudioSink* sink, uint32_t id)
-    : sink_(sink), session_id_(id) {}
+    : sink_(sink),
+      session_id_(id),
+      output_buffer_(
+          base::Buffer::New(kOutputBufferSize, base::Buffer::AUDIO_DECODED)) {
+  output_buffer_->session(session_id_);
+}
+
 AACDecoder::~AACDecoder() = default;
 
 bool AACDecoder::Initialize(base::AudioFormat* format,
@@ -100,6 +107,43 @@ void AACDecoder::GetRawConfig(std::unique_ptr<uint8_t[]>* conf,
   (*conf).reset(buffer);
 }
 
-void AACDecoder::Reset() {}
+bool AACDecoder::DecodeAudio(std::unique_ptr<base::Buffer> buffer) {
+  if (!init_done_ || !sink_)
+    return false;
+
+  if (!buffer || (buffer->type() != base::Buffer::AUDIO_DECODED))
+    return false;
+  AAC_DECODER_ERROR h = AAC_DEC_OK;
+
+  uint32_t valid = buffer->size();
+  auto d = buffer->data<uint8_t>();
+  auto size = buffer->size();
+
+  CHECK_AAC_DEC(aacDecoder_Fill(decoder_handle_, &d, &size, &valid),
+                "aacDecoder_Fill failed");
+
+  CHECK_AAC_DEC(
+      aacDecoder_DecodeFrame(decoder_handle_,
+                             reinterpret_cast<INT_PCM*>(output_buffer_->data()),
+                             kOutputBufferSize / sizeof(INT_PCM), 0),
+      "aacDecoder_DecodeFrame failed");
+
+  auto info = aacDecoder_GetStreamInfo(decoder_handle_);
+
+  sink_->OnDecodeAudio(output_buffer_.get(),
+                       info->numChannels * info->frameSize * sizeof(INT_PCM));
+
+  return true;
+}
+
+void AACDecoder::Reset() {
+  decoder_handle_ ? aacDecoder_Close(decoder_handle_) : void();
+}
+
+void AACDecoder::Release() {
+  if (!init_done_)
+    return;
+  Reset();
+}
 
 }  // namespace _LIB_NAMESPACE::decoder
