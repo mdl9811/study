@@ -119,19 +119,23 @@ bool AACDecoder::DecodeAudio(std::unique_ptr<base::Buffer> buffer) {
   auto d = buffer->data<uint8_t>();
   auto size = buffer->size();
 
-  CHECK_AAC_DEC(aacDecoder_Fill(decoder_handle_, &d, &size, &valid),
-                "aacDecoder_Fill failed");
+  do {
+    CHECK_AAC_DEC(aacDecoder_Fill(decoder_handle_, &d, &size, &valid),
+                  "aacDecoder_Fill failed");
+    d += (buffer->size() - valid);
+    size -= (buffer->size() - valid);
 
-  CHECK_AAC_DEC(
-      aacDecoder_DecodeFrame(decoder_handle_,
-                             reinterpret_cast<INT_PCM*>(output_buffer_->data()),
-                             kOutputBufferSize / sizeof(INT_PCM), 0),
-      "aacDecoder_DecodeFrame failed");
+    CHECK_AAC_DEC(
+        aacDecoder_DecodeFrame(
+            decoder_handle_, reinterpret_cast<INT_PCM*>(output_buffer_->data()),
+            kOutputBufferSize / sizeof(INT_PCM), 0),
+        "aacDecoder_DecodeFrame failed");
 
-  auto info = aacDecoder_GetStreamInfo(decoder_handle_);
+    auto info = aacDecoder_GetStreamInfo(decoder_handle_);
 
-  sink_->OnDecodeAudio(output_buffer_.get(),
-                       info->numChannels * info->frameSize * sizeof(INT_PCM));
+    sink_->OnDecodeAudio(output_buffer_.get(),
+                         info->numChannels * info->frameSize * sizeof(INT_PCM));
+  } while (size > 0);
 
   return true;
 }
