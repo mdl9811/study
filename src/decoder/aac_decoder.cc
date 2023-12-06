@@ -163,6 +163,7 @@ void AACDecoder::Release() {
   if (!init_done_)
     return;
   Reset();
+  init_done_ = false;
 }
 
 }  // namespace _LIB_NAMESPACE::decoder
