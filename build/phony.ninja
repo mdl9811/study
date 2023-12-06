@@ -15,7 +15,8 @@ build opus : phony $lib/opus$LIB
 #exe
 build test : phony $bin/test$EXE
 build aactest : phony $bin/aactest$EXE
+build opustest : phony $bin/opustest$EXE
 build audio_capturetest : phony $bin/audio_capturetest$EXE
 
 
-build all : phony test aactest audio_capturetest
+build all : phony test aactest opustest audio_capturetest

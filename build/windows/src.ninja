@@ -8,6 +8,12 @@ o=$obj/study/src
 CFLAGS = $CR_FLAGS
 LDFLAGS = $CR_LDFLAGS
 
+#pub
+build $lib/pub$LIB  : ar $
+  $lib/base$LIB $lib/c++$LIB $lib/cr$LIB $lib/absl$LIB $lib/ssl$LIB
+
+
+#-------------------------------------------------------------------------------
 #captures
 build $o/audio_capturetest.o : cxx $s/audio_capturetest.cc
 build $o/capture/audio_record.o : cxx $s/capture/audio_record.cc
@@ -15,33 +21,46 @@ build $o/capture/audio_record.o : cxx $s/capture/audio_record.cc
 build $bin/audio_capturetest.exe : link $
   $o/audio_capturetest.o $
   $o/capture/audio_record.o $
-  $lib/base$LIB $lib/aac$LIB $lib/c++$LIB $lib/cr$LIB $lib/absl$LIB $lib/ssl$LIB
+  $lib/pub$LIB
   ldflags = /DEBUG /PDB:"$bin/audio_capturetest.pdb"
 
 #-------------------------------------------------------------------------------
 #encoder
 build $o/encoder/aac_encoder.o : cxx $s/encoder/aac_encoder.cc
   cflags = -Ithird_party/aac/libSYS/include
+build $o/encoder/opus_encoder.o : cxx $s/encoder/opus_encoder.cc
 
 #decoder
 build $o/decoder/aac_decoder.o : cxx $s/decoder/aac_decoder.cc
   cflags = -Ithird_party/aac/libSYS/include
-  
+build $o/decoder/opus_decoder.o : cxx $s/decoder/opus_decoder.cc
+
 #aac 
 build $o/aactest.o : cxx $s/aactest.cc
 
 build $bin/aactest.exe : link $o/aactest.o $
   $o/encoder/aac_encoder.o $
   $o/decoder/aac_decoder.o $
-  $lib/base$LIB $lib/aac$LIB $lib/c++$LIB $lib/cr$LIB $lib/absl$LIB $lib/ssl$LIB
+  $lib/pub$LIB $lib/aac$LIB
   ldflags = /DEBUG /PDB:"$bin/aactest.pdb"
+
+#-------------------------------------------------------------------------------
+#opus
+build $o/opustest.o : cxx $s/opustest.cc
+
+build $bin/opustest.exe : link $o/opustest.o $
+  $o/encoder/opus_encoder.o $
+  $o/decoder/opus_decoder.o $
+  $lib/pub$LIB $lib/opus$LIB
+  ldflags = /DEBUG /PDB:"$bin/opustest.pdb"
+
 
 #-------------------------------------------------------------------------------
 #test
 build $o/test.o : cxx $s/test.cc
 
 build $bin/test.exe : link $o/test.o $
-  $lib/c++$LIB $lib/cr$LIB $lib/absl$LIB $lib/ssl$LIB
+  $lib/pub$LIB
   ldflags = /DEBUG /PDB:"$bin/test.pdb"  
 
 #-------------------------------------------------------------------------------

@@ -22,6 +22,16 @@
       "symbolSearchPath": "C:\\usr\\symbols;${workspaceFolder}/out/debug/bin"
     },
     {
+      "name": "opustest - debug (Windows)",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/out/debug/bin//opustest.exe",
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/out/debug/bin",
+      "visualizerFile": "${workspaceFolder}/build/config/c++/libc++.natvis",
+      "symbolSearchPath": "C:\\usr\\symbols;${workspaceFolder}/out/debug/bin"
+    },
+    {
       "name": "test - debug (Windows)",
       "type": "cppvsdbg",
       "request": "launch",
