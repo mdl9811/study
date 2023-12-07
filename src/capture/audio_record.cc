@@ -117,6 +117,7 @@ void AudioRecord::HandleReader(uint64_t block, bool* done) {
 void AudioRecord::HandleAudioBuffer() {
   if (!init_done_)
     return;
+  DCHECK(sink_);
 #if BUILDFLAG(IS_WIN)
   DWORD flags = -1;
 

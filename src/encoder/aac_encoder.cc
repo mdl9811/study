@@ -36,6 +36,7 @@ bool AACEcoder::Initialize(base::AudioFormat* format,
                            uint16_t frame_len) {
   if (init_done_ || !format)
     return false;
+  DCHECK(!aac_handle_);
 
   if (format && (format->type != base::AudioFormat::kEncode))
     return false;
@@ -121,8 +122,9 @@ bool AACEcoder::EncodeAudio(std::unique_ptr<base::Buffer> buffer) {
 }
 
 void AACEcoder::HandleEncode(std::unique_ptr<base::Buffer> buffer) {
-  if (!init_done_ || !sink_)
+  if (!init_done_)
     return;
+  DCHECK(sink_);
   struct {
     AACENC_BufDesc in_buf, out_buf;
     AACENC_InArgs in_args;

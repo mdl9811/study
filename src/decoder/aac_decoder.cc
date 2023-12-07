@@ -42,7 +42,7 @@ bool AACDecoder::Initialize(base::AudioFormat* format, uint16_t aot) {
     return false;
   if (format && (format->type != base::AudioFormat::kDecode))
     return false;
-
+  DCHECK(!decoder_handle_);
   uint8_t type = TT_MP4_ADTS;
   switch (aot) {
     case AOT_AAC_LC:
@@ -118,9 +118,9 @@ bool AACDecoder::GetRawConfig(void* info,
 }
 
 bool AACDecoder::DecodeAudio(std::unique_ptr<base::Buffer> buffer) {
-  if (!init_done_ || !sink_)
+  if (!init_done_)
     return false;
-
+  DCHECK(sink_);
   if (!buffer || (buffer->type() != base::Buffer::AUDIO_DECODED))
     return false;
   AAC_DECODER_ERROR h = AAC_DEC_OK;
