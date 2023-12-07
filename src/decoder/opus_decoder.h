@@ -10,7 +10,7 @@
 
 namespace _LIB_NAMESPACE::decoder {
 
-class OpusDecoder {
+class STUDY_DLL OpusDecoder {
  public:
   // call sink  有可能多路流 区分回调id
   explicit OpusDecoder(call::DecodeAudioSink* sink, uint32_t id);

@@ -10,7 +10,7 @@
 struct AAC_DECODER_INSTANCE;
 
 namespace _LIB_NAMESPACE::decoder {
-class AACDecoder {
+class STUDY_DLL AACDecoder {
  public:
   // call sink  有可能多路流 区分回调id
   explicit AACDecoder(call::DecodeAudioSink* sink, uint32_t id);

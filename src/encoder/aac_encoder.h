@@ -16,7 +16,7 @@ struct AACENCODER;
 #endif
 // 单线程 异步 阻塞 这样写主要是为了可以嵌入到其他项目中
 namespace _LIB_NAMESPACE::encoder {
-class AACEncoder {
+class STUDY_DLL AACEncoder {
  public:
   // call sink  有可能多路流 区分回调id
   explicit AACEncoder(call::EncodeAudioSink* sink, uint32_t id);

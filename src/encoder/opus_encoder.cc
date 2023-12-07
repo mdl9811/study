@@ -44,10 +44,12 @@ bool OpusEncoder::Initialize(uint32_t bitrate,
   CHECK_OPUS_ENC(opus_encoder_ctl(encoder, OPUS_SET_FORCE_CHANNELS(channels)),
                  "Set channels faild");
 
-  // CHECK_OPUS_ENC(
-  //     opus_encoder_ctl(encoder, OPUS_SET_FORCE_CHANNELS(format->encode.)),
-  //     "Set channels faild");
+  CHECK_OPUS_ENC(opus_encoder_ctl(encoder, OPUS_SET_BITRATE(bitrate)),
+                 "Set bitrate faild");
 
+  CHECK_OPUS_ENC(opus_encoder_ctl(encoder, OPUS_SET_INBAND_FEC(1)),
+                 "Enable fec faild");
+                 
   CHECK_OPUS_ENC(opus_encoder_ctl(encoder, OPUS_SET_INBAND_FEC(1)),
                  "Enable fec faild");
 

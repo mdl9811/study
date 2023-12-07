@@ -23,7 +23,7 @@ class IAudioClient;
 #endif
 
 namespace _LIB_NAMESPACE::collection {
-class AudioRecord {
+class STUDY_DLL AudioRecord {
  public:
   explicit AudioRecord(call::CaptureAudioSink* callback);
 
