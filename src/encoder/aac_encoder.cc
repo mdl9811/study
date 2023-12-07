@@ -20,22 +20,25 @@ const int kOutputBufferSize = 1024 * 16;
 
 namespace _LIB_NAMESPACE::encoder {
 
-AACEcoder::AACEcoder(call::EncodeAudioSink* sink, uint32_t id)
+AACEncoder::AACEncoder(call::EncodeAudioSink* sink, uint32_t id)
     : sink_(sink),
       session_id_(id),
       output_buffer_(
           base::Buffer::New(kOutputBufferSize, base::Buffer::AUDIO_ENCODED)) {
+  DCHECK(sink);
   output_buffer_->session(session_id_);
 }
 
-AACEcoder::~AACEcoder() = default;
+AACEncoder::~AACEncoder() = default;
 
-bool AACEcoder::Initialize(base::AudioFormat* format,
-                           uint32_t bitrate,
-                           uint16_t aot,
-                           uint16_t frame_len) {
+bool AACEncoder::Initialize(base::AudioFormat* format,
+                            uint32_t bitrate,
+                            uint16_t aot,
+                            uint16_t frame_len) {
   if (init_done_ || !format)
     return false;
+  DCHECK(format);
+  DCHECK(format->type == base::AudioFormat::kEncode);
   DCHECK(!aac_handle_);
 
   if (format && (format->type != base::AudioFormat::kEncode))
@@ -98,19 +101,19 @@ bool AACEcoder::Initialize(base::AudioFormat* format,
   return true;
 }
 
-void AACEcoder::Reset() {
+void AACEncoder::Reset() {
   aac_handle_ ? aacEncClose(&aac_handle_) : AACENC_ERROR();
   aac_handle_ = nullptr;
 }
 
-void AACEcoder::Release() {
+void AACEncoder::Release() {
   if (!init_done_)
     return;
   Reset();
   init_done_ = false;
 }
 
-bool AACEcoder::EncodeAudio(std::unique_ptr<base::Buffer> buffer) {
+bool AACEncoder::EncodeAudio(std::unique_ptr<base::Buffer> buffer) {
   if (!init_done_)
     return false;
 
@@ -121,7 +124,7 @@ bool AACEcoder::EncodeAudio(std::unique_ptr<base::Buffer> buffer) {
   return true;
 }
 
-void AACEcoder::HandleEncode(std::unique_ptr<base::Buffer> buffer) {
+void AACEncoder::HandleEncode(std::unique_ptr<base::Buffer> buffer) {
   if (!init_done_)
     return;
   DCHECK(sink_);

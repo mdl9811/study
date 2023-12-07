@@ -32,6 +32,7 @@ AACDecoder::AACDecoder(call::DecodeAudioSink* sink, uint32_t id)
       session_id_(id),
       output_buffer_(
           base::Buffer::New(kOutputBufferSize, base::Buffer::AUDIO_DECODED)) {
+  DCHECK(sink);
   output_buffer_->session(session_id_);
 }
 
@@ -40,9 +41,10 @@ AACDecoder::~AACDecoder() = default;
 bool AACDecoder::Initialize(base::AudioFormat* format, uint16_t aot) {
   if (init_done_)
     return false;
-  if (format && (format->type != base::AudioFormat::kDecode))
-    return false;
+  DCHECK(format);
+  DCHECK(format->type == base::AudioFormat::kDecode);
   DCHECK(!decoder_handle_);
+
   uint8_t type = TT_MP4_ADTS;
   switch (aot) {
     case AOT_AAC_LC:

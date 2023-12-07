@@ -11,15 +11,15 @@
 
 namespace _LIB_NAMESPACE::encoder {
 
-class OpusEcoder {
+class OpusEncoder {
  public:
   // call sink  有可能多路流 区分回调id
-  explicit OpusEcoder(call::EncodeAudioSink* sink, uint32_t id);
+  explicit OpusEncoder(call::EncodeAudioSink* sink, uint32_t id);
 
-  OpusEcoder(const OpusEcoder&) = delete;
-  OpusEcoder& operator=(const OpusEcoder&) = delete;
+  OpusEncoder(const OpusEncoder&) = delete;
+  OpusEncoder& operator=(const OpusEncoder&) = delete;
 
-  virtual ~OpusEcoder() = default;
+  virtual ~OpusEncoder() = default;
 
   bool Initialize(base::AudioFormat* format);
   bool EncodeAudio(std::unique_ptr<base::Buffer> buffer);

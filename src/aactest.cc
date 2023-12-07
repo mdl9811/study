@@ -74,7 +74,7 @@ class AACTest : protected base::Thread,
 
  private:
   uint32_t sample_bits_;
-  study::encoder::AACEcoder aac_encoder_;
+  study::encoder::AACEncoder aac_encoder_;
   study::decoder::AACDecoder aac_decoder_;
 };
 

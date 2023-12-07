@@ -28,15 +28,17 @@ const IID kIIDIAudioClient = __uuidof(IAudioClient);
 
 namespace _LIB_NAMESPACE::collection {
 
-AudioRecord::AudioRecord(call::CaptureAudioSink* sink) : sink_(sink) {}
+AudioRecord::AudioRecord(call::CaptureAudioSink* sink) : sink_(sink) {
+  DCHECK(sink);
+}
 
 AudioRecord::~AudioRecord() = default;
 
 bool AudioRecord::Initialize(const base::AudioFormat* format) {
   if (init_done_)
     return false;
-  if (format && (format->type != base::AudioFormat::kCapture))
-    return false;
+  DCHECK(format);
+  DCHECK(format->type == base::AudioFormat::kCapture);
 
 #if BUILDFLAG(IS_WIN)
   CoInitializeEx(NULL, COINIT_APARTMENTTHREADED);

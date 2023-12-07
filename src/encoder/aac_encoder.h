@@ -17,15 +17,15 @@ struct AACENCODER;
 #endif
 // 单线程 异步 阻塞 这样写主要是为了可以嵌入到其他项目中
 namespace _LIB_NAMESPACE::encoder {
-class AACEcoder {
+class AACEncoder {
  public:
   // call sink  有可能多路流 区分回调id
-  explicit AACEcoder(call::EncodeAudioSink* sink, uint32_t id);
+  explicit AACEncoder(call::EncodeAudioSink* sink, uint32_t id);
 
-  AACEcoder(const AACEcoder&) = delete;
-  AACEcoder& operator=(const AACEcoder&) = delete;
+  AACEncoder(const AACEncoder&) = delete;
+  AACEncoder& operator=(const AACEncoder&) = delete;
 
-  virtual ~AACEcoder();
+  virtual ~AACEncoder();
 
   // aot lc ld 算法模式  lc aot == 2算法快 低复杂度
   // AAC-ELD的范围是最广的，包括
