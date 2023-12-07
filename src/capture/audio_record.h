@@ -7,7 +7,6 @@
 
 #include <atomic>
 #include <memory>
-#include "src/base/audio/audio_format.h"
 #include "src/call/audio/capture_sink.h"
 #include "src/config/config_site.h"
 
@@ -34,11 +33,9 @@ class AudioRecord {
   bool Start();
   void Stop();
 
-  bool Initialize(const base::AudioFormat* format);
+  bool Initialize(uint32_t sample_rate, uint8_t depth, uint8_t channels);
 
   void Release();
-
-  void GetAudioFormat(base::AudioFormat* format);
 
   void HandleReader(uint64_t block, bool* done);
 

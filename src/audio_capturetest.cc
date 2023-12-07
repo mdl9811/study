@@ -33,11 +33,8 @@ class AudioRecordTest : public study::call::CaptureAudioSink,
 
     out.open(study::kAudioWriteFilePath,
              std::ios::out | std::ios::binary | std::ios::app);
-    study::base::AudioFormat format(study::base::AudioFormat::kCapture);
-    format.capture.channels = 2;         // 声道数
-    format.capture.bits = 16;            // 位深
-    format.capture.sample_rate = 48000;  // 采样率
-    audio_record_.Initialize(&format);
+
+    audio_record_.Initialize(48000, 16, 2);
 
     audio_record_.Start();
 

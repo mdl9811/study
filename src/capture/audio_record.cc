@@ -34,11 +34,11 @@ AudioRecord::AudioRecord(call::CaptureAudioSink* sink) : sink_(sink) {
 
 AudioRecord::~AudioRecord() = default;
 
-bool AudioRecord::Initialize(const base::AudioFormat* format) {
+bool AudioRecord::Initialize(uint32_t sample_rate,
+                             uint8_t depth,
+                             uint8_t channels) {
   if (init_done_)
     return false;
-  DCHECK(format);
-  DCHECK(format->type == base::AudioFormat::kCapture);
 
 #if BUILDFLAG(IS_WIN)
   CoInitializeEx(NULL, COINIT_APARTMENTTHREADED);
@@ -58,9 +58,9 @@ bool AudioRecord::Initialize(const base::AudioFormat* format) {
   TEST_OUT_LOG(FAILED(hr), "Activate Faild result:", hr);
 
   format_.wFormatTag = WAVE_FORMAT_PCM;
-  format_.nChannels = format->capture.channels;
-  format_.nSamplesPerSec = format->capture.sample_rate;
-  format_.wBitsPerSample = format->capture.bits;
+  format_.nChannels = channels;
+  format_.nSamplesPerSec = sample_rate;
+  format_.wBitsPerSample = depth;
   format_.nBlockAlign = format_.nChannels * (format_.wBitsPerSample / 8);
   format_.nAvgBytesPerSec = format_.nSamplesPerSec * format_.nBlockAlign;
   format_.cbSize = 0;

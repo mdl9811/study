@@ -5,7 +5,7 @@ namespace _LIB_NAMESPACE::decoder {
 OpusDecoder::OpusDecoder(call::DecodeAudioSink* sink, uint32_t id)
     : sink_(sink), id_(id) {}
 
-bool OpusDecoder::Initialize(base::AudioFormat* format) {
+bool OpusDecoder::Initialize() {
   if (init_done_)
     return false;
 

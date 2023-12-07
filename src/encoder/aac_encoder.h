@@ -6,7 +6,6 @@
 #define SRC_ENCODER_AAC_ENCODER_H_
 
 #include <memory>
-#include "src/base/audio/audio_format.h"
 #include "src/base/io_buffer.h"
 #include "src/call/audio/encode_sink.h"
 #include "src/config/config_site.h"
@@ -31,8 +30,9 @@ class AACEncoder {
   // AAC-ELD的范围是最广的，包括
   // 1024，512，480，其次是AAC-LD范围为:512,480,那么对AAC-LC来说就只有1024了。(注意这里的长度是采样点的个数)。
   // type 0 是TT_MP4_RAW 2是TT_MP4_ADTS
-  bool Initialize(base::AudioFormat* format,
-                  uint32_t bitrate,
+  bool Initialize(uint32_t bitrate,
+                  uint32_t sample_rate,
+                  uint8_t channels,
                   uint16_t aot,
                   uint16_t frame_len);
   bool EncodeAudio(std::unique_ptr<base::Buffer> buffer);

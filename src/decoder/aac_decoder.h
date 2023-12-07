@@ -4,7 +4,6 @@
 
 #ifndef SRC_DECODER_AAC_DECODER_H_
 #define SRC_DECODER_AAC_DECODER_H_
-#include "src/base/audio/audio_format.h"
 #include "src/call/audio/decode_sink.h"
 #include "src/config/config_site.h"
 
@@ -23,7 +22,7 @@ class AACDecoder {
 
   // aot lc ld 算法模式  lc aot == 2算法快 低复杂度
   // type 0 是TT_MP4_RAW 2是TT_MP4_ADTS
-  bool Initialize(base::AudioFormat* format, uint16_t aot);
+  bool Initialize(uint32_t sample_rate, uint8_t channels, uint16_t aot);
   bool DecodeAudio(std::unique_ptr<base::Buffer> buffer);
 
   void Release();
@@ -31,7 +30,8 @@ class AACDecoder {
  private:
   void Reset();
   bool GetRawConfig(void* info,
-                    base::AudioFormat* format,
+                    uint32_t sample_rate,
+                    uint8_t channels,
                     uint8_t aot,
                     uint8_t type);
 

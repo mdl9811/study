@@ -38,11 +38,11 @@ AACDecoder::AACDecoder(call::DecodeAudioSink* sink, uint32_t id)
 
 AACDecoder::~AACDecoder() = default;
 
-bool AACDecoder::Initialize(base::AudioFormat* format, uint16_t aot) {
+bool AACDecoder::Initialize(uint32_t sample_rate,
+                            uint8_t channels,
+                            uint16_t aot) {
   if (init_done_)
     return false;
-  DCHECK(format);
-  DCHECK(format->type == base::AudioFormat::kDecode);
   DCHECK(!decoder_handle_);
 
   uint8_t type = TT_MP4_ADTS;
@@ -61,7 +61,7 @@ bool AACDecoder::Initialize(base::AudioFormat* format, uint16_t aot) {
     return false;
 
   AACENC_InfoStruct aac_info;
-  if (!GetRawConfig(&aac_info, format, aot, type))
+  if (!GetRawConfig(&aac_info, sample_rate, channels, aot, type))
     return false;
   uint8_t* cb[] = {aac_info.confBuf};
   CHECK_AAC_DEC(aacDecoder_ConfigRaw(decoder_handle_, cb, &aac_info.confSize);
@@ -75,27 +75,27 @@ bool AACDecoder::Initialize(base::AudioFormat* format, uint16_t aot) {
 }
 
 bool AACDecoder::GetRawConfig(void* info,
-                              base::AudioFormat* format,
+                              uint32_t sample_rate,
+                              uint8_t channels,
                               uint8_t aot,
                               uint8_t type) {
   auto h = AACENC_OK;
   struct AACENCODER* encoder_handle = nullptr;
-  CHECK_AAC_ENC(aacEncOpen(&encoder_handle, 0, format->decode.channels),
-                "aacEncOpen failed");
+  CHECK_AAC_ENC(aacEncOpen(&encoder_handle, 0, channels), "aacEncOpen failed");
 
   // 设置模式 lc ld
   CHECK_AAC_ENC(aacEncoder_SetParam(encoder_handle, AACENC_AOT, aot),
                 "aacEncoder_SetParam failed");
 
   // 设置 采样率
-  CHECK_AAC_ENC(aacEncoder_SetParam(encoder_handle, AACENC_SAMPLERATE,
-                                    format->decode.sample_rate),
-                "aacEncoder_SetParam failed");
+  CHECK_AAC_ENC(
+      aacEncoder_SetParam(encoder_handle, AACENC_SAMPLERATE, sample_rate),
+      "aacEncoder_SetParam failed");
 
   // 声道模式
-  CHECK_AAC_ENC(aacEncoder_SetParam(encoder_handle, AACENC_CHANNELMODE,
-                                    format->decode.channels),
-                "aacEncoder_SetParam failed");
+  CHECK_AAC_ENC(
+      aacEncoder_SetParam(encoder_handle, AACENC_CHANNELMODE, channels),
+      "aacEncoder_SetParam failed");
 
   // 设置 pcm数据格式
   CHECK_AAC_ENC(aacEncoder_SetParam(encoder_handle, AACENC_CHANNELORDER, 1),

@@ -7,6 +7,7 @@
 
 // 主要是为了 以后可以替换log
 #include "base/check.h"
+#include "base/check_op.h"
 #include "base/logging.h"
 
 #endif

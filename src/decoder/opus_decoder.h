@@ -5,7 +5,6 @@
 #ifndef SRC_DECODER_OPUS_DECODER_H_
 #define SRC_DECODER_OPUS_DECODER_H_
 
-#include "src/base/audio/audio_format.h"
 #include "src/call/audio/decode_sink.h"
 #include "src/config/config_site.h"
 
@@ -21,7 +20,7 @@ class OpusDecoder {
 
   virtual ~OpusDecoder() = default;
 
-  bool Initialize(base::AudioFormat* format);
+  bool Initialize();
   bool DecodeAudio(std::unique_ptr<base::Buffer> buffer);
 
   void Release();

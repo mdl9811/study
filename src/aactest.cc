@@ -39,16 +39,9 @@ class AACTest : protected base::Thread,
 
  private:
   void Init() override {
-    study::base::AudioFormat eformat(study::base::AudioFormat::kEncode);
-    eformat.encode.channels = 2;         // 声道数
-    eformat.encode.bits = 16;            // 位深
-    eformat.encode.sample_rate = 48000;  // 采样率
-    aac_encoder_.Initialize(&eformat, 64000, 23, sample_bits_);
+    aac_encoder_.Initialize(64000, 48000, 2, 23, sample_bits_);
 
-    study::base::AudioFormat dformat(study::base::AudioFormat::kDecode);
-    dformat.decode.channels = 2;
-    dformat.decode.sample_rate = 48000;
-    aac_decoder_.Initialize(&dformat, 23);
+    aac_decoder_.Initialize(48000, 2, 23);
   }
 
   void CleanUp() override {
