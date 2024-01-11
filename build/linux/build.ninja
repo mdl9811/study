@@ -1,0 +1,54 @@
+# Copyright (c) 2023 mdl. All rights reserved.
+
+EXE=
+LIB=.a
+
+rule exec
+  command = $COMMAND
+  description = $DESC
+
+rule cc
+  deps = msvc
+  command = $CLANG -Xclang --show-includes $ARCH_TARGET $OPT_CFLAGS $CFLAGS $
+    $cflags -c $in -o $out 
+  description = CC $out
+
+rule cxx
+  deps = msvc
+  command = $CLANG -std=c++20 -Xclang --show-includes $ARCH_TARGET $OPT_CFLAGS $
+   $CFLAGS $cflags -c $in -o $out
+  description = CC $out
+
+rule ncc
+  deps = msvc
+  command = $CLANG -Xclang --show-includes $OPT_CFLAGS $CFLAGS $cflags $
+    -c $in -o $out
+  description = CC $out
+
+rule ncxx
+  deps = msvc
+  command = $CLANG -std=c++20 -Xclang --show-includes $OPT_CFLAGS $
+   $CFLAGS $cflags -c $in -o $out
+  description = CC $out
+
+rule ar
+  command = $AR crs $out @$out.rsp
+  description = AR $out
+  rspfile = $out.rsp
+  rspfile_content = $in $ar_files
+
+rule link
+  command = $LLD $OPT_LDFLAGS -o $out $in $LDFLAGS $ldflags $OPT_LDFLAGS_END
+  description = LINK $out
+
+rule link_so
+  command = $LLD -o $out $ARCH_LDFLAGS_SO $in $LDFLAGS $ldflags $
+    $OPT_LDFLAGS_END_SO
+  description = LINK $out
+
+rule strip
+  command = $STRIP $in -o $out
+  description = STRIP $out
+
+include build/linux/x64.ninja
+include build/phony.ninja

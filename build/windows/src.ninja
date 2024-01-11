@@ -65,4 +65,4 @@ build $bin/test.exe : link $o/test.o $
 
 #-------------------------------------------------------------------------------
 
-include build/windows/base.ninja
+include build/base.ninja
